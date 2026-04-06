@@ -36,7 +36,7 @@
     const reviewBodyInput = document.getElementById('review-body-input');
     const reviewStatusMsg = document.getElementById('review-status-msg');
     const submitReviewBtn = document.getElementById('submit-review-btn');
-    const messageSidebar = document.querySelector('#tab-messages .w-1\/3 .flex-1.overflow-y-auto');
+    const messageSidebar = document.querySelector('#tab-messages .w-1\\/3 .flex-1.overflow-y-auto');
     const messageHeader = document.querySelector('#tab-messages .flex-1 .px-6.py-5');
     const messagesArea = document.querySelector('#tab-messages .flex-1 .flex-1.overflow-y-auto');
     const vaultGrid = document.querySelector('#tab-vault .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3');

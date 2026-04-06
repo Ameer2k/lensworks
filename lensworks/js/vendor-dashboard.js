@@ -24,7 +24,7 @@
     const bookingFilter = document.querySelector('#tab-bookings select');
     const bookingListContainer = document.querySelector('#tab-bookings .space-y-4');
     const inquirySearchInput = document.getElementById('vendor-inquiry-search');
-    const inquirySidebar = document.querySelector('#tab-messages .w-1\/3 .flex-1.overflow-y-auto');
+    const inquirySidebar = document.querySelector('#tab-messages .w-1\\/3 .flex-1.overflow-y-auto');
     const inquiryHeader = document.querySelector('#tab-messages .flex-1 .px-6.py-5');
     const inquiryMessages = document.querySelector('#tab-messages .flex-1 .flex-1.overflow-y-auto');
     const replyTextarea = document.getElementById('vendor-reply-input');

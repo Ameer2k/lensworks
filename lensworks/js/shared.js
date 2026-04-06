@@ -531,50 +531,50 @@
                     link.textContent = 'Open Dashboard';
                 }
             });
-
-                document.querySelectorAll('[data-nav-href]').forEach((element) => {
-                    const navigate = () => {
-                        const href = String(element.getAttribute('data-nav-href') || '').trim();
-                        if (!href) {
-                            return;
-                        }
-                        window.location.href = href;
-                    };
-
-                    if (!['A', 'BUTTON'].includes(element.tagName)) {
-                        if (!element.hasAttribute('role')) {
-                            element.setAttribute('role', 'button');
-                        }
-                        if (!element.hasAttribute('tabindex')) {
-                            element.setAttribute('tabindex', '0');
-                        }
-
-                        element.addEventListener('keydown', (event) => {
-                            if (event.key === 'Enter' || event.key === ' ') {
-                                event.preventDefault();
-                                navigate();
-                            }
-                        });
-                    }
-
-                    element.addEventListener('click', (event) => {
-                        const href = String(element.getAttribute('data-nav-href') || '').trim();
-                        if (!href) {
-                            return;
-                        }
-
-                        if (element.tagName === 'A') {
-                            return;
-                        }
-
-                        if (element.tagName === 'BUTTON') {
-                            event.preventDefault();
-                        }
-
-                        navigate();
-                    });
-                });
         }
+
+        document.querySelectorAll('[data-nav-href]').forEach((element) => {
+            const navigate = () => {
+                const href = String(element.getAttribute('data-nav-href') || '').trim();
+                if (!href) {
+                    return;
+                }
+                window.location.href = href;
+            };
+
+            if (!['A', 'BUTTON'].includes(element.tagName)) {
+                if (!element.hasAttribute('role')) {
+                    element.setAttribute('role', 'button');
+                }
+                if (!element.hasAttribute('tabindex')) {
+                    element.setAttribute('tabindex', '0');
+                }
+
+                element.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        navigate();
+                    }
+                });
+            }
+
+            element.addEventListener('click', (event) => {
+                const href = String(element.getAttribute('data-nav-href') || '').trim();
+                if (!href) {
+                    return;
+                }
+
+                if (element.tagName === 'A') {
+                    return;
+                }
+
+                if (element.tagName === 'BUTTON') {
+                    event.preventDefault();
+                }
+
+                navigate();
+            });
+        });
 
         document.querySelectorAll('[data-logout-link]').forEach((link) => {
             link.addEventListener('click', async (event) => {
