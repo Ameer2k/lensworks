@@ -394,7 +394,11 @@
             }
 
             const release = setButtonLoading(saveProfileButton, 'Saving...');
-            window.LensWorksApi.account.updateProfile(values).then((result) => {
+            const updateRequest = window.LensWorksApi?.account?.updateProfile
+                ? window.LensWorksApi.account.updateProfile(values)
+                : Promise.resolve({ ok: false });
+
+            updateRequest.then((result) => {
                 state.profile = values;
                 saveState();
                 release();
@@ -436,7 +440,9 @@
                     return;
                 }
 
-                const result = await window.LensWorksApi.account.updateContact({ email: trimmed });
+                const result = window.LensWorksApi?.account?.updateContact
+                    ? await window.LensWorksApi.account.updateContact({ email: trimmed })
+                    : { ok: false, error: { payload: { message: 'Account service unavailable.' } } };
                 if (!result.ok) {
                     const message = result.error?.payload?.message || 'Email update failed.';
                     showToast(message, 'error');
@@ -470,7 +476,9 @@
                 }
 
                 const normalized = nextPhone.trim();
-                const result = await window.LensWorksApi.account.updateContact({ phone: normalized });
+                const result = window.LensWorksApi?.account?.updateContact
+                    ? await window.LensWorksApi.account.updateContact({ phone: normalized })
+                    : { ok: false, error: { payload: { message: 'Account service unavailable.' } } };
                 if (!result.ok) {
                     const message = result.error?.payload?.message || 'Phone update failed.';
                     showToast(message, 'error');
@@ -499,11 +507,13 @@
                     handle = nextHandle.trim();
                 }
 
-                const result = await window.LensWorksApi.account.updateSocial({
-                    platform: 'instagram',
-                    connected: !currentlyConnected,
-                    handle
-                });
+                const result = window.LensWorksApi?.account?.updateSocial
+                    ? await window.LensWorksApi.account.updateSocial({
+                        platform: 'instagram',
+                        connected: !currentlyConnected,
+                        handle
+                    })
+                    : { ok: false, error: { payload: { message: 'Account service unavailable.' } } };
 
                 if (!result.ok) {
                     const message = result.error?.payload?.message || 'Instagram update failed.';
@@ -528,11 +538,13 @@
         if (googleBtn) {
             googleBtn.addEventListener('click', async () => {
                 const currentlyConnected = Boolean(state.account.socialAccounts?.google?.connected);
-                const result = await window.LensWorksApi.account.updateSocial({
-                    platform: 'google',
-                    connected: !currentlyConnected,
-                    handle: !currentlyConnected ? 'Connected with Google' : ''
-                });
+                const result = window.LensWorksApi?.account?.updateSocial
+                    ? await window.LensWorksApi.account.updateSocial({
+                        platform: 'google',
+                        connected: !currentlyConnected,
+                        handle: !currentlyConnected ? 'Connected with Google' : ''
+                    })
+                    : { ok: false, error: { payload: { message: 'Account service unavailable.' } } };
 
                 if (!result.ok) {
                     const message = result.error?.payload?.message || 'Google account update failed.';
@@ -588,9 +600,11 @@
             const submitButton = form.querySelector('button');
             const release = submitButton ? setButtonLoading(submitButton, 'Updating...') : () => {};
 
-            window.LensWorksApi.account
-                .updatePassword({ currentPassword, newPassword })
-                .then((result) => {
+            const passwordRequest = window.LensWorksApi?.account?.updatePassword
+                ? window.LensWorksApi.account.updatePassword({ currentPassword, newPassword })
+                : Promise.resolve({ ok: false, error: { payload: { message: 'Account service unavailable.' } } });
+
+            passwordRequest.then((result) => {
                     release();
 
                     if (!result.ok) {
@@ -632,7 +646,11 @@
             toggle.addEventListener('change', () => {
                 state.notifications[key] = toggle.checked;
                 saveState();
-                window.LensWorksApi.account.updateNotifications(state.notifications).then((result) => {
+                const notificationsRequest = window.LensWorksApi?.account?.updateNotifications
+                    ? window.LensWorksApi.account.updateNotifications(state.notifications)
+                    : Promise.resolve({ ok: false });
+
+                notificationsRequest.then((result) => {
                     if (result.ok) {
                         showToast('Notification preference updated.', 'success');
                     } else {

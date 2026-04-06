@@ -39,7 +39,7 @@
     </header>
 
     <!-- Main Settings Layout -->
-    <main class="flex-1 max-w-7xl mx-auto px-6 md:px-12 py-8 md:py-12 w-full flex flex-col lg:flex-row gap-8 lg:gap-12">
+    <main class="flex-1 max-w-7xl mx-auto px-6 md:px-12 py-8 md:py-12 w-full">
         <section class="w-full lg:col-span-full lg:order-first overflow-hidden rounded-[2rem] border border-slate-200 bg-[radial-gradient(circle_at_top_left,_rgba(191,219,254,0.9),_transparent_35%),linear-gradient(135deg,_#0f172a,_#1e293b)] p-6 text-white shadow-xl md:p-8">
             <div class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
                 <div>
@@ -64,26 +64,27 @@
             </div>
         </section>
         
+        <div class="mt-8 flex flex-col lg:flex-row gap-8 lg:gap-12">
         <!-- Sidebar / Mobile Pill Navigation -->
         <aside class="w-full lg:w-64 flex-shrink-0 lg:sticky lg:top-28 lg:h-fit">
             <h1 class="text-3xl font-bold text-slate-900 mb-6 tracking-tight hidden lg:block">Settings</h1>
             
             <nav class="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 no-scrollbar -mx-6 px-6 lg:mx-0 lg:px-0" id="settings-tabs">
                 <!-- Active Tab -->
-                <button class="tab-btn shrink-0 w-auto lg:w-full flex items-center gap-2.5 px-5 py-2.5 lg:py-3.5 rounded-full lg:rounded-xl text-sm font-bold bg-slate-900 text-white transition shadow-md lg:shadow-sm" data-target="profile">
+                <button type="button" class="tab-btn shrink-0 w-auto lg:w-full flex items-center gap-2.5 px-5 py-2.5 lg:py-3.5 rounded-full lg:rounded-xl text-sm font-bold bg-slate-900 text-white transition shadow-md lg:shadow-sm" data-target="profile">
                     <i data-lucide="user-circle" class="w-4 h-4 lg:w-5 lg:h-5"></i> <span class="whitespace-nowrap">Public Profile</span>
                 </button>
                 <!-- Inactive Tabs -->
-                <button class="tab-btn shrink-0 w-auto lg:w-full flex items-center gap-2.5 px-5 py-2.5 lg:py-3.5 rounded-full lg:rounded-xl text-sm font-medium text-slate-600 bg-white border border-gray-200 lg:border-transparent lg:bg-transparent hover:bg-gray-100 lg:hover:bg-slate-50 hover:text-slate-900 transition shadow-sm lg:shadow-none" data-target="account">
+                <button type="button" class="tab-btn shrink-0 w-auto lg:w-full flex items-center gap-2.5 px-5 py-2.5 lg:py-3.5 rounded-full lg:rounded-xl text-sm font-medium text-slate-600 bg-white border border-gray-200 lg:border-transparent lg:bg-transparent hover:bg-gray-100 lg:hover:bg-slate-50 hover:text-slate-900 transition shadow-sm lg:shadow-none" data-target="account">
                     <i data-lucide="settings" class="w-4 h-4 lg:w-5 lg:h-5"></i> <span class="whitespace-nowrap">Account Details</span>
                 </button>
-                <button class="tab-btn shrink-0 w-auto lg:w-full flex items-center gap-2.5 px-5 py-2.5 lg:py-3.5 rounded-full lg:rounded-xl text-sm font-medium text-slate-600 bg-white border border-gray-200 lg:border-transparent lg:bg-transparent hover:bg-gray-100 lg:hover:bg-slate-50 hover:text-slate-900 transition shadow-sm lg:shadow-none" data-target="security">
+                <button type="button" class="tab-btn shrink-0 w-auto lg:w-full flex items-center gap-2.5 px-5 py-2.5 lg:py-3.5 rounded-full lg:rounded-xl text-sm font-medium text-slate-600 bg-white border border-gray-200 lg:border-transparent lg:bg-transparent hover:bg-gray-100 lg:hover:bg-slate-50 hover:text-slate-900 transition shadow-sm lg:shadow-none" data-target="security">
                     <i data-lucide="shield-check" class="w-4 h-4 lg:w-5 lg:h-5"></i> <span class="whitespace-nowrap">Security</span>
                 </button>
-                <button class="tab-btn shrink-0 w-auto lg:w-full flex items-center gap-2.5 px-5 py-2.5 lg:py-3.5 rounded-full lg:rounded-xl text-sm font-medium text-slate-600 bg-white border border-gray-200 lg:border-transparent lg:bg-transparent hover:bg-gray-100 lg:hover:bg-slate-50 hover:text-slate-900 transition shadow-sm lg:shadow-none" data-target="notifications">
+                <button type="button" class="tab-btn shrink-0 w-auto lg:w-full flex items-center gap-2.5 px-5 py-2.5 lg:py-3.5 rounded-full lg:rounded-xl text-sm font-medium text-slate-600 bg-white border border-gray-200 lg:border-transparent lg:bg-transparent hover:bg-gray-100 lg:hover:bg-slate-50 hover:text-slate-900 transition shadow-sm lg:shadow-none" data-target="notifications">
                     <i data-lucide="bell" class="w-4 h-4 lg:w-5 lg:h-5"></i> <span class="whitespace-nowrap">Notifications</span>
                 </button>
-                <button class="tab-btn shrink-0 w-auto lg:w-full flex items-center gap-2.5 px-5 py-2.5 lg:py-3.5 rounded-full lg:rounded-xl text-sm font-medium text-slate-600 bg-white border border-gray-200 lg:border-transparent lg:bg-transparent hover:bg-gray-100 lg:hover:bg-slate-50 hover:text-slate-900 transition shadow-sm lg:shadow-none" data-target="billing">
+                <button type="button" class="tab-btn shrink-0 w-auto lg:w-full flex items-center gap-2.5 px-5 py-2.5 lg:py-3.5 rounded-full lg:rounded-xl text-sm font-medium text-slate-600 bg-white border border-gray-200 lg:border-transparent lg:bg-transparent hover:bg-gray-100 lg:hover:bg-slate-50 hover:text-slate-900 transition shadow-sm lg:shadow-none" data-target="billing">
                     <i data-lucide="credit-card" class="w-4 h-4 lg:w-5 lg:h-5"></i> <span class="whitespace-nowrap">Billing & Payouts</span>
                 </button>
             </nav>
@@ -467,6 +468,7 @@
                 </section>
             </div>
 
+        </div>
         </div>
     </main>
 
