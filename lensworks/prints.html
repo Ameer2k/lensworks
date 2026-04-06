@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Print Shop | LensWorks</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://unpkg.com/lucide@latest"></script>
+	<link rel="stylesheet" href="css/shared.css">
+	<link rel="stylesheet" href="css/info-page.css">
+</head>
+<body class="text-slate-900 font-sans min-h-screen flex flex-col">
+	<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+		<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+			<a href="index.html" class="flex items-center gap-2"><i data-lucide="camera" class="w-6 h-6 text-slate-900"></i><span class="font-bold text-xl">LensWorks</span></a>
+		</div>
+	</header>
+	<main class="info-shell px-6 py-16">
+		<div class="max-w-5xl mx-auto w-full info-card rounded-3xl border border-white/60 shadow-2xl p-8 md:p-12">
+			<div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+				<div>
+					<div class="w-14 h-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center mb-6"><i data-lucide="image" class="w-7 h-7"></i></div>
+					<p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-600 mb-3">Commerce</p>
+					<h1 class="text-4xl font-black tracking-tight mb-4">Print Shop</h1>
+					<p class="text-gray-600 leading-relaxed max-w-2xl">Turn delivered galleries into framed wall art, archival albums, and gift prints. Every order is prepared from vendor-approved final images to preserve color, crop, and finish quality.</p>
+				</div>
+				<a href="gallery.html" class="inline-flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-xl font-semibold hover:bg-slate-700 transition"><i data-lucide="images" class="w-4 h-4"></i> Browse Your Gallery</a>
+			</div>
+
+			<div class="grid md:grid-cols-3 gap-4 mb-10 text-sm">
+				<div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+					<p class="font-bold mb-1">Fine Art Prints</p>
+					<p class="text-gray-500">Museum-grade paper with matte, lustre, and textured finishes for portraits and editorial stills.</p>
+				</div>
+				<div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+					<p class="font-bold mb-1">Albums & Books</p>
+					<p class="text-gray-500">Lay-flat albums with linen or leather covers, foil stamping, and curated spreads.</p>
+				</div>
+				<div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+					<p class="font-bold mb-1">Frames & Wall Sets</p>
+					<p class="text-gray-500">Ready-to-hang pieces in black, oak, and brushed metal finishes for home or studio display.</p>
+				</div>
+			</div>
+
+			<div class="grid lg:grid-cols-3 gap-6 mb-8">
+				<div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+					<p class="text-xs uppercase tracking-[0.18em] text-gray-500 font-bold mb-2">Best Seller</p>
+					<h2 class="text-xl font-black text-slate-900 mb-2">Signature Album</h2>
+					<p class="text-gray-500 text-sm mb-4">20 spreads, premium binding, velvet pouch, and gift box packaging.</p>
+					<p class="text-2xl font-black text-slate-900">From $180</p>
+				</div>
+				<div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+					<p class="text-xs uppercase tracking-[0.18em] text-gray-500 font-bold mb-2">Popular</p>
+					<h2 class="text-xl font-black text-slate-900 mb-2">Gallery Wall Set</h2>
+					<p class="text-gray-500 text-sm mb-4">Three framed prints sized to work together as a living-room feature wall.</p>
+					<p class="text-2xl font-black text-slate-900">From $240</p>
+				</div>
+				<div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+					<p class="text-xs uppercase tracking-[0.18em] text-gray-500 font-bold mb-2">Gift Ready</p>
+					<h2 class="text-xl font-black text-slate-900 mb-2">Fine Art Duo</h2>
+					<p class="text-gray-500 text-sm mb-4">Two 8x10 archival prints packaged for gifting or desk display.</p>
+					<p class="text-2xl font-black text-slate-900">From $68</p>
+				</div>
+			</div>
+
+			<div class="grid lg:grid-cols-2 gap-6 text-sm text-gray-600 leading-relaxed">
+				<section class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+					<h2 class="text-lg font-black text-slate-900 mb-3">How Ordering Works</h2>
+					<ol class="space-y-3 list-decimal pl-5">
+						<li>Open a delivered gallery and mark favorites or choose individual images.</li>
+						<li>Select product type, finish, framing, and shipping destination.</li>
+						<li>Review crops carefully for vertical and panoramic images before checkout.</li>
+						<li>Track production and delivery from your dashboard once the order is placed.</li>
+					</ol>
+				</section>
+				<section class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+					<h2 class="text-lg font-black text-slate-900 mb-3">Production & Shipping</h2>
+					<p>Most print orders are produced within 3 to 5 business days. Albums and framed products may take longer due to assembly and finish checks. Shipping speed depends on the destination selected during checkout, and tracking is shared once the order is dispatched.</p>
+				</section>
+			</div>
+
+			<a href="index.html" class="inline-flex items-center gap-2 mt-10 bg-slate-900 text-white px-5 py-3 rounded-xl font-semibold hover:bg-slate-700 transition"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home</a>
+		</div>
+	</main>
+	<footer class="px-6 py-8 text-center text-sm text-gray-500">© <span id="info-year">2026</span> LensWorks</footer>
+	<script src="js/shared.js"></script>
+	<script src="js/info-page.js"></script>
+</body>
+</html>

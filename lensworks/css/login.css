@@ -1,0 +1,9 @@
+﻿body { font-family: 'Inter', sans-serif; }
+        
+        /* Smooth image crossfade */
+        .bg-crossfade {
+            transition: background-image 0.5s ease-in-out;
+        }
+
+        /* Hide scrollbar */
+        ::-webkit-scrollbar { display: none; }

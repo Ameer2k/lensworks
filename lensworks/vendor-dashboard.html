@@ -1,0 +1,705 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Dashboard | LensWorks</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/vendor-dashboard.css">
+</head>
+<body class="text-slate-900 font-sans min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-3 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 cursor-pointer group">
+                <i data-lucide="camera" class="w-7 h-7 text-slate-900 group-hover:text-blue-600 transition-colors"></i>
+                <span class="text-xl font-bold tracking-tight">LensWorks <span class="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded-full ml-1 border border-blue-200">Pro</span></span></a>
+            
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-500">
+                <button id="nav-dashboard-btn" class="nav-main-btn text-slate-900 font-semibold relative after:absolute after:bottom-[-16px] after:left-0 after:w-full after:h-0.5 after:bg-slate-900 transition focus:outline-none">Dashboard</button>
+                <button id="nav-calendar-btn" class="nav-main-btn hover:text-slate-900 transition relative focus:outline-none">Calendar</button>
+                <button class="nav-quick-tab-btn hover:text-slate-900 transition" data-vendor-tab-target="messages">Messages</button>
+                <button class="nav-quick-tab-btn hover:text-slate-900 transition" data-vendor-tab-target="earnings">Earnings</button>
+                <a id="vendor-public-profile-link" href="#" target="_blank" class="hover:text-slate-900 transition flex items-center gap-1"><i data-lucide="external-link" class="w-3.5 h-3.5"></i> View Public Profile</a>
+            </nav>
+
+            <div class="flex items-center gap-5">
+                <button id="vendor-notification-btn" class="relative text-gray-500 hover:text-slate-900 transition mt-1">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span id="vendor-bell-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full border-2 border-white shadow-sm">3</span>
+                </button>
+                
+                <!-- Profile Dropdown Container -->
+                <div class="relative">
+                    <button id="profile-menu-btn" class="flex items-center gap-3 pl-5 border-l border-gray-200 cursor-pointer hover:opacity-80 transition focus:outline-none">
+                        <div class="text-right hidden sm:block">
+                            <p id="vendor-profile-name" class="text-sm font-bold text-slate-900 leading-none">LensWorks Vendor</p>
+                            <p id="vendor-profile-studio" class="text-xs text-gray-500 mt-1">Studio</p>
+                        </div>
+                        <img id="vendor-profile-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" class="w-9 h-9 rounded-full border border-gray-200 object-cover shadow-sm" alt="Pro Profile">
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div id="profile-dropdown" class="absolute right-0 mt-3 w-56 bg-white rounded-xl shadow-lg border border-gray-100 py-2 hidden z-50 origin-top-right transition-all transform opacity-0 scale-95">
+                        <a id="vendor-dropdown-public-profile-link" href="#" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="user" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Profile & Portfolio</a>
+                        <a href="vendor-dashboard.html?tab=messages" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="message-square" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Messages</a>
+                        <a href="vendor-dashboard.html?tab=earnings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="wallet" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Earnings</a>
+                        <a href="account-settings.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="settings" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Account Settings</a>
+                        <div class="border-t border-gray-100 my-1"></div>
+                        <a href="login.html" data-logout-link class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50"><i data-lucide="log-out" class="w-4 h-4 inline-block mr-2"></i> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Application Area -->
+    <main class="flex-1 max-w-7xl mx-auto px-6 md:px-12 py-8 w-full">
+        
+        <!-- ========================================== -->
+        <!-- VIEW 1: DASHBOARD (Active by Default)      -->
+        <!-- ========================================== -->
+        <div id="view-dashboard" class="main-view block opacity-100">
+            <!-- Welcome & Quick Stats -->
+            <div class="mb-10">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Studio Overview</h1>
+                        <p id="vendor-welcome-subtitle" class="text-gray-500 mt-1.5 text-sm">Welcome back. Here's how your business is performing.</p>
+                    </div>
+                    <div class="flex gap-3">
+                        <a id="vendor-share-profile-link" href="#" target="_blank" class="bg-white border border-gray-200 text-slate-700 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-50 transition shadow-sm flex items-center justify-center">
+                            Share Profile
+                        </a>
+                        <button class="nav-calendar-trigger bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            <i data-lucide="calendar-plus" class="w-4 h-4"></i> View Calendar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Stats Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-green-300 transition group cursor-pointer">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center">
+                                <i data-lucide="dollar-sign" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md">+12% this month</span>
+                        </div>
+                        <p class="text-sm font-medium text-gray-500">Monthly Earnings</p>
+                        <p id="vendor-stat-earnings" class="text-2xl font-bold text-slate-900 tracking-tight">$4,250.00</p>
+                    </div>
+                    
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-blue-300 transition group cursor-pointer">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                                <i data-lucide="calendar" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-xs font-bold text-slate-600 bg-gray-100 px-2 py-1 rounded-md">2 this week</span>
+                        </div>
+                        <p class="text-sm font-medium text-gray-500">Active Bookings</p>
+                        <p id="vendor-stat-active-bookings" class="text-2xl font-bold text-slate-900 tracking-tight">8</p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-purple-300 transition group cursor-pointer">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center">
+                                <i data-lucide="eye" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md">+45% this week</span>
+                        </div>
+                        <p class="text-sm font-medium text-gray-500">Profile Views</p>
+                        <p class="text-2xl font-bold text-slate-900 tracking-tight">1,204</p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-yellow-300 transition group cursor-pointer">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 bg-yellow-50 text-yellow-600 rounded-xl flex items-center justify-center fill-yellow-500">
+                                <i data-lucide="star" class="w-5 h-5"></i>
+                            </div>
+                            <span class="text-xs font-bold text-slate-600 bg-gray-100 px-2 py-1 rounded-md">124 Reviews</span>
+                        </div>
+                        <p class="text-sm font-medium text-gray-500">Average Rating</p>
+                        <p class="text-2xl font-bold text-slate-900 tracking-tight">4.9</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Tabs -->
+            <div class="border-b border-gray-200 mb-8 overflow-x-auto no-scrollbar">
+                <nav class="flex gap-8 min-w-max" id="dashboard-tabs">
+                    <button class="tab-btn active pb-4 text-sm font-bold text-slate-900 border-b-2 border-slate-900 transition flex items-center gap-2" data-target="bookings">
+                        <i data-lucide="calendar-check" class="w-4 h-4"></i> Manage Bookings
+                    </button>
+                    <button class="tab-btn pb-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-slate-900 transition flex items-center gap-2" data-target="packages">
+                        <i data-lucide="package" class="w-4 h-4"></i> Services & Packages
+                    </button>
+                    <button class="tab-btn pb-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-slate-900 transition flex items-center gap-2" data-target="earnings">
+                        <i data-lucide="wallet" class="w-4 h-4"></i> Earnings & Payouts
+                    </button>
+                    <button class="tab-btn pb-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-slate-900 transition flex items-center gap-2 relative" data-target="messages">
+                        <i data-lucide="message-square" class="w-4 h-4"></i> Messages
+                        <span id="vendor-messages-tab-badge" class="bg-blue-600 text-white px-1.5 py-0.5 rounded-full text-[10px] font-bold ml-1 absolute -top-1 -right-4">2</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Tab Content Containers -->
+            <div class="relative min-h-[500px]">
+                
+                <!-- 1. Manage Bookings View -->
+                <div id="tab-bookings" class="tab-content w-full opacity-100 block">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-lg font-bold text-slate-900">Upcoming Shoots</h2>
+                        <div class="flex gap-2">
+                            <select class="bg-white border border-gray-200 text-sm font-medium text-slate-700 py-2 px-3 rounded-lg outline-none focus:border-slate-900 cursor-pointer">
+                                <option>All Statuses</option>
+                                <option>Confirmed</option>
+                                <option>Pending Deposit</option>
+                                <option>Completed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Booking List Item 1 -->
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:shadow-md transition">
+                            <div class="flex items-center gap-6">
+                                <!-- Date Box -->
+                                <div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-xl flex flex-col items-center justify-center flex-shrink-0">
+                                    <span class="text-xs font-bold text-red-500 uppercase">Oct</span>
+                                    <span class="text-xl font-black text-slate-900 leading-none mt-0.5">14</span>
+                                </div>
+                                
+                                <!-- Info -->
+                                <div>
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h3 class="font-bold text-slate-900 text-lg">Premium Portrait Session</h3>
+                                        <span class="bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Confirmed</span>
+                                    </div>
+                                    <div class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-gray-500">
+                                        <span class="flex items-center gap-1.5"><i data-lucide="user" class="w-3.5 h-3.5"></i> Client: Booked client</span>
+                                        <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Bahrain Bay</span>
+                                        <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 10:00 AM (3 hrs)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="flex flex-wrap md:flex-nowrap items-center gap-3 w-full md:w-auto">
+                                <div class="text-right hidden lg:block mr-4">
+                                    <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-0.5">Payout</p>
+                                    <p class="font-bold text-slate-900">$450.00</p>
+                                </div>
+                                <button class="flex-1 md:flex-none border border-gray-200 text-slate-700 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2">
+                                    <i data-lucide="message-square" class="w-4 h-4"></i> Chat
+                                </button>
+                                <button class="flex-1 md:flex-none bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-800 transition shadow-sm">
+                                    Manage
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Booking List Item 2 -->
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:shadow-md transition">
+                            <div class="flex items-center gap-6">
+                                <div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-xl flex flex-col items-center justify-center flex-shrink-0">
+                                    <span class="text-xs font-bold text-red-500 uppercase">Oct</span>
+                                    <span class="text-xl font-black text-slate-900 leading-none mt-0.5">22</span>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h3 class="font-bold text-slate-900 text-lg">Full Day Cinematic Wedding</h3>
+                                        <span class="bg-yellow-50 text-yellow-700 border border-yellow-200 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Awaiting Deposit</span>
+                                    </div>
+                                    <div class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-gray-500">
+                                        <span class="flex items-center gap-1.5"><i data-lucide="user" class="w-3.5 h-3.5"></i> Client: Emma & John</span>
+                                        <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Ritz Carlton</span>
+                                        <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 2:00 PM (8 hrs)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap md:flex-nowrap items-center gap-3 w-full md:w-auto">
+                                <div class="text-right hidden lg:block mr-4">
+                                    <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-0.5">Payout</p>
+                                    <p class="font-bold text-slate-900">$1,200.00</p>
+                                </div>
+                                <button class="flex-1 md:flex-none border border-gray-200 text-slate-700 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2">
+                                    <i data-lucide="bell-ring" class="w-4 h-4"></i> Remind
+                                </button>
+                                <button class="flex-1 md:flex-none border border-gray-200 text-slate-700 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2">
+                                    <i data-lucide="message-square" class="w-4 h-4"></i> Chat
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Booking List Item 3 (Completed) -->
+                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 transition opacity-75 hover:opacity-100">
+                            <div class="flex items-center gap-6">
+                                <div class="w-16 h-16 bg-white border border-gray-200 rounded-xl flex flex-col items-center justify-center flex-shrink-0 text-gray-400">
+                                    <span class="text-xs font-bold uppercase">Sep</span>
+                                    <span class="text-xl font-black leading-none mt-0.5">28</span>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-3 mb-1">
+                                        <h3 class="font-bold text-slate-700 text-lg">Essential Shoot</h3>
+                                        <span class="bg-gray-200 text-gray-600 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Shoot Done</span>
+                                    </div>
+                                    <div class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-gray-500">
+                                        <span class="flex items-center gap-1.5"><i data-lucide="user" class="w-3.5 h-3.5"></i> Client: Marcus T.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap md:flex-nowrap items-center gap-3 w-full md:w-auto">
+                                <button class="flex-1 md:flex-none bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-700 transition shadow-sm flex items-center justify-center gap-2">
+                                    <i data-lucide="upload-cloud" class="w-4 h-4"></i> Deliver Photos
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 2. Services & Packages View (Hidden initially) -->
+                <div id="tab-packages" class="tab-content w-full hidden opacity-0">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-900">Your Booking Packages</h2>
+                            <p class="text-sm text-gray-500">Clients see these options on your public profile.</p>
+                        </div>
+                        <button class="bg-slate-900 text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-sm">
+                            <i data-lucide="plus" class="w-4 h-4"></i> New Package
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        
+                        <!-- Package Card 1 -->
+                        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col relative group">
+                            <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition">
+                                <button class="p-1.5 bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200"><i data-lucide="edit" class="w-4 h-4"></i></button>
+                                <button class="p-1.5 bg-red-50 text-red-600 rounded-md hover:bg-red-100"><i data-lucide="trash" class="w-4 h-4"></i></button>
+                            </div>
+                            <h3 class="font-bold text-xl text-slate-900 mb-1">Essential Shoot</h3>
+                            <p class="text-2xl font-black text-slate-900 mb-4">$150</p>
+                            <p class="text-sm text-gray-500 mb-6">Perfect for quick portraits or couples.</p>
+                            
+                            <div class="space-y-3 mt-auto border-t border-gray-100 pt-4">
+                                <div class="flex items-center gap-2 text-sm text-gray-700">
+                                    <i data-lucide="clock" class="w-4 h-4 text-blue-500"></i> 1 Hour Duration
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-gray-700">
+                                    <i data-lucide="image" class="w-4 h-4 text-blue-500"></i> 50+ Edited Photos
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-gray-700">
+                                    <i data-lucide="cloud-download" class="w-4 h-4 text-blue-500"></i> Online Gallery
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Package Card 2 -->
+                        <div class="bg-slate-50 border-2 border-slate-900 rounded-2xl p-6 shadow-sm flex flex-col relative group">
+                            <div class="absolute -top-3 left-6 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Most Popular</div>
+                            <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition">
+                                <button class="p-1.5 bg-white border border-gray-200 text-gray-600 rounded-md hover:bg-gray-50"><i data-lucide="edit" class="w-4 h-4"></i></button>
+                                <button class="p-1.5 bg-red-50 border border-red-100 text-red-600 rounded-md hover:bg-red-100"><i data-lucide="trash" class="w-4 h-4"></i></button>
+                            </div>
+                            <h3 class="font-bold text-xl text-slate-900 mb-1 mt-2">Premium Session</h3>
+                            <p class="text-2xl font-black text-slate-900 mb-4">$450</p>
+                            <p class="text-sm text-gray-500 mb-6">Ideal for events, engagements, or small weddings.</p>
+                            
+                            <div class="space-y-3 mt-auto border-t border-gray-200 pt-4">
+                                <div class="flex items-center gap-2 text-sm text-gray-700">
+                                    <i data-lucide="clock" class="w-4 h-4 text-blue-500"></i> 3 Hours Duration
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-gray-700">
+                                    <i data-lucide="image" class="w-4 h-4 text-blue-500"></i> 150+ Edited Photos
+                                </div>
+                                <div class="flex items-center gap-2 text-sm text-gray-700">
+                                    <i data-lucide="shirt" class="w-4 h-4 text-blue-500"></i> 2 Outfit Changes
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add-ons Configuration -->
+                        <div class="bg-white border border-gray-200 border-dashed rounded-2xl p-6 shadow-sm flex flex-col">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-bold text-lg text-slate-900">A La Carte Extras</h3>
+                                <button class="text-blue-600 text-sm font-semibold hover:underline">Add New</button>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100 group">
+                                    <div>
+                                        <p class="font-semibold text-sm text-slate-900">Extra Hour</p>
+                                        <p class="text-xs text-gray-500">+$100.00</p>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-slate-900 hidden group-hover:block transition"><i data-lucide="edit-2" class="w-4 h-4"></i></button>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100 group">
+                                    <div>
+                                        <p class="font-semibold text-sm text-slate-900">Expedited Delivery</p>
+                                        <p class="text-xs text-gray-500">+$75.00</p>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-slate-900 hidden group-hover:block transition"><i data-lucide="edit-2" class="w-4 h-4"></i></button>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100 group">
+                                    <div>
+                                        <p class="font-semibold text-sm text-slate-900">Leather Album</p>
+                                        <p class="text-xs text-gray-500">+$250.00</p>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-slate-900 hidden group-hover:block transition"><i data-lucide="edit-2" class="w-4 h-4"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 3. Earnings & Payouts View (Hidden initially) -->
+                <div id="tab-earnings" class="tab-content w-full hidden opacity-0">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        
+                        <!-- Balance Card -->
+                        <div class="lg:col-span-1 bg-slate-900 rounded-2xl p-6 text-white shadow-lg flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2 opacity-80">
+                                    <i data-lucide="wallet" class="w-5 h-5"></i>
+                                    <h3 class="text-sm font-semibold uppercase tracking-wider">Available Payout</h3>
+                                </div>
+                                <p id="vendor-available-payout" class="text-4xl font-black tracking-tight mb-1">$1,850.00</p>
+                                <p id="vendor-next-transfer" class="text-xs text-slate-400">Next automatic transfer: Oct 15</p>
+                            </div>
+                            <div class="mt-8">
+                                <button id="vendor-withdraw-btn" class="w-full bg-white text-slate-900 px-4 py-3 rounded-xl text-sm font-bold hover:bg-gray-100 transition shadow-sm">
+                                    Withdraw Now
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-2 bg-white border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-bold text-lg text-slate-900">Earnings History</h3>
+                                <select class="bg-gray-50 border border-gray-200 text-sm font-medium text-slate-700 py-1.5 px-3 rounded-lg outline-none focus:border-slate-900 cursor-pointer">
+                                    <option>This Year</option>
+                                    <option>Last 6 Months</option>
+                                </select>
+                            </div>
+                            
+                            <!-- CSS Bar Chart Representation -->
+                            <div class="flex-1 flex items-end justify-between gap-2 md:gap-4 mt-auto pt-6 px-2">
+                                <div class="w-full bg-blue-100 rounded-t-sm relative group flex justify-center h-[40%] hover:bg-blue-200 transition"><span class="absolute -top-6 text-xs text-gray-500 font-bold opacity-0 group-hover:opacity-100 transition">$800</span><span class="absolute -bottom-6 text-xs text-gray-400 font-medium">May</span></div>
+                                <div class="w-full bg-blue-500 rounded-t-sm relative group flex justify-center h-[85%] hover:bg-blue-600 shadow-sm transition"><span class="absolute -top-6 text-xs text-slate-900 font-bold">$3.2k</span><span class="absolute -bottom-6 text-xs text-slate-900 font-bold">Jun</span></div>
+                                <div class="w-full bg-blue-100 rounded-t-sm relative group flex justify-center h-[55%] hover:bg-blue-200 transition"><span class="absolute -top-6 text-xs text-gray-500 font-bold opacity-0 group-hover:opacity-100 transition">$1.5k</span><span class="absolute -bottom-6 text-xs text-gray-400 font-medium">Jul</span></div>
+                                <div class="w-full bg-blue-100 rounded-t-sm relative group flex justify-center h-[30%] hover:bg-blue-200 transition"><span class="absolute -top-6 text-xs text-gray-500 font-bold opacity-0 group-hover:opacity-100 transition">$600</span><span class="absolute -bottom-6 text-xs text-gray-400 font-medium">Aug</span></div>
+                                <div class="w-full bg-blue-500 rounded-t-sm relative group flex justify-center h-[70%] hover:bg-blue-600 shadow-sm transition"><span class="absolute -top-6 text-xs text-slate-900 font-bold">$2.8k</span><span class="absolute -bottom-6 text-xs text-slate-900 font-bold">Sep</span></div>
+                                <div class="w-full bg-blue-600 rounded-t-sm relative group flex justify-center h-[100%] hover:bg-blue-700 shadow-sm transition"><span class="absolute -top-6 text-xs text-blue-600 font-bold">$4.2k</span><span class="absolute -bottom-6 text-xs text-blue-600 font-bold">Oct</span></div>
+                            </div>
+                            <div class="h-6"></div> <!-- spacing for bottom labels -->
+                            <div class="mt-6 grid sm:grid-cols-3 gap-3 text-sm">
+                                <div class="rounded-xl bg-slate-50 border border-gray-200 p-4">
+                                    <p class="text-gray-500">Average monthly revenue</p>
+                                    <p class="font-black text-slate-900 text-xl mt-1">$2.18k</p>
+                                </div>
+                                <div class="rounded-xl bg-slate-50 border border-gray-200 p-4">
+                                    <p class="text-gray-500">Highest month</p>
+                                    <p class="font-black text-slate-900 text-xl mt-1">October</p>
+                                </div>
+                                <div class="rounded-xl bg-slate-50 border border-gray-200 p-4">
+                                    <p class="text-gray-500">Pending fees</p>
+                                    <p class="font-black text-slate-900 text-xl mt-1">$126</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Transactions -->
+                    <div class="mt-8 bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-100 bg-gray-50/50">
+                            <h3 class="font-bold text-slate-900">Recent Transactions</h3>
+                        </div>
+                        <div id="vendor-recent-transactions" class="divide-y divide-gray-100">
+                            <div class="p-4 px-6 flex justify-between items-center hover:bg-gray-50 transition">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-green-50 text-green-600 flex items-center justify-center"><i data-lucide="arrow-down-left" class="w-5 h-5"></i></div>
+                                    <div>
+                                        <p class="font-semibold text-sm text-slate-900">Deposit - Portrait Session</p>
+                                        <p class="text-xs text-gray-500">Client payment • Oct 10, 2025</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-green-600">+$90.00</p>
+                                    <p class="text-[10px] text-gray-400">Platform fee deducted</p>
+                                </div>
+                            </div>
+                            <div class="p-4 px-6 flex justify-between items-center hover:bg-gray-50 transition">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center"><i data-lucide="arrow-up-right" class="w-5 h-5"></i></div>
+                                    <div>
+                                        <p class="font-semibold text-sm text-slate-900">Bank Payout (Stripe)</p>
+                                        <p class="text-xs text-gray-500">Processing to Chase ****4921 • Oct 01, 2025</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-slate-900">-$2,800.00</p>
+                                    <p class="text-[10px] text-gray-400">Completed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Messages View (Hidden initially) -->
+                <div id="tab-messages" class="tab-content w-full hidden opacity-0">
+                    <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex h-[600px]">
+                        <!-- Reused Message Interface but flipped context -->
+                        <div class="w-1/3 border-r border-gray-200 flex flex-col bg-white">
+                            <div class="p-5 border-b border-gray-100">
+                                <h2 class="text-lg font-bold text-slate-900 mb-4">Client Inquiries</h2>
+                                <div class="relative">
+                                    <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                                    <input id="vendor-inquiry-search" type="text" placeholder="Search clients..." class="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition">
+                                </div>
+                            </div>
+                            
+                            <div class="flex-1 overflow-y-auto no-scrollbar">
+                                <div class="p-4 border-b border-gray-100 bg-blue-50/40 cursor-pointer flex gap-4 relative">
+                                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-md"></div>
+                                    <div class="relative">
+                                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=150&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover shadow-sm" alt="Alex">
+                                    </div>
+                                    <div class="flex-1 overflow-hidden pt-1">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <h4 class="font-bold text-sm text-slate-900">Client</h4>
+                                            <span class="text-[10px] text-blue-600 font-bold uppercase">10:40 AM</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 truncate font-medium">Hi Sarah! Just confirming the l...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex-1 flex flex-col bg-gray-50/30">
+                            <div class="px-6 py-5 border-b border-gray-200 flex justify-between items-center bg-white shadow-sm z-10">
+                                <div class="flex items-center gap-4">
+                                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=150&auto=format&fit=crop" class="w-10 h-10 rounded-full object-cover border border-gray-100" alt="Alex">
+                                    <div>
+                                        <h3 class="font-bold text-slate-900 text-sm">Client</h3>
+                                        <p class="text-xs text-blue-600 font-medium">Booking Confirmed: Oct 14</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex-1 overflow-y-auto p-6 space-y-6">
+                                <div class="flex justify-start">
+                                    <div class="flex gap-3 max-w-[75%]">
+                                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=150&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-1" alt="Alex">
+                                        <div>
+                                            <div class="bg-white border border-gray-200 text-slate-900 rounded-2xl rounded-tl-sm px-5 py-3 shadow-sm">
+                                                <p class="text-sm leading-relaxed">Hi Sarah! Just confirming the location for next week. Are we meeting by the main fountain at Bahrain Bay?</p>
+                                            </div>
+                                            <span class="text-[10px] text-gray-400 mt-1 block font-medium">10:40 AM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-5 bg-white border-t border-gray-200">
+                                <div class="flex items-end gap-3">
+                                    <button class="p-3 text-gray-400 hover:text-slate-900 hover:bg-gray-50 transition rounded-xl flex-shrink-0"><i data-lucide="paperclip" class="w-5 h-5"></i></button>
+                                    <div class="flex-1 bg-gray-50 border border-gray-200 rounded-2xl p-2 focus-within:border-slate-900 focus-within:ring-1 focus-within:ring-slate-900 transition flex items-end">
+                                        <textarea id="vendor-reply-input" placeholder="Write a reply..." class="w-full bg-transparent border-none focus:ring-0 text-sm py-2 px-2 outline-none resize-none min-h-[40px] max-h-[120px]" rows="1"></textarea>
+                                    </div>
+                                    <button id="vendor-reply-btn" class="p-3 bg-slate-900 text-white rounded-xl hover:bg-slate-800 shadow-md transition flex-shrink-0 flex items-center justify-center">
+                                        <i data-lucide="send" class="w-5 h-5 translate-x-[-1px] translate-y-[1px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- VIEW 2: CALENDAR (Hidden by Default)       -->
+        <!-- ========================================== -->
+        <div id="view-calendar" class="main-view hidden opacity-0">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Studio Calendar</h1>
+                    <p class="text-gray-500 mt-1.5 text-sm">Manage your availability and upcoming shoots.</p>
+                </div>
+                <div class="flex gap-2">
+                    <button class="bg-white border border-gray-200 text-slate-700 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-50 transition shadow-sm flex items-center justify-center gap-2">
+                        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                    </button>
+                    <button id="vendor-calendar-month-btn" class="bg-white border border-gray-200 text-slate-900 px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-gray-50 transition shadow-sm flex items-center gap-2">
+                        <i data-lucide="calendar" class="w-4 h-4"></i> October 2026
+                    </button>
+                    <button class="bg-white border border-gray-200 text-slate-700 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-gray-50 transition shadow-sm flex items-center justify-center gap-2">
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Left Panel: Event List & Actions -->
+                <div class="lg:col-span-1 space-y-6">
+                    <button id="vendor-add-block-btn" class="w-full bg-slate-900 text-white px-5 py-3.5 rounded-xl text-sm font-bold hover:bg-slate-800 transition flex items-center justify-center gap-2 shadow-md hover:-translate-y-0.5">
+                        <i data-lucide="plus" class="w-5 h-5"></i> Add Block / Event
+                    </button>
+
+                    <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                        <h3 class="font-bold text-slate-900 mb-5 pb-3 border-b border-gray-100 flex items-center gap-2">
+                            <i data-lucide="list" class="w-4 h-4 text-gray-400"></i> Upcoming
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex gap-3 hover:bg-gray-50 p-2 -mx-2 rounded-lg transition cursor-pointer">
+                                <div class="w-2.5 h-2.5 rounded-full bg-blue-500 mt-1 flex-shrink-0"></div>
+                                <div>
+                                    <p class="text-sm font-bold text-slate-900">Oct 14 - Portrait Session</p>
+                                    <p class="text-xs text-gray-500 mt-0.5">10:00 AM • Client booking</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 hover:bg-gray-50 p-2 -mx-2 rounded-lg transition cursor-pointer">
+                                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500 mt-1 flex-shrink-0"></div>
+                                <div>
+                                    <p class="text-sm font-bold text-slate-900">Oct 22 - Full Wedding</p>
+                                    <p class="text-xs text-gray-500 mt-0.5">2:00 PM • Emma & John</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-3 hover:bg-gray-50 p-2 -mx-2 rounded-lg transition cursor-pointer">
+                                <div class="w-2.5 h-2.5 rounded-full bg-gray-400 mt-1 flex-shrink-0"></div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-500 line-through">Oct 25-27</p>
+                                    <p class="text-xs text-gray-400 font-medium mt-0.5">Blocked - Personal Time</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Calendar Grid -->
+                <div class="lg:col-span-3">
+                    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+                        <!-- Days Header -->
+                        <div class="grid grid-cols-7 bg-gray-50 border-b border-gray-200 text-center text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-wider py-3">
+                            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                        </div>
+                        
+                        <!-- Grid Cells -->
+                        <div class="grid grid-cols-7 bg-gray-200 gap-px flex-1 min-h-[500px]">
+                            
+                            <!-- Week 1 -->
+                            <div class="bg-gray-50 min-h-[100px] p-1.5 sm:p-2 cursor-not-allowed"><span class="text-xs sm:text-sm font-medium text-gray-400">27</span></div>
+                            <div class="bg-gray-50 min-h-[100px] p-1.5 sm:p-2 cursor-not-allowed"><span class="text-xs sm:text-sm font-medium text-gray-400">28</span></div>
+                            <div class="bg-gray-50 min-h-[100px] p-1.5 sm:p-2 cursor-not-allowed"><span class="text-xs sm:text-sm font-medium text-gray-400">29</span></div>
+                            <div class="bg-gray-50 min-h-[100px] p-1.5 sm:p-2 cursor-not-allowed"><span class="text-xs sm:text-sm font-medium text-gray-400">30</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">1</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">2</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">3</span></div>
+
+                            <!-- Week 2 -->
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">4</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">5</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">6</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">7</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">8</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">9</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">10</span></div>
+
+                            <!-- Week 3 (Contains Event) -->
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">11</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">12</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">13</span></div>
+                            
+                            <!-- Highlighted Day -->
+                            <div class="bg-blue-50/30 min-h-[100px] p-1.5 sm:p-2 border border-blue-200 relative overflow-hidden cursor-pointer transition ring-1 ring-inset ring-blue-500">
+                                <span class="text-xs sm:text-sm font-black text-blue-700">14</span>
+                                <div class="mt-1 bg-blue-100 text-blue-800 border border-blue-200 rounded px-1.5 py-1 text-[10px] font-bold shadow-sm flex flex-col gap-0.5 leading-tight hover:bg-blue-200 transition">
+                                    <span class="truncate">10:00 AM</span>
+                                    <span class="truncate text-blue-600">Portrait</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">15</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">16</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">17</span></div>
+
+                            <!-- Week 4 (Contains Event & Blocks) -->
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">18</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">19</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">20</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">21</span></div>
+                            
+                            <!-- Highlighted Day -->
+                            <div class="bg-yellow-50/30 min-h-[100px] p-1.5 sm:p-2 border border-yellow-200 relative overflow-hidden cursor-pointer transition">
+                                <span class="text-xs sm:text-sm font-bold text-slate-900">22</span>
+                                <div class="mt-1 bg-yellow-100 text-yellow-800 border border-yellow-200 rounded px-1.5 py-1 text-[10px] font-bold shadow-sm flex flex-col gap-0.5 leading-tight hover:bg-yellow-200 transition">
+                                    <span class="truncate">2:00 PM</span>
+                                    <span class="truncate text-yellow-700">Wedding</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">23</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">24</span></div>
+
+                            <!-- Week 5 (Contains Blocked days) -->
+                            <div class="bg-gray-100 min-h-[100px] p-1.5 sm:p-2 relative overflow-hidden cursor-pointer transition striped-bg">
+                                <span class="text-xs sm:text-sm font-bold text-gray-500">25</span>
+                                <div class="mt-1 bg-gray-200 text-gray-600 border border-gray-300 rounded px-1.5 py-1 text-[10px] font-bold truncate">Blocked</div>
+                            </div>
+                            <div class="bg-gray-100 min-h-[100px] p-1.5 sm:p-2 relative overflow-hidden cursor-pointer transition striped-bg">
+                                <span class="text-xs sm:text-sm font-bold text-gray-500">26</span>
+                                <div class="mt-1 bg-gray-200 text-gray-600 border border-gray-300 rounded px-1.5 py-1 text-[10px] font-bold truncate">Blocked</div>
+                            </div>
+                            <div class="bg-gray-100 min-h-[100px] p-1.5 sm:p-2 relative overflow-hidden cursor-pointer transition striped-bg">
+                                <span class="text-xs sm:text-sm font-bold text-gray-500">27</span>
+                                <div class="mt-1 bg-gray-200 text-gray-600 border border-gray-300 rounded px-1.5 py-1 text-[10px] font-bold truncate">Blocked</div>
+                            </div>
+                            
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">28</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">29</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">30</span></div>
+                            <div class="bg-white min-h-[100px] p-1.5 sm:p-2 hover:bg-blue-50/50 cursor-pointer transition"><span class="text-xs sm:text-sm font-bold text-slate-900">31</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-slate-900 text-white pt-12 pb-8 px-6 md:px-12 mt-auto border-t border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+            <div class="flex items-center gap-2">
+                <i data-lucide="camera" class="w-5 h-5 text-gray-500"></i>
+                <span class="font-bold text-gray-300 text-sm tracking-tight">LensWorks Pro</span>
+            </div>
+            <p>© 2026 LensWorks Platform. All rights reserved.</p>
+            <div class="flex gap-6 font-medium">
+                <a href="seller-support.html" class="hover:text-white transition">Seller Support</a>
+                <a href="terms.html" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+
+        <script src="js/shared.js"></script>
+    <script src="js/vendor-dashboard.js"></script>
+</body>
+</html>
+

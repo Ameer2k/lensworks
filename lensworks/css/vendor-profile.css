@@ -1,0 +1,32 @@
+﻿body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        
+        /* Lightbox Styles */
+        #lightbox {
+            transition: opacity 0.3s ease;
+        }
+        #lightbox.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #lightbox:not(.hidden) {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Custom Checkbox for Add-ons */
+        .addon-checkbox:checked + div {
+            border-color: #0f172a;
+            background-color: #f8fafc;
+        }
+        .addon-checkbox:checked + div .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        #booking-steps > div {
+            transition: all 0.2s ease;
+        }
+
+        #vendor-faq-list summary::-webkit-details-marker {
+            display: none;
+        }

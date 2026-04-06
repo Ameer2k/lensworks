@@ -1,0 +1,474 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LensWorks | Photography Booking Platform</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom Styles for minor tweaks -->
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body class="min-h-screen bg-white text-slate-900 font-sans">
+
+    <!-- Navigation Bar -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent py-6 text-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <i data-lucide="camera" id="nav-logo-icon" class="w-8 h-8 text-white transition-colors duration-300"></i>
+                <span class="text-xl font-bold tracking-tight">LensWorks</span>
+            </div>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="directory.html" class="hover:opacity-70 transition">Explore Photographers</a>
+                <a href="directory.html" class="hover:opacity-70 transition">Shop Packages</a>
+                <a href="#how" class="hover:opacity-70 transition">How It Works</a>
+            </nav>
+
+            <!-- Right Actions -->
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <a href="login.html" class="hover:opacity-70 transition">Log In</a>
+                <button id="signup-btn" onclick="window.location.href='login.html'" class="px-5 py-2.5 rounded-full transition bg-white text-slate-900 hover:bg-gray-100">
+                    Sign Up
+                </button>
+                <button class="relative hover:opacity-70 transition" onclick="window.location.href='cart.html'">
+                    <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden hover:opacity-70 transition">
+                <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Drawer -->
+    <div id="mobile-nav-panel" class="hidden fixed inset-0 z-40">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mobile-nav-overlay"></div>
+        <div class="absolute top-0 right-0 h-full w-72 bg-white shadow-2xl flex flex-col pt-20 px-6 pb-8">
+            <button id="mobile-nav-close" class="absolute top-5 right-5 p-2 rounded-lg hover:bg-gray-100">
+                <i data-lucide="x" class="w-6 h-6 text-slate-900"></i>
+            </button>
+            <nav class="flex flex-col gap-1 flex-1">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 font-medium text-slate-900"><i data-lucide="home" class="w-5 h-5 text-gray-400"></i> Home</a>
+                <a href="directory.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 font-medium text-slate-900"><i data-lucide="search" class="w-5 h-5 text-gray-400"></i> Find Photographers</a>
+                <a href="#how" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 font-medium text-slate-900" onclick="closeMobileNav()"><i data-lucide="info" class="w-5 h-5 text-gray-400"></i> How It Works</a>
+                <a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 font-medium text-slate-900"><i data-lucide="log-in" class="w-5 h-5 text-gray-400"></i> Log In</a>
+            </nav>
+            <a href="login.html" class="mt-auto block w-full bg-slate-900 text-white text-center font-bold py-3 rounded-xl hover:bg-slate-700 transition">Get Started</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen min-h-[700px] flex items-center justify-center pt-20">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=2578&auto=format&fit=crop" 
+                alt="Photography Background" 
+                class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-black/40"></div> <!-- Dark overlay -->
+        </div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto w-full">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg">
+                Capture Your <br class="hidden md:block"/> Best Moments.
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-12 max-w-2xl mx-auto font-light">
+                From breathtaking weddings to high-end commercial shoots, find the perfect lens for your story.
+            </p>
+
+            <!-- Smart Search Engine -->
+            <form id="hero-search-form" class="bg-white p-2 rounded-2xl md:rounded-full shadow-2xl flex flex-col md:flex-row items-center gap-2 max-w-4xl mx-auto">
+                
+                <div class="flex-1 w-full flex items-center gap-3 px-4 py-3 md:py-4 md:border-r border-gray-200">
+                    <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+                    <select id="hero-service" class="w-full bg-transparent text-slate-700 outline-none cursor-pointer appearance-none">
+                        <option value="">Service Type...</option>
+                        <option value="wedding">Weddings</option>
+                        <option value="ads">Commercial & Ads</option>
+                        <option value="portrait">Portraits</option>
+                        <option value="events">Events</option>
+                    </select>
+                </div>
+
+                <div class="flex-1 w-full flex items-center gap-3 px-4 py-3 md:py-4 md:border-r border-gray-200">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-gray-400"></i>
+                    <input 
+                        id="hero-location"
+                        type="text" 
+                        placeholder="Location (e.g. Manama)" 
+                        class="w-full bg-transparent outline-none text-slate-700 placeholder-gray-400"
+                    />
+                </div>
+
+                <div class="flex-1 w-full flex items-center gap-3 px-4 py-3 md:py-4">
+                    <i data-lucide="calendar" class="w-5 h-5 text-gray-400"></i>
+                    <input 
+                        id="hero-date"
+                        type="date" 
+                        class="w-full bg-transparent outline-none text-slate-700 text-sm"
+                    />
+                </div>
+
+                <button type="submit" class="w-full md:w-auto bg-slate-900 text-white px-8 py-4 rounded-xl md:rounded-full font-medium hover:bg-slate-800 transition shadow-lg whitespace-nowrap">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Browse by Category -->
+    <section class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h2 class="text-3xl font-bold mb-4 tracking-tight">Browse by Category</h2>
+                <p class="text-gray-500">Find specialized professionals for your specific needs.</p>
+            </div>
+            <a href="directory.html" class="hidden md:flex items-center gap-1 font-medium hover:text-gray-600 transition">
+                View All <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Category 1 -->
+            <div class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" alt="Weddings" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6">
+                    <h3 class="text-white text-xl font-semibold opacity-90 group-hover:opacity-100 transition">Weddings</h3>
+                </div>
+            </div>
+            <!-- Category 2 -->
+            <div class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm">
+                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=800&auto=format&fit=crop" alt="Commercial & Ads" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6">
+                    <h3 class="text-white text-xl font-semibold opacity-90 group-hover:opacity-100 transition">Commercial & Ads</h3>
+                </div>
+            </div>
+            <!-- Category 3 -->
+            <div class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Fashion & Portraits" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6">
+                    <h3 class="text-white text-xl font-semibold opacity-90 group-hover:opacity-100 transition">Fashion & Portraits</h3>
+                </div>
+            </div>
+            <!-- Category 4 -->
+            <div class="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-sm">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800&auto=format&fit=crop" alt="Nature & Landscape" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6">
+                    <h3 class="text-white text-xl font-semibold opacity-90 group-hover:opacity-100 transition">Nature & Landscape</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spotlight: Top-Rated Photographers -->
+    <section class="py-24 px-6 md:px-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold mb-4 tracking-tight">Spotlight Professionals</h2>
+                <p class="text-gray-500">Top-rated creators with verified portfolios and reviews.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Pro Card 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=800&auto=format&fit=crop" alt="Cover" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-slate-800">Wedding</div>
+                    </div>
+                    <div class="p-6 relative pt-12">
+                        <div class="absolute -top-10 left-6">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" alt="Featured photographer" class="w-16 h-16 rounded-full border-4 border-white object-cover" />
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-bold text-lg flex items-center gap-1">Featured Pro <i data-lucide="check-circle" class="w-4 h-4 text-blue-500"></i></h3>
+                                <p class="text-gray-500 text-sm">SJ Photography</p>
+                            </div>
+                            <div class="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-lg">
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
+                                <span class="text-sm font-bold text-slate-800">4.9</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                            <div>
+                                <p class="text-xs text-gray-500">Starting at</p>
+                                <p class="font-bold text-slate-900">$150<span class="text-sm font-normal text-gray-500">/hr</span></p>
+                            </div>
+                            <button class="text-sm font-medium text-slate-900 bg-gray-50 hover:bg-slate-900 hover:text-white px-4 py-2 rounded-lg transition" onclick="window.location.href='vendor-profile.html'">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Card 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=800&auto=format&fit=crop" alt="Cover" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-slate-800">Commercial</div>
+                    </div>
+                    <div class="p-6 relative pt-12">
+                        <div class="absolute -top-10 left-6">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" alt="David Chen" class="w-16 h-16 rounded-full border-4 border-white object-cover" />
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-bold text-lg flex items-center gap-1">David Chen <i data-lucide="check-circle" class="w-4 h-4 text-blue-500"></i></h3>
+                                <p class="text-gray-500 text-sm">Elevate Studios</p>
+                            </div>
+                            <div class="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-lg">
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
+                                <span class="text-sm font-bold text-slate-800">5.0</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                            <div>
+                                <p class="text-xs text-gray-500">Starting at</p>
+                                <p class="font-bold text-slate-900">$200<span class="text-sm font-normal text-gray-500">/hr</span></p>
+                            </div>
+                            <button class="text-sm font-medium text-slate-900 bg-gray-50 hover:bg-slate-900 hover:text-white px-4 py-2 rounded-lg transition" onclick="window.location.href='vendor-profile.html?vendor=david-chen'">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Card 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800&auto=format&fit=crop" alt="Cover" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-slate-800">Fashion</div>
+                    </div>
+                    <div class="p-6 relative pt-12">
+                        <div class="absolute -top-10 left-6">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&auto=format&fit=crop" alt="Elena Rostova" class="w-16 h-16 rounded-full border-4 border-white object-cover" />
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-bold text-lg flex items-center gap-1">Elena Rostova <i data-lucide="check-circle" class="w-4 h-4 text-blue-500"></i></h3>
+                                <p class="text-gray-500 text-sm">Light & Shadow</p>
+                            </div>
+                            <div class="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-lg">
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
+                                <span class="text-sm font-bold text-slate-800">4.8</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                            <div>
+                                <p class="text-xs text-gray-500">Starting at</p>
+                                <p class="font-bold text-slate-900">$120<span class="text-sm font-normal text-gray-500">/hr</span></p>
+                            </div>
+                            <button class="text-sm font-medium text-slate-900 bg-gray-50 hover:bg-slate-900 hover:text-white px-4 py-2 rounded-lg transition" onclick="window.location.href='vendor-profile.html?vendor=elena-rostova'">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Card 4 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=800&auto=format&fit=crop" alt="Cover" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-slate-800">Nature</div>
+                    </div>
+                    <div class="p-6 relative pt-12">
+                        <div class="absolute -top-10 left-6">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" alt="Marcus Field" class="w-16 h-16 rounded-full border-4 border-white object-cover" />
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-bold text-lg flex items-center gap-1">Marcus Field <i data-lucide="check-circle" class="w-4 h-4 text-blue-500"></i></h3>
+                                <p class="text-gray-500 text-sm">Field Expeditions</p>
+                            </div>
+                            <div class="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-lg">
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-current"></i>
+                                <span class="text-sm font-bold text-slate-800">4.9</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
+                            <div>
+                                <p class="text-xs text-gray-500">Starting at</p>
+                                <p class="font-bold text-slate-900">$100<span class="text-sm font-normal text-gray-500">/hr</span></p>
+                            </div>
+                            <button class="text-sm font-medium text-slate-900 bg-gray-50 hover:bg-slate-900 hover:text-white px-4 py-2 rounded-lg transition" onclick="window.location.href='vendor-profile.html?vendor=marcus-field'">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 px-6 md:px-12 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-3">What Clients Say</p>
+            <h2 class="text-3xl font-bold mb-16 tracking-tight">Loved by Thousands of Creatives</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-left relative">
+                    <div class="flex gap-0.5 mb-5">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">&ldquo;LensWorks made it so easy to find the perfect photographer for our engagement shoot. The booking process was seamless and the results were breathtaking. I&rsquo;ll never use anything else.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=100&auto=format&fit=crop" class="w-10 h-10 rounded-full object-cover border-2 border-slate-600" alt="Priya S.">
+                        <div>
+                            <p class="font-bold text-sm">Priya Sharma</p>
+                            <p class="text-xs text-gray-500">Engagement Shoot • New York</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-left relative">
+                    <div class="flex gap-0.5 mb-5">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">&ldquo;As a small business owner, I needed top-quality headshots fast. LensWorks connected me with an amazing photographer in under 10 minutes. The gallery delivery through the platform is a game-changer.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop" class="w-10 h-10 rounded-full object-cover border-2 border-slate-600" alt="Tom H.">
+                        <div>
+                            <p class="font-bold text-sm">Tom Henderson</p>
+                            <p class="text-xs text-gray-500">Brand Headshots • Chicago</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-left relative">
+                    <div class="flex gap-0.5 mb-5">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">&ldquo;We hired a drone photographer through LensWorks for our product launch event. Absolutely stunning aerial footage. The vendor&rsquo;s portfolio on the platform gave us full confidence before booking.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop" class="w-10 h-10 rounded-full object-cover border-2 border-slate-600" alt="Lena C.">
+                        <div>
+                            <p class="font-bold text-sm">Lena Cruz</p>
+                            <p class="text-xs text-gray-500">Product Launch • Los Angeles</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how" class="py-24 px-6 md:px-12 max-w-7xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-16 tracking-tight">How LensWorks Operates</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+            <!-- Connecting Line (Desktop) -->
+            <div class="hidden md:block absolute top-12 left-[16.6%] right-[16.6%] h-0.5 bg-gray-100 z-0 w-2/3 mx-auto"></div>
+
+            <!-- Step 1 -->
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="w-24 h-24 bg-white border border-gray-100 shadow-lg rounded-2xl flex items-center justify-center mb-6 text-slate-900">
+                    <i data-lucide="search" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">1. Discover</h3>
+                <p class="text-gray-500 max-w-xs">Browse curated portfolios and find a style that perfectly matches your vision.</p>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="w-24 h-24 bg-white border border-gray-100 shadow-lg rounded-2xl flex items-center justify-center mb-6 text-slate-900">
+                    <i data-lucide="calendar" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">2. Book & Customize</h3>
+                <p class="text-gray-500 max-w-xs">Select your dates, build your custom package, and secure your booking instantly.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="w-24 h-24 bg-white border border-gray-100 shadow-lg rounded-2xl flex items-center justify-center mb-6 text-slate-900">
+                    <i data-lucide="camera" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">3. Capture</h3>
+                <p class="text-gray-500 max-w-xs">Meet your professional. Relax while they capture magic, then download high-res files.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-20 pb-10 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 md:col-span-1">
+                <div class="flex items-center gap-2 mb-6">
+                    <i data-lucide="camera" class="w-8 h-8 text-white"></i>
+                    <span class="text-2xl font-bold tracking-tight">LensWorks</span>
+                </div>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    The premier marketplace connecting visionary clients with top-tier photography and studio professionals worldwide.
+                </p>
+                <!-- Newsletter Signup -->
+                <div>
+                    <p class="text-sm font-semibold text-gray-300 mb-2">Get inspiration &amp; updates</p>
+                    <form class="flex gap-2" onsubmit="handleNewsletter(event)">
+                        <input id="newsletter-email" type="email" placeholder="Enter your email" class="flex-1 bg-slate-800 border border-slate-700 text-sm text-gray-200 placeholder-gray-500 px-4 py-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <button type="submit" class="bg-indigo-500 hover:bg-indigo-400 text-white font-bold text-sm px-4 py-2.5 rounded-xl transition whitespace-nowrap">Subscribe</button>
+                    </form>
+                    <p id="newsletter-msg" class="text-xs text-green-400 mt-2 hidden">You&rsquo;re subscribed!</p>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-6 text-lg">Platform</h4>
+                <ul class="space-y-4 text-sm text-gray-400">
+                    <li><a href="directory.html" class="hover:text-white transition">Explore Photographers</a></li>
+                    <li><a href="studios.html" class="hover:text-white transition">Browse Studios</a></li>
+                    <li><a href="prints.html" class="hover:text-white transition">Shop Prints</a></li>
+                    <li><a href="#how" class="hover:text-white transition">How it Works</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-6 text-lg">Support</h4>
+                <ul class="space-y-4 text-sm text-gray-400">
+                    <li><a href="help.html" class="hover:text-white transition">Help Center</a></li>
+                    <li><a href="trust-safety.html" class="hover:text-white transition">Trust & Safety</a></li>
+                    <li><a href="cancellation-policy.html" class="hover:text-white transition">Cancellation Options</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-6 text-lg">For Professionals</h4>
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <p class="text-sm text-gray-300 mb-4">Grow your photography business, manage bookings, and get paid securely.</p>
+                    <button class="w-full bg-white text-slate-900 py-3 rounded-xl font-bold text-sm hover:bg-gray-100 transition" onclick="window.location.href='login.html'">Join as a Vendor</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+            <p>© 2026 LensWorks Platform. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="privacy.html" class="hover:text-white transition">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+
+        <script src="js/shared.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

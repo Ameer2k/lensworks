@@ -1,0 +1,537 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photographer Profile & Booking | LensWorks</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/vendor-profile.css">
+</head>
+<body class="text-slate-900 font-sans min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                <i data-lucide="camera" class="w-7 h-7 text-slate-900"></i>
+                <span class="text-xl font-bold tracking-tight">LensWorks</span></a>
+            
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-500">
+                <a href="directory.html" class="hover:text-slate-900 transition">Explore Photographers</a>
+                <a href="directory.html" class="text-slate-900 font-semibold">Shop Packages</a>
+                <a href="index.html#how" class="hover:text-slate-900 transition">How It Works</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-5 text-sm font-medium">
+                <a href="login.html" class="text-gray-500 hover:text-slate-900 transition">Log In</a>
+                <button class="px-5 py-2.5 rounded-full transition bg-slate-900 text-white hover:bg-slate-800" onclick="window.location.href='login.html'">Sign Up</button>
+                <button class="relative text-slate-900 hover:opacity-70 transition" onclick="window.location.href='cart.html'">
+                    <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                    <span id="vp-cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
+                </button>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-slate-900 hover:opacity-70 transition">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Drawer -->
+    <div id="mobile-nav-panel" class="hidden fixed inset-0 z-40">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mobile-nav-overlay"></div>
+        <div class="absolute top-0 right-0 h-full w-72 bg-white shadow-2xl flex flex-col pt-20 px-6 pb-8">
+            <button id="mobile-nav-close" class="absolute top-5 right-5 p-2 rounded-lg hover:bg-gray-100">
+                <i data-lucide="x" class="w-6 h-6 text-slate-900"></i>
+            </button>
+            <nav class="flex flex-col gap-1 flex-1">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 font-medium text-slate-900"><i data-lucide="home" class="w-5 h-5 text-gray-400"></i> Home</a>
+                <a href="directory.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 font-medium text-slate-900"><i data-lucide="search" class="w-5 h-5 text-gray-400"></i> Explore Photographers</a>
+                <a href="cart.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 font-medium text-slate-900"><i data-lucide="shopping-bag" class="w-5 h-5 text-gray-400"></i> Cart</a>
+                <a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 font-medium text-slate-900"><i data-lucide="log-in" class="w-5 h-5 text-gray-400"></i> Log In</a>
+            </nav>
+            <a href="checkout.html" class="mt-auto block w-full bg-slate-900 text-white text-center font-bold py-3 rounded-xl hover:bg-slate-700 transition">Book Now</a>
+        </div>
+    </div>
+
+    <!-- Vendor Hero Section -->
+    <div class="bg-white">
+        <!-- Cover Photo -->
+        <div class="h-64 md:h-80 w-full relative">
+            <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Cover Photo">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        </div>
+
+        <!-- Vendor Info Block -->
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative pb-8">
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 -mt-16 md:-mt-20 relative z-10">
+                
+                <div class="flex items-end gap-5">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=300&auto=format&fit=crop" class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white shadow-lg object-cover bg-white" alt="Profile">
+                    <div class="mb-2">
+                        <h1 class="text-3xl font-bold flex items-center gap-2">
+                            LensWorks Photographer 
+                            <i data-lucide="check-circle" class="w-6 h-6 text-blue-500 fill-white"></i>
+                        </h1>
+                        <p class="text-gray-500 font-medium">SJ Photography • Weddings & Portraits</p>
+                        
+                        <div class="flex items-center gap-4 mt-3 text-sm">
+                            <div class="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-md font-bold text-slate-800">
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i> 4.9 (124 Reviews)
+                            </div>
+                            <div class="flex items-center gap-1 text-gray-500">
+                                <i data-lucide="map-pin" class="w-4 h-4"></i> Manama, Bahrain
+                            </div>
+                        </div>
+                        <div class="mt-3 flex flex-wrap gap-2 text-[11px]">
+                            <span id="vendor-response-badge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-semibold border border-slate-200"><i data-lucide="timer" class="w-3 h-3"></i> Responds in 2h</span>
+                            <span id="vendor-completed-badge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-semibold border border-slate-200"><i data-lucide="sparkles" class="w-3 h-3"></i> 250+ completed shoots</span>
+                            <span id="vendor-verified-badge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-semibold border border-emerald-100"><i data-lucide="badge-check" class="w-3 h-3"></i> Verified Pro</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 w-full md:w-auto">
+                    <button id="vendor-message-btn" class="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-gray-200 font-semibold hover:bg-gray-50 transition shadow-sm">
+                        <i data-lucide="message-square" class="w-4 h-4"></i> Message
+                    </button>
+                    <button id="vendor-share-btn" class="flex-none p-3 rounded-xl border border-gray-200 hover:bg-gray-50 transition shadow-sm">
+                        <i data-lucide="share" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Split -->
+    <div class="flex-1 max-w-7xl mx-auto px-6 md:px-12 py-12 w-full flex flex-col lg:flex-row gap-12">
+        
+        <!-- Left Column (Portfolio & Bio) -->
+        <main class="w-full lg:w-3/5 xl:w-2/3">
+            
+            <!-- About Section -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-4">About the Photographer</h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Hi! I'm Sarah, a professional photographer with over 8 years of experience capturing raw, authentic moments. My style is a blend of fine-art editorial and documentary storytelling. Whether it's your wedding day or a simple family portrait, my goal is to make you feel completely comfortable while delivering timeless, cinematic images.
+                </p>
+                
+                <h3 class="font-semibold mb-3">Equipment</h3>
+                <div class="flex flex-wrap gap-3">
+                    <div class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 shadow-sm">
+                        <i data-lucide="camera" class="w-4 h-4 text-gray-400"></i> Sony A7R IV (Dual Setup)
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 shadow-sm">
+                        <i data-lucide="aperture" class="w-4 h-4 text-gray-400"></i> Prime Lenses (35mm, 50mm, 85mm)
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 shadow-sm">
+                        <i data-lucide="sun" class="w-4 h-4 text-gray-400"></i> Profoto Lighting
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 shadow-sm">
+                        <i data-lucide="wind" class="w-4 h-4 text-gray-400"></i> DJI Mavic 3 Pro Drone
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold">Package Comparison</h2>
+                        <span class="text-xs text-gray-500 font-semibold uppercase tracking-wider">Quick Compare</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full min-w-[520px] text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-500 border-b border-gray-200">
+                                    <th class="py-3 pr-4 font-semibold">Package</th>
+                                    <th class="py-3 pr-4 font-semibold">Price</th>
+                                    <th class="py-3 pr-4 font-semibold">Coverage</th>
+                                    <th class="py-3 font-semibold">Best For</th>
+                                </tr>
+                            </thead>
+                            <tbody id="package-compare-table" class="divide-y divide-gray-100">
+                                <tr>
+                                    <td class="py-3 pr-4 font-semibold text-slate-900">Essential Shoot</td>
+                                    <td class="py-3 pr-4 text-slate-700">$150</td>
+                                    <td class="py-3 pr-4 text-gray-600">1 hour</td>
+                                    <td class="py-3 text-gray-600">Portraits & quick sessions</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 font-semibold text-slate-900">Premium Session</td>
+                                    <td class="py-3 pr-4 text-slate-700">$450</td>
+                                    <td class="py-3 pr-4 text-gray-600">3 hours</td>
+                                    <td class="py-3 text-gray-600">Engagements & events</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 font-semibold text-slate-900">Full Day Cinematic</td>
+                                    <td class="py-3 pr-4 text-slate-700">$1,200</td>
+                                    <td class="py-3 pr-4 text-gray-600">8 hours</td>
+                                    <td class="py-3 text-gray-600">Weddings & major shoots</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="mt-3 text-xs text-gray-500">All packages include private online gallery delivery and color-corrected edits.</p>
+                </div>
+            </section>
+
+            <!-- Portfolio Section -->
+            <section class="mb-12">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">Portfolio</h2>
+                    <div class="flex gap-2">
+                        <button class="px-4 py-1.5 text-sm font-semibold bg-slate-900 text-white rounded-full">All</button>
+                        <button class="px-4 py-1.5 text-sm font-semibold bg-gray-100 text-gray-600 rounded-full hover:bg-gray-200 transition">Weddings</button>
+                        <button class="px-4 py-1.5 text-sm font-semibold bg-gray-100 text-gray-600 rounded-full hover:bg-gray-200 transition">Portraits</button>
+                    </div>
+                </div>
+
+                <!-- Masonry Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" class="portfolio-img w-full h-48 md:h-64 object-cover rounded-xl cursor-zoom-in hover:opacity-90 transition shadow-sm" alt="Portfolio 1">
+                    <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=600&auto=format&fit=crop" class="portfolio-img w-full h-48 md:h-64 object-cover rounded-xl cursor-zoom-in hover:opacity-90 transition shadow-sm" alt="Portfolio 2">
+                    <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=600&auto=format&fit=crop" class="portfolio-img w-full h-48 md:h-64 object-cover rounded-xl cursor-zoom-in hover:opacity-90 transition shadow-sm" alt="Portfolio 3">
+                    <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=600&auto=format&fit=crop" class="portfolio-img w-full h-48 md:h-64 object-cover rounded-xl cursor-zoom-in hover:opacity-90 transition shadow-sm" alt="Portfolio 4">
+                    <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=600&auto=format&fit=crop" class="portfolio-img w-full h-48 md:h-64 object-cover rounded-xl cursor-zoom-in hover:opacity-90 transition shadow-sm" alt="Portfolio 5">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop" class="portfolio-img w-full h-48 md:h-64 object-cover rounded-xl cursor-zoom-in hover:opacity-90 transition shadow-sm" alt="Portfolio 6">
+                </div>
+            </section>
+
+            <!-- Reviews Section -->
+            <section class="mb-12" id="reviews">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold">Client Reviews</h2>
+                    <div id="reviews-summary-badge" class="flex items-center gap-2 bg-yellow-50 border border-yellow-100 px-3 py-1.5 rounded-lg">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                        <span id="reviews-summary-rating" class="font-bold text-slate-900">4.9</span>
+                        <span id="reviews-summary-count" class="text-gray-500 text-sm">(124 verified)</span>
+                    </div>
+                </div>
+
+                <form id="review-form" class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm mb-6">
+                    <h3 class="font-bold text-slate-900 text-sm uppercase tracking-wider mb-3">Leave a Review</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mb-3">
+                        <div class="md:col-span-1">
+                            <label for="review-rating" class="text-xs font-bold uppercase tracking-wider text-gray-500 block mb-1">Rating</label>
+                            <select id="review-rating" class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-slate-900">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-4">
+                            <label for="review-body" class="text-xs font-bold uppercase tracking-wider text-gray-500 block mb-1">Comment</label>
+                            <textarea id="review-body" rows="3" class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-slate-900" placeholder="Share details about your experience"></textarea>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between gap-3">
+                        <p id="review-status" class="text-xs text-gray-500 hidden"></p>
+                        <button type="submit" id="review-submit-btn" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-800 transition">Submit Review</button>
+                    </div>
+                </form>
+
+                <div class="space-y-5">
+                    <!-- Review 1 -->
+                    <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop" class="w-10 h-10 rounded-full object-cover border border-gray-100" alt="Client reviewer">
+                                <div>
+                                    <p class="font-bold text-sm text-slate-900">Client reviewer</p>
+                                    <p class="text-xs text-gray-500">Premium Session • Oct 2025</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5">
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Sarah was absolutely incredible. She made the whole experience feel natural and fun. The final photos were beyond what I imagined — every single one felt like a magazine cover. Will 100% be booking again!</p>
+                        <div class="mt-4 grid grid-cols-3 gap-2">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=300&auto=format&fit=crop" class="w-full h-20 object-cover rounded-lg" alt="Review photo">
+                            <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=300&auto=format&fit=crop" class="w-full h-20 object-cover rounded-lg" alt="Review photo">
+                            <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=300&auto=format&fit=crop" class="w-full h-20 object-cover rounded-lg" alt="Review photo">
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
+                            <span class="bg-green-50 text-green-700 text-[10px] font-bold px-2 py-1 rounded border border-green-100 flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3"></i> Verified Booking</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&auto=format&fit=crop" class="w-10 h-10 rounded-full object-cover border border-gray-100" alt="Emma W.">
+                                <div>
+                                    <p class="font-bold text-sm text-slate-900">Emma Williams</p>
+                                    <p class="text-xs text-gray-500">Full Day Cinematic • Aug 2025</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5">
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Hired Sarah for our wedding and she delivered an absolutely jaw-dropping set of photos. Her use of drone footage during the ceremony gave us shots we never expected. She truly goes above and beyond.</p>
+                        <div class="mt-3 flex items-center gap-2">
+                            <span class="bg-green-50 text-green-700 text-[10px] font-bold px-2 py-1 rounded border border-green-100 flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3"></i> Verified Booking</span>
+                            <span class="bg-blue-50 text-blue-700 text-[10px] font-bold px-2 py-1 rounded border border-blue-100">Wedding</span>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">MK</div>
+                                <div>
+                                    <p class="font-bold text-sm text-slate-900">Marcus K.</p>
+                                    <p class="text-xs text-gray-500">Essential Shoot • Jul 2025</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-0.5">
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                                <i data-lucide="star" class="w-4 h-4 text-gray-200 fill-gray-200"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Great experience overall. Very professional setup and the photos came back sharp and beautifully edited. Turnaround was quick too. Slightly wished for more variety in poses but overall very happy.</p>
+                        <div class="mt-3 flex items-center gap-2">
+                            <span class="bg-green-50 text-green-700 text-[10px] font-bold px-2 py-1 rounded border border-green-100 flex items-center gap-1"><i data-lucide="check-circle" class="w-3 h-3"></i> Verified Booking</span>
+                        </div>
+                    </div>
+
+                    <button class="w-full py-3 border border-gray-200 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:text-slate-900 transition flex items-center justify-center gap-2">
+                        <i data-lucide="chevron-down" class="w-4 h-4"></i> Load More Reviews
+                    </button>
+                </div>
+            </section>
+
+            <section class="mb-4">
+                <h2 class="text-2xl font-bold mb-5">Frequently Asked Questions</h2>
+                <div id="vendor-faq-list" class="space-y-3">
+                    <details class="bg-white border border-gray-200 rounded-xl p-4 group" open>
+                        <summary class="cursor-pointer list-none font-semibold text-slate-900 flex items-center justify-between">How soon will I receive my photos?<i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 group-open:rotate-180 transition"></i></summary>
+                        <p class="text-sm text-gray-600 mt-3">Standard delivery is 5-7 days, with an expedited add-on available for 48-hour delivery.</p>
+                    </details>
+                    <details class="bg-white border border-gray-200 rounded-xl p-4 group">
+                        <summary class="cursor-pointer list-none font-semibold text-slate-900 flex items-center justify-between">Can I request specific poses or a mood board?<i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 group-open:rotate-180 transition"></i></summary>
+                        <p class="text-sm text-gray-600 mt-3">Yes. Share references before the shoot and I will tailor direction around your preferred style.</p>
+                    </details>
+                    <details class="bg-white border border-gray-200 rounded-xl p-4 group">
+                        <summary class="cursor-pointer list-none font-semibold text-slate-900 flex items-center justify-between">What is the reschedule policy?<i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 group-open:rotate-180 transition"></i></summary>
+                        <p class="text-sm text-gray-600 mt-3">Rescheduling is free up to 72 hours before the session. Last-minute changes are reviewed case by case.</p>
+                    </details>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Right Column (The Shop & Booking Widget) -->
+        <aside class="w-full lg:w-2/5 xl:w-1/3">
+            <div class="bg-white rounded-2xl border border-gray-200 shadow-xl p-6 lg:sticky lg:top-24">
+                <div class="mb-5">
+                    <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Booking Steps</p>
+                    <div class="grid grid-cols-4 gap-2" id="booking-steps">
+                        <div id="step-package" class="text-[11px] font-semibold px-2 py-2 rounded-lg bg-slate-900 text-white text-center">1. Package</div>
+                        <div id="step-addons" class="text-[11px] font-semibold px-2 py-2 rounded-lg bg-slate-100 text-slate-500 text-center">2. Add-ons</div>
+                        <div id="step-date" class="text-[11px] font-semibold px-2 py-2 rounded-lg bg-slate-100 text-slate-500 text-center">3. Date</div>
+                        <div id="step-checkout" class="text-[11px] font-semibold px-2 py-2 rounded-lg bg-slate-100 text-slate-500 text-center">4. Checkout</div>
+                    </div>
+                </div>
+                
+                <h2 class="text-xl font-bold mb-4">Select a Package</h2>
+                
+                <!-- Package Options -->
+                <div class="space-y-3 mb-6" id="package-container">
+                    
+                    <!-- Tier 1 -->
+                    <label class="block cursor-pointer group">
+                        <input type="radio" name="package" value="150" class="peer sr-only">
+                        <div class="p-4 rounded-xl border-2 border-gray-200 peer-checked:border-slate-900 peer-checked:bg-slate-50 hover:border-gray-300 transition relative">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-bold text-slate-900">Essential Shoot</h3>
+                                <span class="font-bold text-lg text-slate-900">$150</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mb-3">Perfect for quick portraits or couples.</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3 h-3 text-gray-400"></i> 1 Hour Coverage</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="image" class="w-3 h-3 text-gray-400"></i> 50+ Edited High-Res Photos</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="cloud-download" class="w-3 h-3 text-gray-400"></i> Online Digital Gallery</li>
+                            </ul>
+                            <!-- Check Icon (Visible when selected) -->
+                            <div class="absolute top-4 right-4 text-slate-900 opacity-0 peer-checked:opacity-100 transition scale-50 peer-checked:scale-100 hidden">
+                                <i data-lucide="check-circle" class="w-5 h-5 fill-slate-900 text-white"></i>
+                            </div>
+                        </div>
+                    </label>
+
+                    <!-- Tier 2 (Default Selected) -->
+                    <label class="block cursor-pointer group">
+                        <input type="radio" name="package" value="450" class="peer sr-only" checked>
+                        <div class="p-4 rounded-xl border-2 border-slate-900 bg-slate-50 peer-checked:border-slate-900 peer-checked:bg-slate-50 transition relative">
+                            <div class="absolute -top-3 left-4 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Most Popular</div>
+                            <div class="flex justify-between items-start mb-1 mt-1">
+                                <h3 class="font-bold text-slate-900">Premium Session</h3>
+                                <span class="font-bold text-lg text-slate-900">$450</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mb-3">Ideal for events, engagements, or small weddings.</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3 h-3 text-gray-400"></i> 3 Hours Coverage</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="image" class="w-3 h-3 text-gray-400"></i> 150+ Edited High-Res Photos</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="shirt" class="w-3 h-3 text-gray-400"></i> Up to 2 Outfit Changes</li>
+                            </ul>
+                        </div>
+                    </label>
+
+                    <!-- Tier 3 -->
+                    <label class="block cursor-pointer group">
+                        <input type="radio" name="package" value="1200" class="peer sr-only">
+                        <div class="p-4 rounded-xl border-2 border-gray-200 peer-checked:border-slate-900 peer-checked:bg-slate-50 hover:border-gray-300 transition relative">
+                            <div class="flex justify-between items-start mb-1">
+                                <h3 class="font-bold text-slate-900">Full Day Cinematic</h3>
+                                <span class="font-bold text-lg text-slate-900">$1,200</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mb-3">The complete narrative package for major events.</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3 h-3 text-gray-400"></i> 8 Hours Coverage</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="image" class="w-3 h-3 text-gray-400"></i> Unlimited Edited Photos</li>
+                                <li class="flex items-center gap-1.5"><i data-lucide="video" class="w-3 h-3 text-gray-400"></i> 1 Min Highlight Reel Video</li>
+                            </ul>
+                        </div>
+                    </label>
+
+                </div>
+
+                <!-- Add-ons Section -->
+                <h3 class="font-bold text-sm text-gray-500 uppercase tracking-wider mb-3">Optional Add-ons</h3>
+                <div class="space-y-2 mb-6">
+                    
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" class="addon-checkbox sr-only" value="100">
+                        <div class="flex-1 flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
+                            <div class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded border border-gray-300 flex items-center justify-center bg-white transition-colors">
+                                    <i data-lucide="check" class="check-icon w-3 h-3 text-slate-900 opacity-0 transform scale-50 transition-all"></i>
+                                </div>
+                                <span class="text-sm font-medium text-slate-700">Extra Coverage Hour</span>
+                            </div>
+                            <span class="text-sm font-bold text-gray-500">+$100</span>
+                        </div>
+                    </label>
+
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" class="addon-checkbox sr-only" value="75">
+                        <div class="flex-1 flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
+                            <div class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded border border-gray-300 flex items-center justify-center bg-white transition-colors">
+                                    <i data-lucide="check" class="check-icon w-3 h-3 text-slate-900 opacity-0 transform scale-50 transition-all"></i>
+                                </div>
+                                <span class="text-sm font-medium text-slate-700">Expedited Delivery (48h)</span>
+                            </div>
+                            <span class="text-sm font-bold text-gray-500">+$75</span>
+                        </div>
+                    </label>
+
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" class="addon-checkbox sr-only" value="250">
+                        <div class="flex-1 flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition">
+                            <div class="flex items-center gap-3">
+                                <div class="w-5 h-5 rounded border border-gray-300 flex items-center justify-center bg-white transition-colors">
+                                    <i data-lucide="check" class="check-icon w-3 h-3 text-slate-900 opacity-0 transform scale-50 transition-all"></i>
+                                </div>
+                                <span class="text-sm font-medium text-slate-700">Premium Leather Album</span>
+                            </div>
+                            <span class="text-sm font-bold text-gray-500">+$250</span>
+                        </div>
+                    </label>
+
+                </div>
+
+                <!-- Total & Booking Trigger -->
+                <div class="border-t border-gray-200 pt-5 mt-4">
+                    <div class="bg-slate-50 border border-gray-200 rounded-xl p-3 mb-4 text-sm">
+                        <div class="flex items-center justify-between py-1 text-gray-600"><span>Package + add-ons</span><span id="booking-subtotal" class="font-semibold text-slate-900">$450</span></div>
+                        <div class="flex items-center justify-between py-1 text-gray-600"><span>Service fee (5%)</span><span id="booking-fee" class="font-semibold text-slate-900">$22.50</span></div>
+                        <div class="border-t border-gray-200 mt-1 pt-2 flex items-center justify-between text-slate-900"><span class="font-bold">Total</span><span id="booking-total" class="font-bold">$472.50</span></div>
+                        <div class="mt-2 pt-2 border-t border-dashed border-gray-200 text-xs text-gray-500 space-y-1">
+                            <div class="flex items-center justify-between"><span>Deposit due now (20%)</span><span id="booking-deposit" class="font-semibold text-slate-700">$94.50</span></div>
+                            <div class="flex items-center justify-between"><span>Balance after shoot</span><span id="booking-balance" class="font-semibold text-slate-700">$378.00</span></div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-gray-500 font-medium">Total Package</span>
+                        <span class="text-2xl font-bold text-slate-900" id="total-price">$450</span>
+                    </div>
+
+                    <button id="book-now-btn" class="w-full bg-slate-900 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:bg-slate-800 hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2">
+                        Select Date & Book <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                    <button id="add-to-cart-btn" class="w-full mt-3 bg-white border-2 border-slate-900 text-slate-900 font-bold text-base py-3.5 rounded-xl hover:bg-gray-50 transition flex items-center justify-center gap-2">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i> Add to Cart
+                    </button>
+                    <p class="text-center text-xs text-gray-400 mt-3 flex items-center justify-center gap-1">
+                        <i data-lucide="shield-check" class="w-3 h-3"></i> Secure checkout with clear deposit and payout schedule.
+                    </p>
+                </div>
+
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8 px-6 md:px-12 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+            <div class="flex items-center gap-2">
+                <i data-lucide="camera" class="w-5 h-5 text-gray-400"></i>
+                <span class="font-bold text-gray-400 text-sm tracking-tight">LensWorks</span>
+            </div>
+            <p>© 2026 LensWorks Platform. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="privacy.html" class="hover:text-white transition">Privacy</a>
+                <a href="terms.html" class="hover:text-white transition">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fullscreen Image Lightbox -->
+    <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white hover:text-gray-300 transition">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <button id="lightbox-prev" class="absolute left-5 md:left-8 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/10 text-white hover:bg-white/20 transition" aria-label="Previous image">
+            <i data-lucide="chevron-left" class="w-7 h-7"></i>
+        </button>
+        <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" alt="Fullscreen Portfolio">
+        <button id="lightbox-next" class="absolute right-5 md:right-8 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/10 text-white hover:bg-white/20 transition" aria-label="Next image">
+            <i data-lucide="chevron-right" class="w-7 h-7"></i>
+        </button>
+        <div id="lightbox-meta" class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/40 border border-white/20 rounded-full px-4 py-2 text-white text-xs font-semibold tracking-wide">
+            <span id="lightbox-counter">1 / 1</span>
+        </div>
+    </div>
+
+
+        <script src="js/shared.js"></script>
+    <script src="js/vendor-profile.js"></script>
+</body>
+</html>
+
+

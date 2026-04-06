@@ -1,0 +1,12 @@
+body {
+    background: radial-gradient(circle at top left, #f8fafc 0%, #eef2ff 45%, #e2e8f0 100%);
+}
+
+.info-shell {
+    min-height: calc(100vh - 220px);
+}
+
+.info-card {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.82);
+}

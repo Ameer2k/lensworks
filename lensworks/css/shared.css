@@ -1,0 +1,29 @@
+/* ===================================================
+   LensWorks — Shared Styles
+   Imported by every page alongside the page-specific CSS.
+   =================================================== */
+
+/* Base */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Utility: hide scrollbar */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Fade transitions used by settings / dashboard tabs */
+.hidden-fade {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    position: absolute;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.visible-fade {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}

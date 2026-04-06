@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | LensWorks</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body class="text-slate-900 font-sans min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 cursor-pointer">
+                <i data-lucide="camera" class="w-7 h-7 text-slate-900"></i>
+                <span class="text-xl font-bold tracking-tight">LensWorks</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-500">
+                <a href="directory.html" class="hover:text-slate-900 transition">Explore Photographers</a>
+                <a href="directory.html" class="hover:text-slate-900 transition">Shop Packages</a>
+                <a href="index.html#how" class="hover:text-slate-900 transition">How It Works</a>
+            </nav>
+            <div class="hidden md:flex items-center gap-5 text-sm font-medium">
+                <a href="login.html" class="text-gray-500 hover:text-slate-900 transition">Log In</a>
+                <button class="px-5 py-2.5 rounded-full bg-slate-900 text-white hover:bg-slate-800 transition" onclick="window.location.href='login.html'">Sign Up</button>
+                <button class="relative text-slate-900 hover:opacity-70 transition" onclick="window.location.href='cart.html'">
+                    <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
+                </button>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-slate-900 hover:opacity-70 transition">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Drawer -->
+    <div id="mobile-nav-panel" class="hidden fixed inset-0 z-40">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mobile-nav-overlay"></div>
+        <div class="absolute top-0 right-0 h-full w-72 bg-white shadow-2xl flex flex-col pt-20 px-6 pb-8">
+            <button id="mobile-nav-close" class="absolute top-5 right-5 p-2 rounded-lg hover:bg-gray-100">
+                <i data-lucide="x" class="w-6 h-6 text-slate-900"></i>
+            </button>
+            <nav class="flex flex-col gap-1 flex-1">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 font-medium text-slate-900"><i data-lucide="home" class="w-5 h-5 text-gray-400"></i> Home</a>
+                <a href="directory.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 font-medium text-slate-900"><i data-lucide="search" class="w-5 h-5 text-gray-400"></i> Explore Photographers</a>
+                <a href="cart.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-50 font-semibold text-slate-900"><i data-lucide="shopping-bag" class="w-5 h-5 text-gray-400"></i> Cart</a>
+                <a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50 font-medium text-slate-900"><i data-lucide="log-in" class="w-5 h-5 text-gray-400"></i> Log In</a>
+            </nav>
+            <a href="checkout.html" class="mt-auto block w-full bg-slate-900 text-white text-center font-bold py-3 rounded-xl hover:bg-slate-700 transition">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="bg-white border-b border-gray-100 pt-6 pb-4 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <nav class="flex text-sm text-gray-500 mb-2">
+                <a href="index.html" class="hover:text-slate-900 transition">Home</a>
+                <i data-lucide="chevron-right" class="w-4 h-4 mx-1.5 mt-0.5"></i>
+                <span class="text-slate-900 font-medium">Cart</span>
+            </nav>
+            <h1 id="cart-heading" class="text-2xl font-bold">Your Cart <span class="text-gray-400 font-normal text-lg">(0 items)</span></h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl mx-auto w-full px-6 md:px-12 py-10">
+        <div id="cart-alert" class="hidden mb-5 rounded-xl border px-4 py-3 text-sm font-medium"></div>
+        <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+            <!-- Cart Items (Left) -->
+            <div id="cart-items-list" class="flex-1 space-y-4">
+
+                <!-- Item 1 -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm flex gap-4 fade-in" id="cart-item-1">
+                    <div class="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover" alt="Photographer">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-start justify-between gap-3">
+                            <div>
+                                <p class="font-bold text-base">Premium Session - Selected Photographer</p>
+                                <p class="text-sm text-gray-500 mt-0.5">3-Hour Studio & Outdoor Shoot</p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500 transition flex-shrink-0" onclick="removeItem('cart-item-1')">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <!-- Add-ons -->
+                        <div class="mt-3 flex flex-wrap gap-2">
+                            <span class="bg-indigo-50 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded-lg border border-indigo-100">+ Extra Hour</span>
+                            <span class="bg-indigo-50 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded-lg border border-indigo-100">+ Rush Editing (48hr)</span>
+                        </div>
+                        <!-- Date & Deposit -->
+                        <div class="mt-3 flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                            <span class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-4 h-4 text-gray-400"></i> Nov 18, 2026 &bull; 10:00 AM</span>
+                            <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4 text-gray-400"></i> Manhattan Studio, NY</span>
+                        </div>
+                    </div>
+                    <div class="text-right flex-shrink-0">
+                        <p class="font-bold text-lg text-slate-900">$495</p>
+                        <p class="text-xs text-gray-400 mt-0.5">Deposit: $150</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm flex gap-4 fade-in" id="cart-item-2">
+                    <div class="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1452960962994-acf4fd70b632?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover" alt="Drone Package">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-start justify-between gap-3">
+                            <div>
+                                <p class="font-bold text-base">Aerial Drone Add-On Package</p>
+                                <p class="text-sm text-gray-500 mt-0.5">60-min drone coverage &bull; DJI Mavic 3 Pro</p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500 transition flex-shrink-0" onclick="removeItem('cart-item-2')">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <div class="mt-3 flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                            <span class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-4 h-4 text-gray-400"></i> Nov 18, 2026 &bull; 10:00 AM</span>
+                        </div>
+                    </div>
+                    <div class="text-right flex-shrink-0">
+                        <p class="font-bold text-lg text-slate-900">$200</p>
+                        <p class="text-xs text-gray-400 mt-0.5">Included in deposit</p>
+                    </div>
+                </div>
+
+                <!-- Promo Code -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                    <p class="font-semibold text-sm mb-3">Promo Code</p>
+                    <form class="flex gap-3" onsubmit="applyPromo(event)">
+                        <input id="promo-input" type="text" placeholder="e.g. LENS20" class="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 placeholder-gray-400">
+                        <button type="submit" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-700 transition">Apply</button>
+                    </form>
+                    <p id="promo-msg" class="hidden text-xs mt-2 text-green-600 font-medium">Promo code applied - 10% off!</p>
+                </div>
+
+            </div>
+
+            <!-- Order Summary (Right) -->
+            <div class="w-full lg:w-96 flex-shrink-0 space-y-4">
+                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm sticky top-24">
+                    <h2 class="font-bold text-lg mb-5">Order Summary</h2>
+
+                    <div id="summary-lines" class="space-y-3 text-sm text-gray-600">
+                        <div class="flex justify-between">
+                            <span>Premium Session (Selected Photographer)</span>
+                            <span class="font-medium text-slate-900">$350</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Extra Hour</span>
+                            <span class="font-medium text-slate-900">$95</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Rush Editing (48hr)</span>
+                            <span class="font-medium text-slate-900">$50</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Aerial Drone Add-On</span>
+                            <span class="font-medium text-slate-900">$200</span>
+                        </div>
+                        <div class="border-t border-gray-100 pt-3 flex justify-between">
+                            <span>Platform Fee (5%)</span>
+                            <span class="font-medium text-slate-900">$34.75</span>
+                        </div>
+                        <div id="discount-row" class="hidden flex justify-between text-green-600">
+                            <span>Promo (LENS20)</span>
+                            <span class="font-medium">-$69.50</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-200 mt-4 pt-4 flex justify-between items-center">
+                        <span class="font-bold text-base">Total</span>
+                        <span id="order-total" class="font-bold text-xl text-slate-900">$729.75</span>
+                    </div>
+
+                    <div class="mt-2 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 text-xs text-blue-700 flex items-start gap-2">
+                        <i data-lucide="info" class="w-4 h-4 flex-shrink-0 mt-0.5"></i>
+                        <span id="deposit-copy">Only the deposit of <strong>$150</strong> is charged today. The remaining balance is due 48 hours before your session.</span>
+                    </div>
+
+                    <button id="checkout-cta" class="mt-5 w-full bg-slate-900 text-white py-4 rounded-xl font-bold text-base hover:bg-slate-700 transition flex items-center justify-center gap-2">
+                        <i data-lucide="lock" class="w-5 h-5"></i>
+                        Proceed to Checkout
+                    </button>
+
+                    <a href="directory.html" class="mt-3 block w-full text-center text-sm text-gray-500 hover:text-slate-900 transition py-2">
+                        &larr; Continue Browsing
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                    <div class="space-y-3 text-sm text-gray-600">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-green-50 border border-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shield-check" class="w-4 h-4 text-green-600"></i>
+                            </div>
+                            <span><strong class="text-slate-900">Secure Payment</strong> â€” PCI DSS compliant checkout</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-blue-50 border border-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="refresh-cw" class="w-4 h-4 text-blue-600"></i>
+                            </div>
+                            <span><strong class="text-slate-900">Free Cancellation</strong> â€” Up to 48 hours before session</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-yellow-50 border border-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500"></i>
+                            </div>
+                            <span><strong class="text-slate-900">Quality Guarantee</strong> â€” Verified top-rated professionals</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8 px-6 md:px-12 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 border-t border-slate-800 pt-8">
+            <p>آ© 2026 LensWorks Platform. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="privacy.html" class="hover:text-white transition">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+        <script src="js/shared.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

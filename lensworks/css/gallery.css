@@ -1,0 +1,93 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        
+        /* CSS-Only Masonry Grid */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.25rem;
+        }
+        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 768px) { .masonry-grid { column-count: 3; } }
+        @media (min-width: 1280px) { .masonry-grid { column-count: 4; } }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.25rem;
+            position: relative;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            background-color: #fff;
+            transform: translateZ(0); /* Hardware acceleration for smooth scale */
+        }
+
+        /* Hover Overlay & Controls */
+        .photo-overlay {
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0) 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .masonry-item:hover .photo-overlay, .masonry-item.is-selected .photo-overlay {
+            opacity: 1;
+        }
+
+        /* Selection styling */
+        .masonry-item.is-selected {
+            box-shadow: 0 0 0 3px #0f172a;
+        }
+        .masonry-item.is-selected img {
+            transform: scale(0.96);
+            border-radius: 0.5rem;
+            opacity: 0.9;
+        }
+        .masonry-item img {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+            width: 100%;
+        }
+
+        /* Heart Animation */
+        @keyframes heartPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .heart-animate {
+            animation: heartPop 0.3s ease-out forwards;
+        }
+
+        /* Floating Action Bar Animation */
+        #floating-action-bar {
+            transform: translateY(150%) translateX(-50%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+        #floating-action-bar.visible {
+            transform: translateY(0) translateX(-50%);
+            opacity: 1;
+        }
+
+        /* Lightbox */
+        #lightbox { 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            transition: opacity 0.4s ease; 
+        }
+        .hidden-fade { opacity: 0; pointer-events: none; }
+        .visible-fade { opacity: 1; pointer-events: auto; }
+        
+        #lightbox-img {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        #lightbox.visible-fade #lightbox-img {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Hide scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }

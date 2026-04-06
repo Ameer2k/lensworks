@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Gallery | LensWorks</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body class="text-slate-900 font-sans min-h-screen flex flex-col relative pb-24">
+
+    <!-- Premium Glass Header -->
+    <header class="fixed top-0 left-0 w-full z-40 bg-white/80 backdrop-blur-xl border-b border-white/20 shadow-sm transition-all duration-300" id="gallery-header">
+        <div class="max-w-[1400px] mx-auto px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="client-dashboard.html" class="text-slate-500 hover:text-slate-900 transition flex items-center gap-2 text-sm font-semibold bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Vault
+                </a>
+                <div class="h-5 w-px bg-slate-200 hidden sm:block"></div>
+                <div class="hidden sm:flex items-center gap-3">
+                    <img id="gallery-photographer-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" class="w-8 h-8 rounded-full border border-slate-200 object-cover" alt="Photographer">
+                    <div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block leading-none mb-0.5">Photographer</span>
+                        <span id="gallery-photographer-name" class="text-sm font-bold text-slate-900 leading-none">LensWorks Pro</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <nav class="hidden lg:flex items-center gap-2 text-xs font-semibold text-slate-600 mr-2">
+                    <a href="client-dashboard.html?tab=vault" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Vault</a>
+                    <a href="client-dashboard.html?tab=messages" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Messages</a>
+                    <a href="client-dashboard.html?tab=payments" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Payments</a>
+                    <a href="account-settings.html#profile" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition">Profile</a>
+                </nav>
+                <button class="text-slate-500 hover:text-slate-900 transition p-2 rounded-full hover:bg-slate-100" title="Share Gallery">
+                    <i data-lucide="share-2" class="w-5 h-5"></i>
+                </button>
+                <button class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-slate-800 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-2 download-trigger">
+                    <i data-lucide="download-cloud" class="w-4 h-4"></i> <span class="btn-text">Download All</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cinematic Gallery Hero Cover -->
+    <div class="relative w-full h-[60vh] min-h-[450px] mt-16 bg-slate-900 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2500&auto=format&fit=crop" class="w-full h-full object-cover opacity-80" alt="Gallery Cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/50 via-transparent to-slate-900/50"></div>
+        
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10">
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full mb-6 shadow-sm">
+                <p id="gallery-title-chip" class="text-white font-semibold tracking-widest uppercase text-xs">Delivered Gallery</p>
+            </div>
+            <h1 id="gallery-owner-name" class="text-5xl md:text-7xl font-black text-white tracking-tight mb-4 drop-shadow-2xl">Your Gallery</h1>
+            <p id="gallery-meta-line" class="text-slate-300 font-medium text-lg flex items-center gap-2">
+                <i data-lucide="calendar" class="w-4 h-4"></i> October 14, 2026 
+                <span class="mx-2 text-slate-500">•</span> 
+                <i data-lucide="image" class="w-4 h-4"></i> 150 High-Res Photos
+            </p>
+            
+            <button class="mt-10 bg-white text-slate-900 px-8 py-3.5 rounded-full font-bold hover:bg-slate-100 transition shadow-[0_0_40px_rgba(255,255,255,0.3)] flex items-center gap-2 hover:scale-105" onclick="document.getElementById('gallery-start').scrollIntoView({behavior: 'smooth'})">
+                Explore Collection <i data-lucide="chevron-down" class="w-4 h-4 mt-0.5"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Gallery Controls & Grid -->
+    <main class="flex-1 max-w-[1400px] mx-auto px-6 py-8 w-full" id="gallery-start">
+        
+        <!-- Sticky Toolbar -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 sticky top-[72px] bg-slate-50/90 backdrop-blur-xl z-30 py-4 border-b border-slate-200/60 rounded-b-2xl -mx-6 px-6 sm:mx-0 sm:px-4">
+            <div class="flex gap-2 bg-slate-200/50 p-1 rounded-xl">
+                <button class="px-5 py-2 rounded-lg text-sm font-bold transition shadow-sm bg-white text-slate-900" id="filter-all">All Photos</button>
+                <button class="px-5 py-2 rounded-lg text-sm font-bold transition text-slate-600 hover:text-slate-900 flex items-center gap-2" id="filter-favs">
+                    <i data-lucide="heart" class="w-4 h-4"></i> Favorites <span class="bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded text-[10px]" id="fav-count-top">0</span>
+                </button>
+            </div>
+            
+            <div class="text-sm font-medium text-slate-500 flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+                <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-blue-500"></i> Click any photo to expand
+            </div>
+        </div>
+
+        <!-- Masonry Grid -->
+        <div class="masonry-grid" id="gallery-grid">
+            
+            <!-- Item 1 -->
+            <div class="masonry-item group" data-id="1">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=800&auto=format&fit=crop" alt="Photo 1" class="cursor-pointer image-trigger">
+                <div class="photo-overlay absolute inset-0 pointer-events-none flex flex-col justify-between p-5">
+                    <div class="flex justify-end pointer-events-auto">
+                        <button class="fav-btn p-2.5 rounded-full bg-white/20 hover:bg-white backdrop-blur-md text-white hover:text-red-500 transition shadow-lg group-hover:scale-100 scale-90 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                            <i data-lucide="heart" class="w-5 h-5 transition-colors"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end pointer-events-auto transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <p class="text-white text-xs font-mono font-medium drop-shadow-md">IMG_0001.jpg</p>
+                        <button class="p-2 text-white hover:text-blue-400 transition hover:scale-110 download-trigger" title="Download High-Res">
+                            <i data-lucide="download" class="w-5 h-5 drop-shadow-md"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="masonry-item group" data-id="2">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800&auto=format&fit=crop" alt="Photo 2" class="cursor-pointer image-trigger">
+                <div class="photo-overlay absolute inset-0 pointer-events-none flex flex-col justify-between p-5">
+                    <div class="flex justify-end pointer-events-auto">
+                        <button class="fav-btn p-2.5 rounded-full bg-white/20 hover:bg-white backdrop-blur-md text-white hover:text-red-500 transition shadow-lg group-hover:scale-100 scale-90 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                            <i data-lucide="heart" class="w-5 h-5 transition-colors"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end pointer-events-auto transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <p class="text-white text-xs font-mono font-medium drop-shadow-md">IMG_0002.jpg</p>
+                        <button class="p-2 text-white hover:text-blue-400 transition hover:scale-110 download-trigger" title="Download High-Res">
+                            <i data-lucide="download" class="w-5 h-5 drop-shadow-md"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="masonry-item group" data-id="3">
+                <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=800&auto=format&fit=crop" alt="Photo 3" class="cursor-pointer image-trigger">
+                <div class="photo-overlay absolute inset-0 pointer-events-none flex flex-col justify-between p-5">
+                    <div class="flex justify-end pointer-events-auto">
+                        <button class="fav-btn p-2.5 rounded-full bg-white/20 hover:bg-white backdrop-blur-md text-white hover:text-red-500 transition shadow-lg group-hover:scale-100 scale-90 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                            <i data-lucide="heart" class="w-5 h-5 transition-colors"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end pointer-events-auto transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <p class="text-white text-xs font-mono font-medium drop-shadow-md">IMG_0003.jpg</p>
+                        <button class="p-2 text-white hover:text-blue-400 transition hover:scale-110 download-trigger" title="Download High-Res">
+                            <i data-lucide="download" class="w-5 h-5 drop-shadow-md"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="masonry-item group" data-id="4">
+                <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800&auto=format&fit=crop" alt="Photo 4" class="cursor-pointer image-trigger">
+                <div class="photo-overlay absolute inset-0 pointer-events-none flex flex-col justify-between p-5">
+                    <div class="flex justify-end pointer-events-auto">
+                        <button class="fav-btn p-2.5 rounded-full bg-white/20 hover:bg-white backdrop-blur-md text-white hover:text-red-500 transition shadow-lg group-hover:scale-100 scale-90 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                            <i data-lucide="heart" class="w-5 h-5 transition-colors"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end pointer-events-auto transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <p class="text-white text-xs font-mono font-medium drop-shadow-md">IMG_0004.jpg</p>
+                        <button class="p-2 text-white hover:text-blue-400 transition hover:scale-110 download-trigger" title="Download High-Res">
+                            <i data-lucide="download" class="w-5 h-5 drop-shadow-md"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="masonry-item group" data-id="5">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" alt="Photo 5" class="cursor-pointer image-trigger">
+                <div class="photo-overlay absolute inset-0 pointer-events-none flex flex-col justify-between p-5">
+                    <div class="flex justify-end pointer-events-auto">
+                        <button class="fav-btn p-2.5 rounded-full bg-white/20 hover:bg-white backdrop-blur-md text-white hover:text-red-500 transition shadow-lg group-hover:scale-100 scale-90 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                            <i data-lucide="heart" class="w-5 h-5 transition-colors"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end pointer-events-auto transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <p class="text-white text-xs font-mono font-medium drop-shadow-md">IMG_0005.jpg</p>
+                        <button class="p-2 text-white hover:text-blue-400 transition hover:scale-110 download-trigger" title="Download High-Res">
+                            <i data-lucide="download" class="w-5 h-5 drop-shadow-md"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="masonry-item group" data-id="6">
+                <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=800&auto=format&fit=crop" alt="Photo 6" class="cursor-pointer image-trigger">
+                <div class="photo-overlay absolute inset-0 pointer-events-none flex flex-col justify-between p-5">
+                    <div class="flex justify-end pointer-events-auto">
+                        <button class="fav-btn p-2.5 rounded-full bg-white/20 hover:bg-white backdrop-blur-md text-white hover:text-red-500 transition shadow-lg group-hover:scale-100 scale-90 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                            <i data-lucide="heart" class="w-5 h-5 transition-colors"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end pointer-events-auto transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <p class="text-white text-xs font-mono font-medium drop-shadow-md">IMG_0006.jpg</p>
+                        <button class="p-2 text-white hover:text-blue-400 transition hover:scale-110 download-trigger" title="Download High-Res">
+                            <i data-lucide="download" class="w-5 h-5 drop-shadow-md"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 7 -->
+            <div class="masonry-item group" data-id="7">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800&auto=format&fit=crop" alt="Photo 7" class="cursor-pointer image-trigger">
+                <div class="photo-overlay absolute inset-0 pointer-events-none flex flex-col justify-between p-5">
+                    <div class="flex justify-end pointer-events-auto">
+                        <button class="fav-btn p-2.5 rounded-full bg-white/20 hover:bg-white backdrop-blur-md text-white hover:text-red-500 transition shadow-lg group-hover:scale-100 scale-90 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                            <i data-lucide="heart" class="w-5 h-5 transition-colors"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end pointer-events-auto transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <p class="text-white text-xs font-mono font-medium drop-shadow-md">IMG_0007.jpg</p>
+                        <button class="p-2 text-white hover:text-blue-400 transition hover:scale-110 download-trigger" title="Download High-Res">
+                            <i data-lucide="download" class="w-5 h-5 drop-shadow-md"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 8 -->
+            <div class="masonry-item group" data-id="8">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop" alt="Photo 8" class="cursor-pointer image-trigger">
+                <div class="photo-overlay absolute inset-0 pointer-events-none flex flex-col justify-between p-5">
+                    <div class="flex justify-end pointer-events-auto">
+                        <button class="fav-btn p-2.5 rounded-full bg-white/20 hover:bg-white backdrop-blur-md text-white hover:text-red-500 transition shadow-lg group-hover:scale-100 scale-90 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                            <i data-lucide="heart" class="w-5 h-5 transition-colors"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end pointer-events-auto transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                        <p class="text-white text-xs font-mono font-medium drop-shadow-md">IMG_0008.jpg</p>
+                        <button class="p-2 text-white hover:text-blue-400 transition hover:scale-110 download-trigger" title="Download High-Res">
+                            <i data-lucide="download" class="w-5 h-5 drop-shadow-md"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Premium Floating Action Bar (SaaS Style) -->
+    <div id="floating-action-bar" class="fixed bottom-8 left-1/2 z-50 bg-slate-900/95 backdrop-blur-xl text-white pl-6 pr-2 py-2 rounded-full shadow-[0_10px_40px_rgba(15,23,42,0.4)] flex items-center gap-6 border border-white/10 w-[95%] max-w-md justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-red-500 to-rose-600 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-inner" id="fab-count">0</div>
+            <span class="font-bold text-sm tracking-wide">Favorites Selected</span>
+        </div>
+        <div class="flex gap-2">
+            <button class="bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white w-10 h-10 rounded-full transition flex items-center justify-center" title="Clear Selection" id="clear-favs-btn">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <button class="bg-white text-slate-900 px-5 py-2.5 rounded-full text-sm font-bold hover:bg-slate-100 transition shadow-md flex items-center gap-2 download-trigger">
+                Download <span class="hidden sm:inline">Selected</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Cinematic Fullscreen Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-slate-950/90 flex items-center justify-center hidden-fade">
+        
+        <!-- Top Toolbar inside Lightbox -->
+        <div class="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-10 bg-gradient-to-b from-black/60 to-transparent">
+            <div class="text-white/80 font-mono text-sm tracking-wider" id="lightbox-filename">IMG_0000.jpg</div>
+            <div class="flex items-center gap-4">
+                <button id="lightbox-fav-btn" class="text-white/80 hover:text-white hover:scale-110 transition group flex items-center justify-center p-2">
+                    <i data-lucide="heart" class="w-7 h-7 group-[.is-favorited]:fill-red-500 group-[.is-favorited]:text-red-500 transition-colors" id="lightbox-heart-icon"></i>
+                </button>
+                <div class="w-px h-6 bg-white/20"></div>
+                <button class="text-white/80 hover:text-white hover:scale-110 transition p-2 download-trigger" title="Download">
+                    <i data-lucide="download" class="w-6 h-6"></i>
+                </button>
+                <button id="lightbox-close" class="text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition ml-2">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button id="lightbox-prev" class="absolute left-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white bg-black/20 hover:bg-black/50 p-4 rounded-full transition z-10 hidden sm:block hover:scale-105">
+            <i data-lucide="arrow-left" class="w-6 h-6"></i>
+        </button>
+        
+        <button id="lightbox-next" class="absolute right-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white bg-black/20 hover:bg-black/50 p-4 rounded-full transition z-10 hidden sm:block hover:scale-105">
+            <i data-lucide="arrow-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- Image Container -->
+        <div class="relative w-full max-w-7xl h-full flex items-center justify-center p-4 sm:p-12">
+            <img id="lightbox-img" src="" class="max-w-full max-h-full object-contain drop-shadow-2xl rounded-sm" alt="Fullscreen Image">
+        </div>
+        
+        <!-- Bottom Counter -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 font-mono text-xs tracking-widest z-10 bg-black/40 px-4 py-1.5 rounded-full backdrop-blur-sm">
+            <span id="lightbox-counter">1</span> OF 8
+        </div>
+    </div>
+
+
+        <script src="js/shared.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>
+

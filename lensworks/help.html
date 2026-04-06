@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center | LensWorks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/info-page.css">
+</head>
+<body class="text-slate-900 font-sans min-h-screen flex flex-col">
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2"><i data-lucide="camera" class="w-6 h-6 text-slate-900"></i><span class="font-bold text-xl">LensWorks</span></a>
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-500">
+                <a href="directory.html" class="hover:text-slate-900 transition">Explore</a>
+                <a href="directory.html" class="hover:text-slate-900 transition">Packages</a>
+                <a href="index.html#how" class="hover:text-slate-900 transition">How It Works</a>
+            </nav>
+        </div>
+    </header>
+    <main class="info-shell px-6 py-16">
+        <div class="max-w-5xl mx-auto w-full info-card rounded-3xl border border-white/60 shadow-2xl p-8 md:p-12">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center mb-6"><i data-lucide="life-buoy" class="w-7 h-7"></i></div>
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-600 mb-3">Support</p>
+                    <h1 class="text-4xl font-black tracking-tight mb-4">Help Center</h1>
+                    <p class="text-gray-600 leading-relaxed max-w-2xl">Find fast answers for booking, payments, messaging, gallery delivery, and vendor operations. Use these guides first, then contact the team if you still need help.</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-200 p-5 min-w-[260px] shadow-sm">
+                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-gray-500 mb-2">Response Times</p>
+                    <p class="font-semibold text-slate-900">General support: within 24 hours</p>
+                    <p class="font-semibold text-slate-900 mt-2">Urgent booking issues: within 4 hours</p>
+                    <p class="text-sm text-gray-500 mt-3">Support hours: Sun-Thu, 9:00 AM to 6:00 PM GST</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4 mb-10 text-sm">
+                <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+                    <p class="font-bold mb-1">Booking Help</p>
+                    <p class="text-gray-500">Questions about deposits, schedule changes, confirmations, or vendor communication.</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+                    <p class="font-bold mb-1">Gallery & Delivery</p>
+                    <p class="text-gray-500">Access, download rights, favorites, delivery timelines, and missing gallery assets.</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+                    <p class="font-bold mb-1">Vendor Operations</p>
+                    <p class="text-gray-500">Listing quality, payout questions, availability conflicts, and account verification.</p>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-8">
+                <section>
+                    <h2 class="text-xl font-black tracking-tight mb-5">Frequently Asked Questions</h2>
+                    <div class="space-y-4">
+                        <details class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm" open>
+                            <summary class="font-bold cursor-pointer">When is my booking confirmed?</summary>
+                            <p class="text-gray-600 leading-relaxed mt-3">A booking is confirmed once the vendor accepts the request and the deposit is successfully paid. You will then see the booking move into your dashboard with the confirmed date, time, and receipt number.</p>
+                        </details>
+                        <details class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+                            <summary class="font-bold cursor-pointer">Can I reschedule after paying a deposit?</summary>
+                            <p class="text-gray-600 leading-relaxed mt-3">Yes, reschedules are allowed when the vendor is available and the request is made within the reschedule window described in the cancellation policy. Some packages may carry a date-change fee for last-minute moves.</p>
+                        </details>
+                        <details class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+                            <summary class="font-bold cursor-pointer">How do gallery downloads work?</summary>
+                            <p class="text-gray-600 leading-relaxed mt-3">Delivered galleries include web-resolution previews and download access based on the package purchased. Some vendors also enable ZIP delivery, print ordering, and favorites collections for shared albums.</p>
+                        </details>
+                        <details class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+                            <summary class="font-bold cursor-pointer">What should vendors do if a client stops responding?</summary>
+                            <p class="text-gray-600 leading-relaxed mt-3">Keep all communication inside LensWorks, document attempted follow-ups, and contact seller support if the booking date is approaching. This keeps the record auditable in case a dispute needs review.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <aside class="space-y-5">
+                    <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl">
+                        <p class="text-xs font-bold uppercase tracking-[0.18em] text-blue-200 mb-3">Need a Human</p>
+                        <h2 class="text-2xl font-black tracking-tight mb-3">Contact Support</h2>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-5">For urgent booking issues, vendor disputes, or missing gallery delivery, include your booking ID and the email attached to your account.</p>
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-white/10 rounded-2xl p-4 border border-white/10">
+                                <p class="font-semibold">support@lensworks.app</p>
+                                <p class="text-slate-300 mt-1">General account and booking help</p>
+                            </div>
+                            <div class="bg-white/10 rounded-2xl p-4 border border-white/10">
+                                <p class="font-semibold">vendors@lensworks.app</p>
+                                <p class="text-slate-300 mt-1">Vendor listings, payouts, and verification</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+                        <p class="text-xs font-bold uppercase tracking-[0.18em] text-gray-500 mb-3">Quick Links</p>
+                        <div class="space-y-3 text-sm font-medium">
+                            <a href="cancellation-policy.html" class="flex items-center justify-between rounded-xl border border-gray-200 px-4 py-3 hover:bg-gray-50 transition"><span>Cancellation Policy</span><i data-lucide="arrow-right" class="w-4 h-4 text-gray-400"></i></a>
+                            <a href="trust-safety.html" class="flex items-center justify-between rounded-xl border border-gray-200 px-4 py-3 hover:bg-gray-50 transition"><span>Trust & Safety</span><i data-lucide="arrow-right" class="w-4 h-4 text-gray-400"></i></a>
+                            <a href="seller-support.html" class="flex items-center justify-between rounded-xl border border-gray-200 px-4 py-3 hover:bg-gray-50 transition"><span>Seller Support</span><i data-lucide="arrow-right" class="w-4 h-4 text-gray-400"></i></a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <a href="index.html" class="inline-flex items-center gap-2 mt-10 bg-slate-900 text-white px-5 py-3 rounded-xl font-semibold hover:bg-slate-700 transition"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home</a>
+        </div>
+    </main>
+    <footer class="px-6 py-8 text-center text-sm text-gray-500">© <span id="info-year">2026</span> LensWorks</footer>
+    <script src="js/shared.js"></script>
+    <script src="js/info-page.js"></script>
+</body>
+</html>

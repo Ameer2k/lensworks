@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Trust & Safety | LensWorks</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://unpkg.com/lucide@latest"></script>
+	<link rel="stylesheet" href="css/shared.css">
+	<link rel="stylesheet" href="css/info-page.css">
+</head>
+<body class="text-slate-900 font-sans min-h-screen flex flex-col">
+	<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+		<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+			<a href="index.html" class="flex items-center gap-2"><i data-lucide="camera" class="w-6 h-6 text-slate-900"></i><span class="font-bold text-xl">LensWorks</span></a>
+		</div>
+	</header>
+	<main class="info-shell px-6 py-16">
+		<div class="max-w-5xl mx-auto w-full info-card rounded-3xl border border-white/60 shadow-2xl p-8 md:p-12">
+			<div class="w-14 h-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center mb-6"><i data-lucide="badge-check" class="w-7 h-7"></i></div>
+			<p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-600 mb-3">Safety</p>
+			<h1 class="text-4xl font-black tracking-tight mb-4">Trust & Safety</h1>
+			<p class="text-gray-600 leading-relaxed mb-10 max-w-3xl">LensWorks is built to keep bookings, payments, and communication on-platform wherever possible. These standards help protect both clients and vendors before, during, and after every session.</p>
+
+			<div class="grid md:grid-cols-3 gap-4 mb-10 text-sm">
+				<div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+					<p class="font-bold text-slate-900 mb-2">Verified Profiles</p>
+					<p class="text-gray-500">Vendor profiles should contain accurate identity, portfolio, service, and payout information before bookings are accepted.</p>
+				</div>
+				<div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+					<p class="font-bold text-slate-900 mb-2">Protected Payments</p>
+					<p class="text-gray-500">Deposits and payouts should move through approved payment processors so booking status and receipts stay tied to the transaction record.</p>
+				</div>
+				<div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+					<p class="font-bold text-slate-900 mb-2">Recorded Communication</p>
+					<p class="text-gray-500">Use platform messaging when discussing scope, timing, or disputes so there is a clear record if support review is needed.</p>
+				</div>
+			</div>
+
+			<div class="grid lg:grid-cols-2 gap-6 text-sm text-gray-600 leading-relaxed">
+				<section class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+					<h2 class="text-lg font-black text-slate-900 mb-3">For Clients</h2>
+					<ul class="space-y-3 list-disc pl-5">
+						<li>Review vendor ratings, galleries, turnaround times, and package details before paying a deposit.</li>
+						<li>Keep event details, venue requirements, and guest restrictions accurate in the booking record.</li>
+						<li>Never send payment outside the platform unless the transaction is explicitly managed off-platform by contract.</li>
+						<li>Report threatening, deceptive, or discriminatory conduct immediately through support.</li>
+					</ul>
+				</section>
+				<section class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+					<h2 class="text-lg font-black text-slate-900 mb-3">For Vendors</h2>
+					<ul class="space-y-3 list-disc pl-5">
+						<li>Maintain truthful portfolios and clear package descriptions that match the services you actually deliver.</li>
+						<li>Respond promptly to booking requests and avoid moving critical conversations to untracked channels.</li>
+						<li>Respect privacy, venue rules, and the safety of all participants during session coverage.</li>
+						<li>Escalate fraud concerns, harassment, or suspicious payment activity before the shoot date whenever possible.</li>
+					</ul>
+				</section>
+			</div>
+
+			<section class="mt-8 bg-slate-900 text-white rounded-3xl p-6 md:p-8 shadow-xl">
+				<p class="text-xs font-bold uppercase tracking-[0.18em] text-blue-200 mb-3">Report A Concern</p>
+				<h2 class="text-2xl font-black tracking-tight mb-3">Abuse, Fraud, or Safety Risk</h2>
+				<p class="text-slate-300 text-sm leading-relaxed max-w-3xl">If you believe a listing is fraudulent, a payment request is suspicious, or a message creates a safety concern, contact support with the booking ID, involved account, and a clear description of what happened. Urgent risks should also be reported to local authorities where appropriate.</p>
+			</section>
+
+			<a href="index.html" class="inline-flex items-center gap-2 mt-10 bg-slate-900 text-white px-5 py-3 rounded-xl font-semibold hover:bg-slate-700 transition"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home</a>
+		</div>
+	</main>
+	<footer class="px-6 py-8 text-center text-sm text-gray-500">© <span id="info-year">2026</span> LensWorks</footer>
+	<script src="js/shared.js"></script>
+	<script src="js/info-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,563 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard | LensWorks</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/client-dashboard.css">
+</head>
+<body class="text-slate-900 font-sans min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-3 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 cursor-pointer group">
+                <i data-lucide="camera" class="w-7 h-7 text-slate-900 group-hover:text-blue-600 transition-colors"></i>
+                <span class="text-xl font-bold tracking-tight">LensWorks</span></a>
+            
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-500">
+                <a href="directory.html" class="hover:text-slate-900 transition">Explore</a>
+                <a href="saved-pros.html" class="hover:text-slate-900 transition">Saved Pros</a>
+                <a href="client-dashboard.html?tab=vault" class="hover:text-slate-900 transition">Digital Vault</a>
+                <a href="client-dashboard.html?tab=payments" class="hover:text-slate-900 transition">Payments</a>
+                <a href="client-dashboard.html?tab=messages" class="hover:text-slate-900 transition">Messages</a>
+                <a href="client-dashboard.html" class="text-slate-900 font-semibold relative after:absolute after:bottom-[-16px] after:left-0 after:w-full after:h-0.5 after:bg-slate-900">My Dashboard</a>
+            </nav>
+
+            <div class="flex items-center gap-5">
+                <button id="client-notification-btn" class="relative text-gray-500 hover:text-slate-900 transition mt-1">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span id="client-bell-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full border-2 border-white shadow-sm">2</span>
+                </button>
+                
+                <!-- Profile Dropdown Container -->
+                <div class="relative">
+                    <button id="profile-menu-btn" class="flex items-center gap-3 pl-5 border-l border-gray-200 cursor-pointer hover:opacity-80 transition focus:outline-none">
+                        <div class="text-right hidden sm:block">
+                            <p id="client-profile-name" class="text-sm font-bold text-slate-900 leading-none">LensWorks Client</p>
+                            <p id="client-profile-role" class="text-xs text-gray-500 mt-1">Client</p>
+                        </div>
+                        <img id="client-profile-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=150&auto=format&fit=crop" class="w-9 h-9 rounded-full border border-gray-200 object-cover shadow-sm" alt="User Profile">
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu (Hidden by default) -->
+                    <div id="profile-dropdown" class="absolute right-0 mt-3 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 hidden z-50 origin-top-right transition-all transform opacity-0 scale-95">
+                        <a href="account-settings.html#profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="user" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Edit Profile</a>
+                        <a href="account-settings.html#billing" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="credit-card" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Payment Methods</a>
+                        <a href="client-dashboard.html?tab=vault" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="lock" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Digital Vault</a>
+                        <a href="client-dashboard.html?tab=payments" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="receipt-text" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Payments</a>
+                        <a href="client-dashboard.html?tab=messages" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="message-square" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Messages</a>
+                        <div class="border-t border-gray-100 my-1"></div>
+                        <a href="login.html" data-logout-link class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50"><i data-lucide="log-out" class="w-4 h-4 inline-block mr-2"></i> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Area -->
+    <main class="flex-1 max-w-7xl mx-auto px-6 md:px-12 py-8 w-full">
+        
+        <!-- Welcome & Quick Stats -->
+        <div class="mb-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+                <div>
+                    <h1 id="client-welcome-title" class="text-3xl font-bold text-slate-900 tracking-tight">Welcome back</h1>
+                    <p id="client-welcome-subtitle" class="text-gray-500 mt-1.5 text-sm">Here is what's happening with your photography bookings.</p>
+                </div>
+                <button id="book-new-session-btn" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-md hover:shadow-lg transform hover:-translate-y-0.5" onclick="window.location.href='directory.html'"><i data-lucide="plus" class="w-4 h-4"></i> Book New Session
+                </button>
+            </div>
+
+            <!-- Quick Stats Row -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4 hover:border-blue-200 transition">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="calendar-check" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Upcoming Shoots</p>
+                        <p id="quick-upcoming-count" class="text-2xl font-bold text-slate-900">1</p>
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4 hover:border-green-200 transition">
+                    <div class="w-12 h-12 bg-green-50 text-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="image" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Galleries in Vault</p>
+                        <p id="quick-galleries-count" class="text-2xl font-bold text-slate-900">2</p>
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm flex items-center gap-4 hover:border-purple-200 transition">
+                    <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="credit-card" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Total Spent</p>
+                        <p id="quick-total-spent" class="text-2xl font-bold text-slate-900">$1,650</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Tabs -->
+        <div class="border-b border-gray-200 mb-8 overflow-x-auto no-scrollbar">
+            <nav class="flex gap-8 min-w-max" id="dashboard-tabs">
+                <button class="tab-btn active pb-4 text-sm font-bold text-slate-900 border-b-2 border-slate-900 transition flex items-center gap-2" data-target="upcoming">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> Upcoming Bookings
+                </button>
+                <button class="tab-btn pb-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-slate-900 transition flex items-center gap-2" data-target="vault">
+                    <i data-lucide="lock" class="w-4 h-4"></i> Digital Vault
+                </button>
+                <button class="tab-btn pb-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-slate-900 transition flex items-center gap-2" data-target="payments">
+                    <i data-lucide="receipt-text" class="w-4 h-4"></i> Payments
+                </button>
+                <button class="tab-btn pb-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-slate-900 transition flex items-center gap-2 relative" data-target="messages">
+                    <i data-lucide="message-square" class="w-4 h-4"></i> Messages
+                    <span id="client-messages-tab-badge" class="bg-blue-600 text-white px-1.5 py-0.5 rounded-full text-[10px] font-bold ml-1 absolute -top-1 -right-4">1</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Tab Content Containers -->
+        <div class="relative min-h-[500px]">
+            
+            <!-- 1. Upcoming Bookings View -->
+            <div id="tab-upcoming" class="tab-content w-full opacity-100 block">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Active Booking Card -->
+                    <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+                        
+                        <!-- Header / Status Bar -->
+                        <div class="bg-slate-900 px-6 py-4 flex justify-between items-center">
+                            <div class="flex items-center gap-3 text-white">
+                                <div class="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
+                                    <i data-lucide="calendar" class="w-5 h-5 text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-sm tracking-wide">Confirmed Booking</h3>
+                                    <p id="upcoming-booking-id" class="text-xs text-gray-400 font-mono">ID: -</p>
+                                </div>
+                            </div>
+                            <span id="upcoming-booking-status" class="text-[10px] font-bold uppercase tracking-wider bg-green-500/20 text-green-200 px-2.5 py-1 rounded-full">Confirmed</span>
+                            <button id="upcoming-manage-btn" class="text-slate-900 bg-white hover:bg-gray-100 px-4 py-2 rounded-lg text-sm font-semibold transition">
+                                Manage
+                            </button>
+                        </div>
+
+                        <div class="p-6 md:p-8 flex flex-col md:flex-row gap-8">
+                            <!-- Date Box (Premium styling) -->
+                            <div class="flex-shrink-0 flex flex-col items-center justify-center bg-white border-2 border-slate-100 shadow-sm rounded-2xl w-32 h-32 relative overflow-hidden">
+                                <div class="absolute top-0 w-full bg-red-500 py-1 text-center">
+                                    <span id="upcoming-booking-month" class="text-white font-bold text-[10px] tracking-widest uppercase">October</span>
+                                </div>
+                                <span id="upcoming-booking-day" class="text-5xl font-black text-slate-900 mt-4 tracking-tighter">14</span>
+                                <span id="upcoming-booking-time" class="text-gray-500 text-xs font-semibold mt-1">10:00 AM</span>
+                            </div>
+
+                            <!-- Details -->
+                            <div class="flex-1">
+                                <h3 id="upcoming-booking-title" class="text-2xl font-bold text-slate-900 mb-1 tracking-tight">Premium Portrait Session</h3>
+                                <p class="text-gray-500 text-sm mb-6 flex items-center gap-2">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=50&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover" alt="Pro">
+                                    With <span id="upcoming-booking-photographer" class="font-semibold text-slate-700">your photographer</span>
+                                </p>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 mb-8 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                    <div class="flex items-start gap-3">
+                                        <div class="bg-white p-2 rounded-md shadow-sm border border-gray-100">
+                                            <i data-lucide="map-pin" class="w-4 h-4 text-blue-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Location</p>
+                                            <p id="upcoming-booking-location" class="text-sm font-medium text-slate-900">Bahrain Bay, Manama</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3">
+                                        <div class="bg-white p-2 rounded-md shadow-sm border border-gray-100">
+                                            <i data-lucide="clock" class="w-4 h-4 text-blue-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Duration</p>
+                                            <p id="upcoming-booking-duration" class="text-sm font-medium text-slate-900">3 Hours</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="flex flex-wrap gap-3">
+                                    <button id="upcoming-message-btn" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 shadow-sm">
+                                        <i data-lucide="message-circle" class="w-4 h-4"></i> Message Pro
+                                    </button>
+                                    <button id="upcoming-directions-btn" class="bg-white border border-gray-200 hover:bg-gray-50 text-slate-700 px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 shadow-sm">
+                                        <i data-lucide="map" class="w-4 h-4 text-gray-500"></i> Get Directions
+                                    </button>
+                                    <button id="upcoming-reschedule-btn" class="bg-white border border-gray-200 hover:bg-gray-50 text-slate-700 px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 shadow-sm">
+                                        <i data-lucide="calendar-clock" class="w-4 h-4"></i> Request Reschedule
+                                    </button>
+                                    <button id="upcoming-cancel-booking-btn" class="bg-white border border-red-200 hover:bg-red-50 text-red-700 px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 shadow-sm">
+                                        <i data-lucide="x-circle" class="w-4 h-4"></i> Cancel Booking
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Status Tracker Footer -->
+                        <div class="border-t border-gray-100 bg-gray-50/50 px-6 md:px-8 py-5">
+                            <div class="flex items-center justify-between relative">
+                                <!-- Connecting Line -->
+                                <div class="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-0.5 bg-gray-200 z-0"></div>
+                                <div id="upcoming-progress-fill" class="absolute left-6 top-1/2 -translate-y-1/2 h-0.5 bg-green-500 z-0 transition-all duration-300" style="width: 0%;"></div>
+                                
+                                <!-- Steps -->
+                                <div id="upcoming-step-requested" class="relative z-10 flex flex-col items-center gap-2 bg-gray-50/50 px-2">
+                                    <div id="upcoming-step-requested-dot" class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-white shadow-sm ring-4 ring-gray-50/50"><i data-lucide="check" class="w-3 h-3"></i></div>
+                                    <span id="upcoming-step-requested-label" class="text-[10px] font-bold text-slate-900 uppercase tracking-wider">Requested</span>
+                                </div>
+                                <div id="upcoming-step-deposit" class="relative z-10 flex flex-col items-center gap-2 bg-gray-50/50 px-2">
+                                    <div id="upcoming-step-deposit-dot" class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-white shadow-sm ring-4 ring-gray-50/50"><i data-lucide="check" class="w-3 h-3"></i></div>
+                                    <span id="upcoming-step-deposit-label" class="text-[10px] font-bold text-slate-900 uppercase tracking-wider">Deposit Paid</span>
+                                </div>
+                                <div id="upcoming-step-shoot" class="relative z-10 flex flex-col items-center gap-2 bg-gray-50/50 px-2">
+                                    <div id="upcoming-step-shoot-dot" class="w-6 h-6 rounded-full bg-white border-2 border-blue-500 flex items-center justify-center shadow-sm ring-4 ring-gray-50/50"><div class="w-2 h-2 bg-blue-500 rounded-full"></div></div>
+                                    <span id="upcoming-step-shoot-label" class="text-[10px] font-bold text-blue-600 uppercase tracking-wider">Shoot Day</span>
+                                </div>
+                                <div id="upcoming-step-delivered" class="relative z-10 flex flex-col items-center gap-2 bg-gray-50/50 px-2">
+                                    <div id="upcoming-step-delivered-dot" class="w-6 h-6 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center shadow-sm ring-4 ring-gray-50/50"></div>
+                                    <span id="upcoming-step-delivered-label" class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Delivered</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Receipt Card -->
+                    <div class="lg:col-span-1 bg-white rounded-2xl border border-gray-200 shadow-sm flex flex-col overflow-hidden">
+                        <div class="p-6 border-b border-gray-100 bg-gray-50/50">
+                            <h3 class="font-bold text-lg text-slate-900 flex items-center gap-2">
+                                <i data-lucide="receipt" class="w-5 h-5 text-gray-400"></i> Payment Details
+                            </h3>
+                        </div>
+                        
+                        <div class="p-6 space-y-4 flex-1">
+                            <div class="flex justify-between items-center text-sm">
+                                <span id="upcoming-payment-package-label" class="text-gray-500">Premium Session</span>
+                                <span id="upcoming-payment-package-price" class="font-medium text-slate-900">$450.00</span>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <span id="upcoming-payment-addon-label" class="text-gray-500">Extra Hour Add-on</span>
+                                <span id="upcoming-payment-addon-price" class="font-medium text-slate-900">$100.00</span>
+                            </div>
+                            <div class="pt-4 border-t border-dashed border-gray-200">
+                                <div class="flex justify-between items-center text-sm mb-2">
+                                    <span class="text-gray-500">Subtotal</span>
+                                    <span id="upcoming-payment-subtotal" class="font-medium text-slate-900">$550.00</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-gray-500">Deposit Paid (20%)</span>
+                                    <span id="upcoming-payment-deposit" class="text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded">- $110.00</span>
+                                </div>
+                            </div>
+                            
+                            <div class="pt-4 border-t border-gray-200 flex justify-between items-end mt-4">
+                                <div>
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Amount Due</span>
+                                    <span id="upcoming-payment-due" class="font-black text-3xl text-slate-900">$440</span>
+                                </div>
+                                <span id="upcoming-payment-due-date" class="text-xs text-gray-500 pb-1">Due Oct 13</span>
+                            </div>
+                        </div>
+
+                        <div class="p-6 pt-0 mt-auto">
+                            <button id="upcoming-pay-balance-btn" class="w-full bg-slate-900 text-white px-4 py-3.5 rounded-xl text-sm font-bold hover:bg-slate-800 transition shadow-md flex justify-center items-center gap-2">
+                                Pay Balance <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                            <p class="text-[10px] text-center text-gray-400 mt-3 flex justify-center items-center gap-1">
+                                <i data-lucide="lock" class="w-3 h-3"></i> Secure SSL Encrypted Checkout
+                            </p>
+                            <div class="mt-4 border-t border-gray-100 pt-4">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Recent Payments</h4>
+                                <div id="client-payment-history" class="space-y-2">
+                                    <p class="text-xs text-gray-500">Loading payment history...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 2. Digital Vault View (Hidden initially) -->
+            <div id="tab-vault" class="tab-content w-full hidden opacity-0">
+                
+                <div class="flex justify-between items-center mb-6">
+                    <p class="text-sm text-gray-500">Your high-resolution galleries are stored securely here forever.</p>
+                    <div class="relative hidden sm:block">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                        <input type="text" placeholder="Search events..." class="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 transition">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Gallery Card 1 -->
+                    <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden group hover:shadow-md transition">
+                        <div class="h-56 relative overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Gallery Cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                            
+                            <!-- Top action overlay -->
+                            <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="bg-white/90 backdrop-blur-sm text-slate-900 p-2 rounded-lg hover:bg-white shadow-sm" title="Share Gallery">
+                                    <i data-lucide="share-2" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <div class="absolute bottom-4 left-5 text-white pr-4">
+                                <h3 class="font-bold text-lg leading-tight mb-1">Engagement Shoot</h3>
+                                <p class="text-xs text-gray-300 font-medium">Aug 12, 2025 • 142 Photos • 1.2 GB</p>
+                            </div>
+                        </div>
+                        <div class="p-5 flex justify-between items-center bg-white">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" class="w-9 h-9 rounded-full object-cover border border-gray-100" alt="Pro">
+                                <div>
+                                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Photographer</p>
+                                    <span class="text-sm font-semibold text-slate-900">David Chen</span>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-sm" onclick="window.location.href='gallery.html'"><i data-lucide="download" class="w-4 h-4"></i> ZIP
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Card 2 -->
+                    <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden group hover:shadow-md transition">
+                        <div class="h-56 relative overflow-hidden bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Gallery Cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                            
+                            <!-- Top action overlay -->
+                            <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="bg-white/90 backdrop-blur-sm text-slate-900 p-2 rounded-lg hover:bg-white shadow-sm" title="Share Gallery">
+                                    <i data-lucide="share-2" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+
+                            <div class="absolute bottom-4 left-5 text-white pr-4">
+                                <h3 class="font-bold text-lg leading-tight mb-1">Corporate Headshots</h3>
+                                <p class="text-xs text-gray-300 font-medium">May 04, 2025 • 15 Photos • 350 MB</p>
+                            </div>
+                        </div>
+                        <div class="p-5 flex justify-between items-center bg-white">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-slate-100 border border-gray-200 flex items-center justify-center text-slate-900 text-xs font-bold">ES</div>
+                                <div>
+                                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Studio</p>
+                                    <span class="text-sm font-semibold text-slate-900">Elevate Studios</span>
+                                </div>
+                            </div>
+                            <button class="px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-sm" onclick="window.location.href='gallery.html'"><i data-lucide="download" class="w-4 h-4"></i> ZIP
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 3. Payments View (Hidden initially) -->
+            <div id="tab-payments" class="tab-content w-full hidden opacity-0">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                        <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Transactions</p>
+                        <p id="client-payments-count" class="text-3xl font-black text-slate-900 mt-2">0</p>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                        <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Total Paid</p>
+                        <p id="client-payments-total" class="text-3xl font-black text-slate-900 mt-2">$0.00</p>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                        <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Latest Payment</p>
+                        <p id="client-payments-latest" class="text-3xl font-black text-slate-900 mt-2">-</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+                    <div class="p-5 border-b border-gray-100 bg-gray-50/60 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+                        <h3 class="text-lg font-bold text-slate-900">Payment History</h3>
+                        <div class="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+                            <div class="relative sm:min-w-[220px]">
+                                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                                <input id="payments-search-input" type="text" placeholder="Search by booking or type" class="w-full pl-9 pr-3 py-2 bg-white border border-gray-200 rounded-lg text-sm outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 transition">
+                            </div>
+                            <select id="payments-type-filter" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900">
+                                <option value="ALL">All Types</option>
+                                <option value="DEPOSIT">Deposits</option>
+                                <option value="BALANCE">Balances</option>
+                            </select>
+                            <select id="payments-status-filter" class="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-slate-700 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900">
+                                <option value="ALL">All Statuses</option>
+                                <option value="SUCCEEDED">Succeeded</option>
+                                <option value="PENDING">Pending</option>
+                                <option value="FAILED">Failed</option>
+                            </select>
+                            <button id="payments-export-csv-btn" class="bg-slate-900 text-white rounded-lg px-3 py-2 text-sm font-semibold hover:bg-slate-800 transition flex items-center justify-center gap-2">
+                                <i data-lucide="download" class="w-4 h-4"></i> Export CSV
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="client-payments-list" class="divide-y divide-gray-100">
+                        <div class="p-5 text-sm text-gray-500">Loading payment history...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Messages View (Hidden initially) -->
+            <div id="tab-messages" class="tab-content w-full hidden opacity-0">
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex h-[600px]">
+                    
+                    <!-- Chat List Sidebar -->
+                    <div class="w-1/3 border-r border-gray-200 flex flex-col bg-white">
+                        <div class="p-5 border-b border-gray-100">
+                            <h2 class="text-lg font-bold text-slate-900 mb-4">Messages</h2>
+                            <div class="relative">
+                                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"></i>
+                                <input id="client-conversation-search" type="text" placeholder="Search conversations..." class="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-slate-900 focus:ring-1 focus:ring-slate-900 outline-none transition">
+                            </div>
+                        </div>
+                        
+                        <div class="flex-1 overflow-y-auto no-scrollbar">
+                            <!-- Active Chat Item -->
+                            <div class="p-4 border-b border-gray-100 bg-blue-50/40 cursor-pointer flex gap-4 relative">
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-blue-600 rounded-r-md"></div>
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover shadow-sm" alt="Sarah">
+                                    <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+                                </div>
+                                <div class="flex-1 overflow-hidden pt-1">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h4 class="font-bold text-sm text-slate-900">Photographer</h4>
+                                        <span class="text-[10px] text-blue-600 font-bold uppercase">10:42 AM</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 truncate font-medium">Yes! That works perfectly. Loo...</p>
+                                </div>
+                            </div>
+
+                            <!-- Read Chat Item -->
+                            <div class="p-4 border-b border-gray-100 hover:bg-gray-50 transition cursor-pointer flex gap-4">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover shadow-sm border border-gray-100" alt="David">
+                                <div class="flex-1 overflow-hidden pt-1">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h4 class="font-bold text-sm text-slate-900">David Chen</h4>
+                                        <span class="text-[10px] text-gray-400 uppercase">Oct 02</span>
+                                    </div>
+                                    <p class="text-sm text-gray-500 truncate">Thanks! I've uploaded the final...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Chat Window -->
+                    <div class="flex-1 flex flex-col bg-gray-50/30">
+                        <!-- Chat Header -->
+                        <div class="px-6 py-5 border-b border-gray-200 flex justify-between items-center bg-white shadow-sm z-10">
+                            <div class="flex items-center gap-4">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" class="w-10 h-10 rounded-full object-cover border border-gray-100" alt="Sarah">
+                                <div>
+                                    <h3 class="font-bold text-slate-900 text-sm">Photographer</h3>
+                                    <p class="text-xs text-gray-500 font-medium">Usually replies within 1 hour</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="p-2 border border-gray-200 text-gray-600 hover:bg-gray-50 rounded-lg transition" title="Call"><i data-lucide="phone" class="w-4 h-4"></i></button>
+                                <button class="p-2 border border-gray-200 text-gray-600 hover:bg-gray-50 rounded-lg transition" title="More Info"><i data-lucide="info" class="w-4 h-4"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Messages Area -->
+                        <div class="flex-1 overflow-y-auto p-6 space-y-6">
+                            
+                            <!-- Date Divider -->
+                            <div class="flex justify-center">
+                                <span class="bg-gray-100 text-gray-500 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Yesterday</span>
+                            </div>
+
+                            <!-- Outgoing -->
+                            <div class="flex justify-end">
+                                <div class="max-w-[70%]">
+                                    <div class="bg-slate-900 text-white rounded-2xl rounded-tr-sm px-5 py-3 shadow-sm">
+                                        <p class="text-sm leading-relaxed">Hi Sarah! Just confirming the location for next week. Are we meeting by the main fountain at Bahrain Bay?</p>
+                                    </div>
+                                    <span class="text-[10px] text-gray-400 mt-1 block text-right font-medium">4:30 PM <i data-lucide="check-check" class="w-3 h-3 inline text-blue-500"></i></span>
+                                </div>
+                            </div>
+
+                            <!-- Date Divider -->
+                            <div class="flex justify-center">
+                                <span class="bg-gray-100 text-gray-500 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Today</span>
+                            </div>
+
+                            <!-- Incoming -->
+                            <div class="flex justify-start">
+                                <div class="flex gap-3 max-w-[75%]">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=50&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover flex-shrink-0 mt-1" alt="Sarah">
+                                    <div>
+                                        <div class="bg-white border border-gray-200 text-slate-900 rounded-2xl rounded-tl-sm px-5 py-3 shadow-sm">
+                                            <p class="text-sm leading-relaxed">Yes! That works perfectly. Looking forward to the shoot! Will bring the portable lighting setup just in case it gets cloudy. See you at 10 AM! 📸</p>
+                                        </div>
+                                        <span class="text-[10px] text-gray-400 mt-1 block font-medium">10:42 AM</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Input Area -->
+                        <div class="p-5 bg-white border-t border-gray-200">
+                            <div class="flex items-end gap-3">
+                                <button class="p-3 text-gray-400 hover:text-slate-900 hover:bg-gray-50 transition rounded-xl flex-shrink-0"><i data-lucide="paperclip" class="w-5 h-5"></i></button>
+                                <div class="flex-1 bg-gray-50 border border-gray-200 rounded-2xl p-2 focus-within:border-slate-900 focus-within:ring-1 focus-within:ring-slate-900 transition flex items-end">
+                                    <textarea id="client-chat-input" placeholder="Write a message..." class="w-full bg-transparent border-none focus:ring-0 text-sm py-2 px-2 outline-none resize-none min-h-[40px] max-h-[120px]" rows="1"></textarea>
+                                </div>
+                                <button id="client-send-btn" class="p-3 bg-slate-900 text-white rounded-xl hover:bg-slate-800 shadow-md transition flex-shrink-0 flex items-center justify-center">
+                                    <i data-lucide="send" class="w-5 h-5 translate-x-[-1px] translate-y-[1px]"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-slate-900 text-white pt-12 pb-8 px-6 md:px-12 mt-auto border-t border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+            <div class="flex items-center gap-2">
+                <i data-lucide="camera" class="w-5 h-5 text-gray-500"></i>
+                <span class="font-bold text-gray-300 text-sm tracking-tight">LensWorks</span>
+            </div>
+            <p>© 2026 LensWorks Platform. All rights reserved.</p>
+            <div class="flex gap-6 font-medium">
+                <a href="help.html" class="hover:text-white transition">Help Center</a>
+                <a href="privacy.html" class="hover:text-white transition">Privacy</a>
+                <a href="terms.html" class="hover:text-white transition">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+
+        <script src="js/shared.js"></script>
+    <script src="js/client-dashboard.js"></script>
+</body>
+</html>
+
