@@ -25,6 +25,8 @@
                 <button id="nav-calendar-btn" class="nav-main-btn hover:text-slate-900 transition relative focus:outline-none">Calendar</button>
                 <button class="nav-quick-tab-btn hover:text-slate-900 transition" data-vendor-tab-target="messages">Messages</button>
                 <button class="nav-quick-tab-btn hover:text-slate-900 transition" data-vendor-tab-target="earnings">Earnings</button>
+                <button class="nav-quick-tab-btn hover:text-slate-900 transition" data-vendor-tab-target="analytics">Analytics</button>
+                <button class="nav-quick-tab-btn hover:text-slate-900 transition" data-vendor-tab-target="reviews">Reviews</button>
                 <a id="vendor-public-profile-link" href="#" class="hover:text-slate-900 transition flex items-center gap-1"><i data-lucide="user" class="w-3.5 h-3.5"></i> View Public Profile</a>
             </nav>
 
@@ -50,6 +52,8 @@
                         <a id="vendor-dropdown-public-profile-link" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="user" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Profile & Portfolio</a>
                         <a href="vendor-dashboard.html?tab=messages" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="message-square" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Messages</a>
                         <a href="vendor-dashboard.html?tab=earnings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="wallet" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Earnings</a>
+                        <a href="vendor-dashboard.html?tab=analytics" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="bar-chart-2" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Analytics</a>
+                        <a href="vendor-dashboard.html?tab=reviews" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="star" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Reviews</a>
                         <a href="account-settings.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="settings" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Account Settings</a>
                         <div class="border-t border-gray-100 my-1"></div>
                         <a href="login.html" data-logout-link class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50"><i data-lucide="log-out" class="w-4 h-4 inline-block mr-2"></i> Log Out</a>
@@ -85,7 +89,7 @@
 
                 <!-- Quick Stats Row -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-green-300 transition group cursor-pointer">
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-green-300 transition group">
                         <div class="flex justify-between items-start mb-4">
                             <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center">
                                 <i data-lucide="dollar-sign" class="w-5 h-5"></i>
@@ -96,7 +100,7 @@
                         <p id="vendor-stat-earnings" class="text-2xl font-bold text-slate-900 tracking-tight">$4,250.00</p>
                     </div>
                     
-                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-blue-300 transition group cursor-pointer">
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-blue-300 transition group">
                         <div class="flex justify-between items-start mb-4">
                             <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
                                 <i data-lucide="calendar" class="w-5 h-5"></i>
@@ -107,7 +111,7 @@
                         <p id="vendor-stat-active-bookings" class="text-2xl font-bold text-slate-900 tracking-tight">8</p>
                     </div>
 
-                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-purple-300 transition group cursor-pointer">
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-purple-300 transition group">
                         <div class="flex justify-between items-start mb-4">
                             <div class="w-10 h-10 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center">
                                 <i data-lucide="eye" class="w-5 h-5"></i>
@@ -118,7 +122,7 @@
                         <p class="text-2xl font-bold text-slate-900 tracking-tight">1,204</p>
                     </div>
 
-                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-yellow-300 transition group cursor-pointer">
+                    <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:border-yellow-300 transition group">
                         <div class="flex justify-between items-start mb-4">
                             <div class="w-10 h-10 bg-yellow-50 text-yellow-600 rounded-xl flex items-center justify-center fill-yellow-500">
                                 <i data-lucide="star" class="w-5 h-5"></i>
@@ -147,6 +151,12 @@
                         <i data-lucide="message-square" class="w-4 h-4"></i> Messages
                         <span id="vendor-messages-tab-badge" class="bg-blue-600 text-white px-1.5 py-0.5 rounded-full text-[10px] font-bold ml-1 absolute -top-1 -right-4">2</span>
                     </button>
+                    <button class="tab-btn pb-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-slate-900 transition flex items-center gap-2" data-target="analytics">
+                        <i data-lucide="bar-chart-2" class="w-4 h-4"></i> Analytics
+                    </button>
+                    <button class="tab-btn pb-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-slate-900 transition flex items-center gap-2" data-target="reviews">
+                        <i data-lucide="star" class="w-4 h-4"></i> Reviews
+                    </button>
                 </nav>
             </div>
 
@@ -168,103 +178,9 @@
                     </div>
 
                     <div class="space-y-4">
-                        <!-- Booking List Item 1 -->
-                        <div class="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:shadow-md transition">
-                            <div class="flex items-center gap-6">
-                                <!-- Date Box -->
-                                <div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-xl flex flex-col items-center justify-center flex-shrink-0">
-                                    <span class="text-xs font-bold text-red-500 uppercase">Oct</span>
-                                    <span class="text-xl font-black text-slate-900 leading-none mt-0.5">14</span>
-                                </div>
-                                
-                                <!-- Info -->
-                                <div>
-                                    <div class="flex items-center gap-3 mb-1">
-                                        <h3 class="font-bold text-slate-900 text-lg">Premium Portrait Session</h3>
-                                        <span class="bg-blue-50 text-blue-600 border border-blue-200 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Confirmed</span>
-                                    </div>
-                                    <div class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-gray-500">
-                                        <span class="flex items-center gap-1.5"><i data-lucide="user" class="w-3.5 h-3.5"></i> Client: Booked client</span>
-                                        <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Bahrain Bay</span>
-                                        <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 10:00 AM (3 hrs)</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Actions -->
-                            <div class="flex flex-wrap md:flex-nowrap items-center gap-3 w-full md:w-auto">
-                                <div class="text-right hidden lg:block mr-4">
-                                    <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-0.5">Payout</p>
-                                    <p class="font-bold text-slate-900">$450.00</p>
-                                </div>
-                                <button class="flex-1 md:flex-none border border-gray-200 text-slate-700 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2">
-                                    <i data-lucide="message-square" class="w-4 h-4"></i> Chat
-                                </button>
-                                <button class="flex-1 md:flex-none bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-800 transition shadow-sm">
-                                    Manage
-                                </button>
-                            </div>
+                        <div class="bg-white border border-dashed border-gray-300 rounded-2xl p-10 text-center text-sm text-gray-500">
+                            Loading your bookings...
                         </div>
-
-                        <!-- Booking List Item 2 -->
-                        <div class="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:shadow-md transition">
-                            <div class="flex items-center gap-6">
-                                <div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-xl flex flex-col items-center justify-center flex-shrink-0">
-                                    <span class="text-xs font-bold text-red-500 uppercase">Oct</span>
-                                    <span class="text-xl font-black text-slate-900 leading-none mt-0.5">22</span>
-                                </div>
-                                <div>
-                                    <div class="flex items-center gap-3 mb-1">
-                                        <h3 class="font-bold text-slate-900 text-lg">Full Day Cinematic Wedding</h3>
-                                        <span class="bg-yellow-50 text-yellow-700 border border-yellow-200 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Awaiting Deposit</span>
-                                    </div>
-                                    <div class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-gray-500">
-                                        <span class="flex items-center gap-1.5"><i data-lucide="user" class="w-3.5 h-3.5"></i> Client: Emma & John</span>
-                                        <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Ritz Carlton</span>
-                                        <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 2:00 PM (8 hrs)</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-wrap md:flex-nowrap items-center gap-3 w-full md:w-auto">
-                                <div class="text-right hidden lg:block mr-4">
-                                    <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-0.5">Payout</p>
-                                    <p class="font-bold text-slate-900">$1,200.00</p>
-                                </div>
-                                <button class="flex-1 md:flex-none border border-gray-200 text-slate-700 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2">
-                                    <i data-lucide="bell-ring" class="w-4 h-4"></i> Remind
-                                </button>
-                                <button class="flex-1 md:flex-none border border-gray-200 text-slate-700 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2">
-                                    <i data-lucide="message-square" class="w-4 h-4"></i> Chat
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Booking List Item 3 (Completed) -->
-                        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 transition opacity-75 hover:opacity-100">
-                            <div class="flex items-center gap-6">
-                                <div class="w-16 h-16 bg-white border border-gray-200 rounded-xl flex flex-col items-center justify-center flex-shrink-0 text-gray-400">
-                                    <span class="text-xs font-bold uppercase">Sep</span>
-                                    <span class="text-xl font-black leading-none mt-0.5">28</span>
-                                </div>
-                                <div>
-                                    <div class="flex items-center gap-3 mb-1">
-                                        <h3 class="font-bold text-slate-700 text-lg">Essential Shoot</h3>
-                                        <span class="bg-gray-200 text-gray-600 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Shoot Done</span>
-                                    </div>
-                                    <div class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-gray-500">
-                                        <span class="flex items-center gap-1.5"><i data-lucide="user" class="w-3.5 h-3.5"></i> Client: Marcus T.</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-wrap md:flex-nowrap items-center gap-3 w-full md:w-auto">
-                                <button class="flex-1 md:flex-none bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-700 transition shadow-sm flex items-center justify-center gap-2">
-                                    <i data-lucide="upload-cloud" class="w-4 h-4"></i> Deliver Photos
-                                </button>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
@@ -281,86 +197,9 @@
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        
-                        <!-- Package Card 1 -->
-                        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col relative group">
-                            <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition">
-                                <button class="p-1.5 bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200"><i data-lucide="edit" class="w-4 h-4"></i></button>
-                                <button class="p-1.5 bg-red-50 text-red-600 rounded-md hover:bg-red-100"><i data-lucide="trash" class="w-4 h-4"></i></button>
-                            </div>
-                            <h3 class="font-bold text-xl text-slate-900 mb-1">Essential Shoot</h3>
-                            <p class="text-2xl font-black text-slate-900 mb-4">$150</p>
-                            <p class="text-sm text-gray-500 mb-6">Perfect for quick portraits or couples.</p>
-                            
-                            <div class="space-y-3 mt-auto border-t border-gray-100 pt-4">
-                                <div class="flex items-center gap-2 text-sm text-gray-700">
-                                    <i data-lucide="clock" class="w-4 h-4 text-blue-500"></i> 1 Hour Duration
-                                </div>
-                                <div class="flex items-center gap-2 text-sm text-gray-700">
-                                    <i data-lucide="image" class="w-4 h-4 text-blue-500"></i> 50+ Edited Photos
-                                </div>
-                                <div class="flex items-center gap-2 text-sm text-gray-700">
-                                    <i data-lucide="cloud-download" class="w-4 h-4 text-blue-500"></i> Online Gallery
-                                </div>
-                            </div>
+                        <div class="md:col-span-2 lg:col-span-3 bg-white border border-dashed border-gray-300 rounded-2xl p-10 text-center text-sm text-gray-500">
+                            Loading your packages...
                         </div>
-
-                        <!-- Package Card 2 -->
-                        <div class="bg-slate-50 border-2 border-slate-900 rounded-2xl p-6 shadow-sm flex flex-col relative group">
-                            <div class="absolute -top-3 left-6 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Most Popular</div>
-                            <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition">
-                                <button class="p-1.5 bg-white border border-gray-200 text-gray-600 rounded-md hover:bg-gray-50"><i data-lucide="edit" class="w-4 h-4"></i></button>
-                                <button class="p-1.5 bg-red-50 border border-red-100 text-red-600 rounded-md hover:bg-red-100"><i data-lucide="trash" class="w-4 h-4"></i></button>
-                            </div>
-                            <h3 class="font-bold text-xl text-slate-900 mb-1 mt-2">Premium Session</h3>
-                            <p class="text-2xl font-black text-slate-900 mb-4">$450</p>
-                            <p class="text-sm text-gray-500 mb-6">Ideal for events, engagements, or small weddings.</p>
-                            
-                            <div class="space-y-3 mt-auto border-t border-gray-200 pt-4">
-                                <div class="flex items-center gap-2 text-sm text-gray-700">
-                                    <i data-lucide="clock" class="w-4 h-4 text-blue-500"></i> 3 Hours Duration
-                                </div>
-                                <div class="flex items-center gap-2 text-sm text-gray-700">
-                                    <i data-lucide="image" class="w-4 h-4 text-blue-500"></i> 150+ Edited Photos
-                                </div>
-                                <div class="flex items-center gap-2 text-sm text-gray-700">
-                                    <i data-lucide="shirt" class="w-4 h-4 text-blue-500"></i> 2 Outfit Changes
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Add-ons Configuration -->
-                        <div class="bg-white border border-gray-200 border-dashed rounded-2xl p-6 shadow-sm flex flex-col">
-                            <div class="flex justify-between items-center mb-4">
-                                <h3 class="font-bold text-lg text-slate-900">A La Carte Extras</h3>
-                                <button class="text-blue-600 text-sm font-semibold hover:underline">Add New</button>
-                            </div>
-                            
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100 group">
-                                    <div>
-                                        <p class="font-semibold text-sm text-slate-900">Extra Hour</p>
-                                        <p class="text-xs text-gray-500">+$100.00</p>
-                                    </div>
-                                    <button class="text-gray-400 hover:text-slate-900 hidden group-hover:block transition"><i data-lucide="edit-2" class="w-4 h-4"></i></button>
-                                </div>
-                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100 group">
-                                    <div>
-                                        <p class="font-semibold text-sm text-slate-900">Expedited Delivery</p>
-                                        <p class="text-xs text-gray-500">+$75.00</p>
-                                    </div>
-                                    <button class="text-gray-400 hover:text-slate-900 hidden group-hover:block transition"><i data-lucide="edit-2" class="w-4 h-4"></i></button>
-                                </div>
-                                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100 group">
-                                    <div>
-                                        <p class="font-semibold text-sm text-slate-900">Leather Album</p>
-                                        <p class="text-xs text-gray-500">+$250.00</p>
-                                    </div>
-                                    <button class="text-gray-400 hover:text-slate-900 hidden group-hover:block transition"><i data-lucide="edit-2" class="w-4 h-4"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
 
@@ -523,6 +362,105 @@
                                     </button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Analytics View (Hidden initially) -->
+                <div id="tab-analytics" class="tab-content w-full hidden opacity-0">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Profile Views (7d)</p>
+                            <p id="vendor-analytics-views" class="text-3xl font-black text-slate-900">—</p>
+                            <p class="text-xs text-green-600 font-bold mt-1 bg-green-50 w-fit px-2 py-0.5 rounded">+45% vs last week</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Inquiries (7d)</p>
+                            <p id="vendor-analytics-inquiries" class="text-3xl font-black text-slate-900">—</p>
+                            <p class="text-xs text-blue-600 font-bold mt-1 bg-blue-50 w-fit px-2 py-0.5 rounded">Inbox messages</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Conversion Rate</p>
+                            <p id="vendor-analytics-conversion" class="text-3xl font-black text-slate-900">—</p>
+                            <p class="text-xs text-gray-500 font-bold mt-1">Inquiries → Bookings</p>
+                        </div>
+                        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                            <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Avg. Response Time</p>
+                            <p id="vendor-analytics-resp-time" class="text-3xl font-black text-slate-900">—</p>
+                            <p class="text-xs text-gray-500 font-bold mt-1">To first reply</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        <!-- Weekly Views Chart -->
+                        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-bold text-slate-900">Profile Views — Last 7 Days</h3>
+                            </div>
+                            <div class="flex items-end justify-between gap-2 h-32 px-2">
+                                <div class="w-full bg-blue-100 rounded-t-sm relative group flex justify-center h-[40%] hover:bg-blue-200 transition"><span class="absolute -top-5 text-[10px] text-gray-500 font-bold opacity-0 group-hover:opacity-100">82</span><span class="absolute -bottom-5 text-[10px] text-gray-400">Mon</span></div>
+                                <div class="w-full bg-blue-200 rounded-t-sm relative group flex justify-center h-[60%] hover:bg-blue-300 transition"><span class="absolute -top-5 text-[10px] text-gray-500 font-bold opacity-0 group-hover:opacity-100">124</span><span class="absolute -bottom-5 text-[10px] text-gray-400">Tue</span></div>
+                                <div class="w-full bg-blue-300 rounded-t-sm relative group flex justify-center h-[75%] hover:bg-blue-400 transition"><span class="absolute -top-5 text-[10px] text-gray-500 font-bold opacity-0 group-hover:opacity-100">155</span><span class="absolute -bottom-5 text-[10px] text-gray-400">Wed</span></div>
+                                <div class="w-full bg-blue-100 rounded-t-sm relative group flex justify-center h-[30%] hover:bg-blue-200 transition"><span class="absolute -top-5 text-[10px] text-gray-500 font-bold opacity-0 group-hover:opacity-100">62</span><span class="absolute -bottom-5 text-[10px] text-gray-400">Thu</span></div>
+                                <div class="w-full bg-blue-500 rounded-t-sm relative group flex justify-center h-[100%] hover:bg-blue-600 transition"><span class="absolute -top-5 text-[10px] text-slate-900 font-bold">206</span><span class="absolute -bottom-5 text-[10px] text-blue-600 font-bold">Fri</span></div>
+                                <div class="w-full bg-blue-400 rounded-t-sm relative group flex justify-center h-[88%] hover:bg-blue-500 transition"><span class="absolute -top-5 text-[10px] text-gray-500 font-bold opacity-0 group-hover:opacity-100">181</span><span class="absolute -bottom-5 text-[10px] text-gray-400">Sat</span></div>
+                                <div class="w-full bg-blue-300 rounded-t-sm relative group flex justify-center h-[70%] hover:bg-blue-400 transition"><span class="absolute -top-5 text-[10px] text-gray-500 font-bold opacity-0 group-hover:opacity-100">144</span><span class="absolute -bottom-5 text-[10px] text-gray-400">Sun</span></div>
+                            </div>
+                            <div class="h-6"></div>
+                        </div>
+
+                        <!-- Top Packages -->
+                        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                            <h3 class="font-bold text-slate-900 mb-5">Top Packages by Bookings</h3>
+                            <div id="vendor-analytics-packages" class="space-y-4">
+                                <div class="text-sm text-gray-500">Loading package stats...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Platform Summary -->
+                    <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                        <h3 class="font-bold text-slate-900 mb-5">Platform Summary</h3>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                            <div class="bg-slate-50 rounded-xl p-4 border border-gray-200">
+                                <p class="text-gray-500 mb-1">Profile Completeness</p>
+                                <p id="vendor-analytics-profile-complete" class="text-xl font-black text-slate-900">—</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-4 border border-gray-200">
+                                <p class="text-gray-500 mb-1">Active Packages</p>
+                                <p id="vendor-analytics-pkg-count" class="text-xl font-black text-slate-900">—</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-4 border border-gray-200">
+                                <p class="text-gray-500 mb-1">Total Bookings</p>
+                                <p id="vendor-analytics-total-bookings" class="text-xl font-black text-slate-900">—</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-4 border border-gray-200">
+                                <p class="text-gray-500 mb-1">Repeat Clients</p>
+                                <p id="vendor-analytics-repeat" class="text-xl font-black text-slate-900">—</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Reviews View (Hidden initially) -->
+                <div id="tab-reviews" class="tab-content w-full hidden opacity-0">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-900">Client Reviews</h2>
+                            <p id="vendor-reviews-sub" class="text-sm text-gray-500 mt-1">Reviews from your completed sessions.</p>
+                        </div>
+                        <div id="vendor-reviews-summary" class="flex items-center gap-3 bg-white border border-gray-200 rounded-2xl px-5 py-3 shadow-sm">
+                            <span class="text-3xl font-black text-slate-900" id="vendor-reviews-avg">—</span>
+                            <div>
+                                <div id="vendor-reviews-stars-display" class="text-yellow-400 text-lg leading-none">☆☆☆☆☆</div>
+                                <p id="vendor-reviews-count" class="text-xs text-gray-500 mt-0.5">0 reviews</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="vendor-reviews-list" class="space-y-4">
+                        <div class="bg-white border border-dashed border-gray-300 rounded-2xl p-10 text-center text-sm text-gray-500">
+                            Loading reviews...
                         </div>
                     </div>
                 </div>

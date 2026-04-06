@@ -26,6 +26,8 @@
                 <a href="client-dashboard.html?tab=vault" class="hover:text-slate-900 transition">Digital Vault</a>
                 <a href="client-dashboard.html?tab=payments" class="hover:text-slate-900 transition">Payments</a>
                 <a href="client-dashboard.html?tab=messages" class="hover:text-slate-900 transition">Messages</a>
+                <a href="client-dashboard.html?tab=history" class="hover:text-slate-900 transition">Past Bookings</a>
+                <a href="client-dashboard.html?tab=reviews" class="hover:text-slate-900 transition">Reviews</a>
                 <a href="client-dashboard.html" class="text-slate-900 font-semibold relative after:absolute after:bottom-[-16px] after:left-0 after:w-full after:h-0.5 after:bg-slate-900">My Dashboard</a>
             </nav>
 
@@ -53,6 +55,8 @@
                         <a href="client-dashboard.html?tab=vault" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="lock" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Digital Vault</a>
                         <a href="client-dashboard.html?tab=payments" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="receipt-text" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Payments</a>
                         <a href="client-dashboard.html?tab=messages" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="message-square" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Messages</a>
+                        <a href="client-dashboard.html?tab=history" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="history" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Past Bookings</a>
+                        <a href="client-dashboard.html?tab=reviews" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-slate-900"><i data-lucide="star" class="w-4 h-4 inline-block mr-2 text-gray-400"></i> Reviews</a>
                         <div class="border-t border-gray-100 my-1"></div>
                         <a href="login.html" data-logout-link class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50"><i data-lucide="log-out" class="w-4 h-4 inline-block mr-2"></i> Log Out</a>
                     </div>
@@ -71,7 +75,7 @@
                     <h1 id="client-welcome-title" class="text-3xl font-bold text-slate-900 tracking-tight">Welcome back</h1>
                     <p id="client-welcome-subtitle" class="text-gray-500 mt-1.5 text-sm">Here is what's happening with your photography bookings.</p>
                 </div>
-                <button id="book-new-session-btn" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-md hover:shadow-lg transform hover:-translate-y-0.5" onclick="window.location.href='directory.html'"><i data-lucide="plus" class="w-4 h-4"></i> Book New Session
+                <button id="book-new-session-btn" type="button" data-nav-href="directory.html" class="bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"><i data-lucide="plus" class="w-4 h-4"></i> Book New Session
                 </button>
             </div>
 
@@ -122,6 +126,12 @@
                 <button class="tab-btn pb-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-slate-900 transition flex items-center gap-2 relative" data-target="messages">
                     <i data-lucide="message-square" class="w-4 h-4"></i> Messages
                     <span id="client-messages-tab-badge" class="bg-blue-600 text-white px-1.5 py-0.5 rounded-full text-[10px] font-bold ml-1 absolute -top-1 -right-4">1</span>
+                </button>
+                <button class="tab-btn pb-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-slate-900 transition flex items-center gap-2" data-target="history">
+                    <i data-lucide="history" class="w-4 h-4"></i> Past Bookings
+                </button>
+                <button class="tab-btn pb-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-slate-900 transition flex items-center gap-2" data-target="reviews">
+                    <i data-lucide="star" class="w-4 h-4"></i> Reviews
                 </button>
             </nav>
         </div>
@@ -333,7 +343,7 @@
                                     <span class="text-sm font-semibold text-slate-900">David Chen</span>
                                 </div>
                             </div>
-                            <button class="px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-sm" onclick="window.location.href='gallery.html'"><i data-lucide="download" class="w-4 h-4"></i> ZIP
+                            <button type="button" data-nav-href="gallery.html" class="px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-sm"><i data-lucide="download" class="w-4 h-4"></i> ZIP
                             </button>
                         </div>
                     </div>
@@ -364,7 +374,7 @@
                                     <span class="text-sm font-semibold text-slate-900">Elevate Studios</span>
                                 </div>
                             </div>
-                            <button class="px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-sm" onclick="window.location.href='gallery.html'"><i data-lucide="download" class="w-4 h-4"></i> ZIP
+                            <button type="button" data-nav-href="gallery.html" class="px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-sm"><i data-lucide="download" class="w-4 h-4"></i> ZIP
                             </button>
                         </div>
                     </div>
@@ -533,6 +543,83 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+
+            <!-- 5. Past Bookings View (Hidden initially) -->
+            <div id="tab-history" class="tab-content w-full hidden opacity-0">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900">Past Bookings</h2>
+                        <p class="text-sm text-gray-500 mt-1">Your completed and cancelled sessions.</p>
+                    </div>
+                    <a href="directory.html" class="bg-slate-900 text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-2 shadow-sm">
+                        <i data-lucide="plus" class="w-4 h-4"></i> Book Again
+                    </a>
+                </div>
+
+                <div id="client-history-list" class="space-y-4">
+                    <div class="bg-white border border-dashed border-gray-300 rounded-2xl p-10 text-center text-sm text-gray-500">
+                        Loading booking history...
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Reviews View (Hidden initially) -->
+            <div id="tab-reviews" class="tab-content w-full hidden opacity-0">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="lg:col-span-2">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-lg font-bold text-slate-900">Your Reviews</h2>
+                                <p class="text-sm text-gray-500 mt-1">Reviews you have left for photographers.</p>
+                            </div>
+                        </div>
+                        <div id="client-reviews-given-list" class="space-y-4">
+                            <div class="bg-white border border-dashed border-gray-300 rounded-2xl p-10 text-center text-sm text-gray-500">
+                                Loading your reviews...
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leave a Review Panel -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm sticky top-28">
+                            <h3 class="font-bold text-slate-900 mb-1 flex items-center gap-2">
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-500"></i> Leave a Review
+                            </h3>
+                            <p class="text-xs text-gray-500 mb-4">Share your experience with a completed session.</p>
+
+                            <div class="mb-4">
+                                <label class="text-xs font-bold uppercase tracking-wider text-gray-500 block mb-2">Select Session</label>
+                                <select id="review-booking-select" class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-slate-900 outline-none transition">
+                                    <option value="">Loading sessions...</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="text-xs font-bold uppercase tracking-wider text-gray-500 block mb-2">Your Rating</label>
+                                <div id="review-stars" class="flex gap-1" data-rating="0">
+                                    <button type="button" class="review-star-btn text-2xl text-gray-300 hover:text-yellow-400 transition focus:outline-none" data-value="1">★</button>
+                                    <button type="button" class="review-star-btn text-2xl text-gray-300 hover:text-yellow-400 transition focus:outline-none" data-value="2">★</button>
+                                    <button type="button" class="review-star-btn text-2xl text-gray-300 hover:text-yellow-400 transition focus:outline-none" data-value="3">★</button>
+                                    <button type="button" class="review-star-btn text-2xl text-gray-300 hover:text-yellow-400 transition focus:outline-none" data-value="4">★</button>
+                                    <button type="button" class="review-star-btn text-2xl text-gray-300 hover:text-yellow-400 transition focus:outline-none" data-value="5">★</button>
+                                </div>
+                            </div>
+
+                            <div class="mb-5">
+                                <label class="text-xs font-bold uppercase tracking-wider text-gray-500 block mb-2">Your Review</label>
+                                <textarea id="review-body-input" rows="4" placeholder="Tell others what made the session great..." class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:border-slate-900 outline-none transition resize-none"></textarea>
+                            </div>
+
+                            <p id="review-status-msg" class="hidden text-xs rounded-lg px-3 py-2 border mb-3 font-medium"></p>
+
+                            <button id="submit-review-btn" class="w-full bg-slate-900 text-white px-4 py-3 rounded-xl text-sm font-bold hover:bg-slate-800 transition shadow-sm flex items-center justify-center gap-2">
+                                <i data-lucide="send" class="w-4 h-4"></i> Submit Review
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 

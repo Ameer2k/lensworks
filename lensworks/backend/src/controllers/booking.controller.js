@@ -6,6 +6,7 @@ function normalizeBooking(record, perspective = 'client') {
   const booking = record.booking || {};
   const customer = record.customer || {};
   const rescheduleRequest = record.rescheduleRequest || null;
+  const vendor = store.vendors.find((entry) => entry.ownerUserId === record.vendorUserId);
   return {
     id: record.id,
     receiptNumber: record.receiptNumber,
@@ -18,6 +19,8 @@ function normalizeBooking(record, perspective = 'client') {
     date: booking.date || null,
     time: booking.time || null,
     location: booking.location || null,
+    vendorSlug: vendor?.slug || null,
+    vendorName: vendor?.displayName || null,
     customer: perspective === 'vendor' ? `${customer.firstName || ''} ${customer.lastName || ''}`.trim() : null,
     rescheduleReason: rescheduleRequest?.reason || '',
     rescheduleRequestedAt: rescheduleRequest?.requestedAt || null,

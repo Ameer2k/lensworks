@@ -2,7 +2,7 @@
     const pageParams = new URLSearchParams(window.location.search);
     const requestedConversationId = String(pageParams.get('conversation') || '').trim();
     const requestedTab = String(pageParams.get('tab') || '').trim().toLowerCase();
-    const allowedTabs = new Set(['upcoming', 'messages', 'vault', 'payments']);
+    const allowedTabs = new Set(['upcoming', 'messages', 'vault', 'payments', 'history', 'reviews']);
     const initialTabKey = requestedConversationId
         ? 'messages'
         : (allowedTabs.has(requestedTab) ? requestedTab : 'upcoming');
@@ -29,6 +29,13 @@
     const chatTextarea = document.getElementById('client-chat-input');
     const sendButton = document.getElementById('client-send-btn');
     const notificationButton = document.getElementById('client-notification-btn');
+    const historyList = document.getElementById('client-history-list');
+    const reviewsGivenList = document.getElementById('client-reviews-given-list');
+    const reviewBookingSelect = document.getElementById('review-booking-select');
+    const reviewStarsContainer = document.getElementById('review-stars');
+    const reviewBodyInput = document.getElementById('review-body-input');
+    const reviewStatusMsg = document.getElementById('review-status-msg');
+    const submitReviewBtn = document.getElementById('submit-review-btn');
     const messageSidebar = document.querySelector('#tab-messages .w-1\/3 .flex-1.overflow-y-auto');
     const messageHeader = document.querySelector('#tab-messages .flex-1 .px-6.py-5');
     const messagesArea = document.querySelector('#tab-messages .flex-1 .flex-1.overflow-y-auto');
@@ -90,7 +97,10 @@
     let isDropdownOpen = false;
     let activeBooking = null;
     let clientBookings = [];
+    let clientPastBookings = [];
+    let clientSubmittedReviews = [];
     let clientPayments = [];
+    let currentReviewRating = 0;
     let activeClientUser = null;
     let activeClientProfile = null;
     const clientDataFailures = new Map();
@@ -197,6 +207,64 @@
 
     function formatMoney(value) {
         return `$${Number(value || 0).toFixed(2)}`;
+    }
+
+    function escapeHtml(value) {
+        return String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function getClientReviewAuthorCandidates() {
+        const session = window.LensWorksStore?.getSession?.() || {};
+        const names = new Set();
+        [
+            activeClientUser?.fullName,
+            session.name,
+            activeClientProfile?.fullName,
+            [activeClientProfile?.firstName, activeClientProfile?.lastName].filter(Boolean).join(' ')
+        ].forEach((entry) => {
+            const normalized = String(entry || '').trim().toLowerCase();
+            if (normalized) {
+                names.add(normalized);
+            }
+        });
+        return names;
+    }
+
+    function renderClientSubmittedReviews(items) {
+        if (!reviewsGivenList) {
+            return;
+        }
+
+        if (!Array.isArray(items) || !items.length) {
+            reviewsGivenList.innerHTML = '<div class="bg-white border border-dashed border-gray-300 rounded-2xl p-10 text-center text-sm text-gray-500">Reviews you submit will appear here.</div>';
+            return;
+        }
+
+        reviewsGivenList.innerHTML = items.map((review) => {
+            const rating = Math.max(0, Math.min(5, Number(review.rating || 0)));
+            const stars = `${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}`;
+            const dateLabel = review.createdAt
+                ? new Date(review.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                : 'Recently';
+            const vendorLabel = review.vendorName || 'Vendor';
+            return `
+                <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between mb-3">
+                        <div>
+                            <p class="font-bold text-slate-900">${escapeHtml(vendorLabel)}</p>
+                            <p class="text-xs text-gray-400 mt-0.5">${dateLabel}</p>
+                        </div>
+                        <span class="text-yellow-400 text-lg leading-none">${stars}</span>
+                    </div>
+                    <p class="text-sm text-slate-700 leading-relaxed">${escapeHtml(review.body)}</p>
+                </div>
+            `;
+        }).join('');
     }
 
     function setBadgeValue(element, count) {
@@ -1377,6 +1445,140 @@
         }
     }
 
+    async function hydrateHistoryFromApi() {
+        if (!historyList) return;
+        if (!window.LensWorksApi?.bookings?.getMine) {
+            historyList.innerHTML = '<div class="bg-white border border-dashed border-gray-300 rounded-2xl p-10 text-center text-sm text-gray-500">Could not load booking history.</div>';
+            return;
+        }
+        const result = await window.LensWorksApi.bookings.getMine();
+        if (!result.ok) {
+            historyList.innerHTML = '<div class="bg-white border border-dashed border-gray-300 rounded-2xl p-10 text-center text-sm text-gray-500">Could not load booking history.</div>';
+            return;
+        }
+        const allBookings = result.payload?.data?.items || result.payload?.data?.bookings || [];
+        clientPastBookings = allBookings.filter((b) => ['COMPLETED', 'CANCELED', 'CANCELLED'].includes(String(b.status || '').toUpperCase()));
+
+        if (!clientPastBookings.length) {
+            historyList.innerHTML = '<div class="bg-white border border-dashed border-gray-300 rounded-2xl p-10 text-center text-sm text-gray-500">No past bookings yet. Your completed sessions will appear here.</div>';
+            return;
+        }
+
+        historyList.innerHTML = clientPastBookings.map((booking) => {
+            const status = String(booking.status || 'COMPLETED');
+            const isCompleted = status === 'COMPLETED';
+            const statusColor = isCompleted ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600';
+            const dateStr = booking.date
+                ? new Date(booking.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+                : '—';
+            return `
+                <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-6 py-5">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="camera" class="w-5 h-5 text-slate-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900">${booking.packageName || 'Session'}</h3>
+                                <p class="text-sm text-gray-500 mt-0.5">${dateStr} &bull; ${booking.location || '—'}</p>
+                                <p class="text-xs text-gray-400 mt-0.5 font-mono">Receipt: ${booking.receiptNumber || booking.id}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 flex-shrink-0">
+                            <span class="text-sm font-black text-slate-900">${formatMoney(booking.total || 0)}</span>
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-full ${statusColor}">${status.charAt(0) + status.slice(1).toLowerCase()}</span>
+                            ${isCompleted ? `<button class="text-xs font-semibold text-blue-600 hover:underline history-review-btn" data-booking-id="${booking.id}" data-vendor-slug="${booking.vendorSlug || ''}">Leave Review</button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        historyList.querySelectorAll('.history-review-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const tab = document.querySelector('[data-target="reviews"]');
+                if (reviewBookingSelect) {
+                    reviewBookingSelect.value = btn.dataset.bookingId || '';
+                }
+                if (tab) tab.click();
+            });
+        });
+
+        window.refreshLensWorksIcons();
+    }
+
+    async function hydrateReviewsTabFromApi() {
+        if (!reviewsGivenList) return;
+
+        // Load past bookings if not already loaded
+        if (!clientPastBookings.length && window.LensWorksApi?.bookings?.getMine) {
+            const result = await window.LensWorksApi.bookings.getMine();
+            if (result.ok) {
+                const all = result.payload?.data?.items || result.payload?.data?.bookings || [];
+                clientPastBookings = all.filter((b) => ['COMPLETED'].includes(String(b.status || '').toUpperCase()));
+            }
+        }
+
+        const completedBookings = clientPastBookings.filter((booking) => String(booking.status || '').toUpperCase() === 'COMPLETED');
+
+        // Populate select with completed bookings
+        if (reviewBookingSelect) {
+            if (!completedBookings.length) {
+                reviewBookingSelect.innerHTML = '<option value="">No completed sessions yet</option>';
+            } else {
+                reviewBookingSelect.innerHTML = '<option value="">Select a session...</option>' +
+                    completedBookings.map((b) => {
+                        const dateStr = b.date
+                            ? new Date(b.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                            : '';
+                        return `<option value="${b.id}" data-slug="${b.vendorSlug || ''}">${b.packageName || 'Session'} — ${dateStr}</option>`;
+                    }).join('');
+            }
+        }
+
+        if (!window.LensWorksApi?.vendors?.getReviews) {
+            clientSubmittedReviews = [];
+            renderClientSubmittedReviews(clientSubmittedReviews);
+            return;
+        }
+
+        const reviewerNames = getClientReviewAuthorCandidates();
+        const vendorMetaBySlug = new Map();
+        completedBookings.forEach((booking) => {
+            if (booking.vendorSlug) {
+                vendorMetaBySlug.set(booking.vendorSlug, booking.vendorName || booking.photographer || 'Vendor');
+            }
+        });
+
+        const vendorSlugs = Array.from(vendorMetaBySlug.keys());
+        if (!vendorSlugs.length || !reviewerNames.size) {
+            clientSubmittedReviews = [];
+            renderClientSubmittedReviews(clientSubmittedReviews);
+            return;
+        }
+
+        const reviewResponses = await Promise.all(vendorSlugs.map(async (slug) => {
+            const result = await window.LensWorksApi.vendors.getReviews(slug);
+            if (!result.ok) {
+                return [];
+            }
+            const reviews = result.payload?.data?.reviews || [];
+            return reviews
+                .filter((review) => reviewerNames.has(String(review.author || '').trim().toLowerCase()))
+                .map((review) => ({
+                    ...review,
+                    vendorSlug: slug,
+                    vendorName: vendorMetaBySlug.get(slug) || 'Vendor'
+                }));
+        }));
+
+        clientSubmittedReviews = reviewResponses
+            .flat()
+            .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
+
+        renderClientSubmittedReviews(clientSubmittedReviews);
+    }
+
     async function hydrateClientIdentityFromApi() {
         if (!window.LensWorksApi?.auth?.me) {
             applyClientIdentity();
@@ -1385,8 +1587,15 @@
         }
 
         const meResult = await window.LensWorksApi.auth.me();
-        if (meResult.ok) {
-            activeClientUser = meResult.payload?.data?.user || null;
+        if (!meResult.ok) {
+            window.location.replace('login.html');
+            return;
+        }
+        activeClientUser = meResult.payload?.data?.user || null;
+        const role = String(activeClientUser?.role || '').toUpperCase();
+        if (role && role !== 'CLIENT') {
+            window.location.replace('vendor-dashboard.html');
+            return;
         }
 
         if (window.LensWorksApi?.account?.getSettings) {
@@ -1395,6 +1604,8 @@
                 activeClientProfile = settingsResult.payload?.data?.profile || null;
             }
         }
+
+        hydrateReviewsTabFromApi();
 
         applyClientIdentity();
         renderClientProfilePrompt();
@@ -1655,6 +1866,12 @@
 
             activeBooking.status = 'CANCELED';
             setUpcomingBookingCard(activeBooking);
+            hydrateHistoryFromApi();
+            hydrateReviewsTabFromApi();
+
+            cancelBookingButton.disabled = false;
+            cancelBookingButton.innerHTML = originalMarkup;
+            window.refreshLensWorksIcons();
         });
     }
 
@@ -1768,6 +1985,90 @@
         });
     });
 
+    // Star rating interaction for review form
+    if (reviewStarsContainer) {
+        reviewStarsContainer.querySelectorAll('.review-star-btn').forEach((star) => {
+            star.addEventListener('click', () => {
+                currentReviewRating = Number(star.dataset.value);
+                reviewStarsContainer.dataset.rating = currentReviewRating;
+                reviewStarsContainer.querySelectorAll('.review-star-btn').forEach((s) => {
+                    const val = Number(s.dataset.value);
+                    s.classList.toggle('text-yellow-400', val <= currentReviewRating);
+                    s.classList.toggle('text-gray-300', val > currentReviewRating);
+                });
+            });
+            star.addEventListener('mouseenter', () => {
+                const hoverVal = Number(star.dataset.value);
+                reviewStarsContainer.querySelectorAll('.review-star-btn').forEach((s) => {
+                    const val = Number(s.dataset.value);
+                    s.classList.toggle('text-yellow-300', val <= hoverVal);
+                });
+            });
+            star.addEventListener('mouseleave', () => {
+                reviewStarsContainer.querySelectorAll('.review-star-btn').forEach((s) => {
+                    const val = Number(s.dataset.value);
+                    s.classList.toggle('text-yellow-400', val <= currentReviewRating);
+                    s.classList.toggle('text-yellow-300', false);
+                    s.classList.toggle('text-gray-300', val > currentReviewRating);
+                });
+            });
+        });
+    }
+
+    if (submitReviewBtn) {
+        submitReviewBtn.addEventListener('click', async () => {
+            if (!reviewStatusMsg) return;
+            const selectedOption = reviewBookingSelect?.options[reviewBookingSelect.selectedIndex];
+            const vendorSlug = selectedOption?.dataset.slug || '';
+            const body = reviewBodyInput?.value.trim() || '';
+            if (!vendorSlug) {
+                reviewStatusMsg.textContent = 'Please select a session.';
+                reviewStatusMsg.className = 'text-xs rounded-lg px-3 py-2 border mb-3 font-medium bg-red-50 text-red-700 border-red-200';
+                reviewStatusMsg.classList.remove('hidden');
+                return;
+            }
+            if (!currentReviewRating) {
+                reviewStatusMsg.textContent = 'Please select a star rating.';
+                reviewStatusMsg.className = 'text-xs rounded-lg px-3 py-2 border mb-3 font-medium bg-red-50 text-red-700 border-red-200';
+                reviewStatusMsg.classList.remove('hidden');
+                return;
+            }
+            if (body.length < 10) {
+                reviewStatusMsg.textContent = 'Please write at least 10 characters.';
+                reviewStatusMsg.className = 'text-xs rounded-lg px-3 py-2 border mb-3 font-medium bg-red-50 text-red-700 border-red-200';
+                reviewStatusMsg.classList.remove('hidden');
+                return;
+            }
+            reviewStatusMsg.classList.add('hidden');
+            submitReviewBtn.disabled = true;
+            submitReviewBtn.textContent = 'Submitting...';
+            const result = await window.LensWorksApi?.vendors?.createReview?.(vendorSlug, { rating: currentReviewRating, body });
+            submitReviewBtn.disabled = false;
+            submitReviewBtn.innerHTML = '<i data-lucide="send" class="w-4 h-4"></i> Submit Review';
+            window.refreshLensWorksIcons();
+            if (result?.ok) {
+                reviewStatusMsg.textContent = 'Review submitted! Thank you.';
+                reviewStatusMsg.className = 'text-xs rounded-lg px-3 py-2 border mb-3 font-medium bg-green-50 text-green-700 border-green-200';
+                reviewStatusMsg.classList.remove('hidden');
+                if (reviewBodyInput) reviewBodyInput.value = '';
+                if (reviewBookingSelect) reviewBookingSelect.value = '';
+                currentReviewRating = 0;
+                if (reviewStarsContainer) {
+                    reviewStarsContainer.dataset.rating = '0';
+                    reviewStarsContainer.querySelectorAll('.review-star-btn').forEach((s) => {
+                        s.classList.remove('text-yellow-400', 'text-yellow-300');
+                        s.classList.add('text-gray-300');
+                    });
+                }
+                await hydrateReviewsTabFromApi();
+            } else {
+                reviewStatusMsg.textContent = result?.payload?.message || 'Could not submit review. Try again.';
+                reviewStatusMsg.className = 'text-xs rounded-lg px-3 py-2 border mb-3 font-medium bg-red-50 text-red-700 border-red-200';
+                reviewStatusMsg.classList.remove('hidden');
+            }
+        });
+    }
+
     setActiveTab(initialTabKey);
     hydrateClientIdentityFromApi();
     updateClientNotificationBadges();
@@ -1776,6 +2077,8 @@
     hydrateBookingsFromApi();
     hydrateClientPaymentsFromApi();
     hydrateVaultFromApi();
+    hydrateHistoryFromApi();
+    hydrateReviewsTabFromApi();
     filterVault();
 
     if (dashboardMain) {

@@ -29,6 +29,41 @@
     </header>
 
     <main class="flex-1 max-w-7xl mx-auto px-6 md:px-12 py-8 w-full">
+        <section class="mb-8 overflow-hidden rounded-[2rem] border border-slate-200 bg-[radial-gradient(circle_at_top_left,_rgba(191,219,254,0.9),_transparent_40%),linear-gradient(135deg,_#0f172a,_#1e293b)] text-white shadow-xl">
+            <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-6 px-6 py-8 md:px-8 md:py-10">
+                <div>
+                    <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-blue-100">
+                        <i data-lucide="bookmark" class="w-3.5 h-3.5"></i> Curated shortlist
+                    </div>
+                    <h1 class="mt-4 text-3xl font-black tracking-tight md:text-5xl">Keep your strongest options in one place.</h1>
+                    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">Saved Pros acts like a working shortlist. Compare style, city, pricing, trust signals, and recent activity before you message, book, or move a package into checkout.</p>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <a href="directory.html" class="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-slate-900 transition hover:bg-slate-100">
+                            <i data-lucide="search" class="w-4 h-4"></i> Keep Browsing
+                        </a>
+                        <a href="client-dashboard.html?tab=history" class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/10 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/15">
+                            <i data-lucide="history" class="w-4 h-4"></i> Review Past Sessions
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+                    <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-100">Best use</p>
+                        <p class="mt-2 text-sm font-semibold text-white">Save options while exploring, then narrow down after checking packages and reviews.</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-100">Works well for</p>
+                        <p class="mt-2 text-sm font-semibold text-white">Wedding planning, recurring brand shoots, team headshots, and studio comparisons.</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-100">Next move</p>
+                        <p class="mt-2 text-sm font-semibold text-white">Open a saved profile, compare package scope, then message with date, budget, and location details.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
                 <h1 class="text-3xl font-black tracking-tight text-slate-900">Saved Pros</h1>
@@ -37,10 +72,105 @@
             <p id="saved-pros-count" class="text-sm font-semibold text-slate-600">0 saved</p>
         </div>
 
+        <div class="grid md:grid-cols-3 gap-4 mb-8">
+            <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                <p class="text-xs uppercase tracking-wider text-gray-500 font-bold mb-2">Compare Faster</p>
+                <p class="text-sm text-slate-700 leading-relaxed">Save multiple vendors while browsing so you can compare style, city, price range, and review score side by side before booking.</p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                <p class="text-xs uppercase tracking-wider text-gray-500 font-bold mb-2">Book Later</p>
+                <p class="text-sm text-slate-700 leading-relaxed">Keep a shortlist for upcoming weddings, portraits, brand shoots, and recurring studio rentals without losing the profiles you liked.</p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                <p class="text-xs uppercase tracking-wider text-gray-500 font-bold mb-2">Share With Others</p>
+                <p class="text-sm text-slate-700 leading-relaxed">Use saved profiles as your internal shortlist when deciding with a partner, team, or event planner before checkout.</p>
+            </div>
+        </div>
+
         <div id="saved-pros-status" class="hidden mb-6 rounded-xl border px-4 py-3 text-sm font-medium"></div>
 
-        <div id="saved-pros-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            <div class="bg-white border border-dashed border-gray-300 rounded-2xl p-10 text-center text-sm text-gray-500">Loading saved pros...</div>
+        <div class="grid lg:grid-cols-[1fr_320px] gap-6 items-start">
+            <div>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+                    <h2 class="text-lg font-bold text-slate-900">Your Shortlist</h2>
+                    <div class="flex gap-2 text-xs font-semibold text-slate-600">
+                        <span class="px-3 py-1.5 rounded-full bg-white border border-gray-200">Photographers</span>
+                        <span class="px-3 py-1.5 rounded-full bg-white border border-gray-200">Studios</span>
+                        <span class="px-3 py-1.5 rounded-full bg-white border border-gray-200">Recently Saved</span>
+                    </div>
+                </div>
+
+                <div id="saved-pros-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <div class="bg-white border border-dashed border-gray-300 rounded-2xl p-10 text-center text-sm text-gray-500">Loading saved pros...</div>
+                </div>
+
+                <section class="mt-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+                    <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">Shortlist workflow</p>
+                            <h2 class="mt-2 text-2xl font-black tracking-tight text-slate-900">A better way to compare before you commit.</h2>
+                        </div>
+                        <a href="directory.html" class="inline-flex items-center gap-2 text-sm font-bold text-slate-900 hover:text-blue-700 transition">
+                            See more vendors <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <div class="mt-6 grid gap-4 md:grid-cols-3">
+                        <div class="rounded-2xl bg-slate-50 p-5 border border-gray-200">
+                            <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                                <i data-lucide="bookmark-check" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900">1. Save broadly</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-gray-600">Keep a mix of photographers and studios while you are still evaluating style, city, and starting price.</p>
+                        </div>
+                        <div class="rounded-2xl bg-slate-50 p-5 border border-gray-200">
+                            <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                                <i data-lucide="scale" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900">2. Compare signals</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-gray-600">Review rating, package structure, availability fit, and what each vendor is strongest at before sending inquiries.</p>
+                        </div>
+                        <div class="rounded-2xl bg-slate-50 p-5 border border-gray-200">
+                            <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+                                <i data-lucide="message-circle-more" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900">3. Contact intentionally</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-gray-600">Lead with the event date, location, and package goal so vendors can respond with useful availability and scope details.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="space-y-5 lg:sticky lg:top-28">
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-xl">
+                    <p class="text-xs uppercase tracking-[0.18em] text-blue-200 font-bold mb-3">Shortlist Tips</p>
+                    <h2 class="text-2xl font-black tracking-tight mb-3">Choose With More Confidence</h2>
+                    <ul class="space-y-3 text-sm text-slate-300 leading-relaxed">
+                        <li>Compare response speed, package range, and recent reviews before making contact.</li>
+                        <li>Open each profile and save your preferred package to cart only when scope and style align.</li>
+                        <li>Keep event date, location, and budget ready so messaging starts with useful details.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                    <h3 class="font-bold text-slate-900 mb-3">Useful Next Steps</h3>
+                    <div class="space-y-3 text-sm">
+                        <a href="directory.html" class="flex items-center justify-between rounded-xl border border-gray-200 px-4 py-3 hover:bg-gray-50 transition"><span>Continue browsing pros</span><i data-lucide="arrow-right" class="w-4 h-4 text-gray-400"></i></a>
+                        <a href="client-dashboard.html?tab=history" class="flex items-center justify-between rounded-xl border border-gray-200 px-4 py-3 hover:bg-gray-50 transition"><span>Review past bookings</span><i data-lucide="arrow-right" class="w-4 h-4 text-gray-400"></i></a>
+                        <a href="client-dashboard.html?tab=messages" class="flex items-center justify-between rounded-xl border border-gray-200 px-4 py-3 hover:bg-gray-50 transition"><span>Open conversations</span><i data-lucide="arrow-right" class="w-4 h-4 text-gray-400"></i></a>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                    <h3 class="font-bold text-slate-900 mb-3">What To Compare</h3>
+                    <ul class="space-y-3 text-sm text-gray-600 leading-relaxed">
+                        <li>Package floor price compared with the deliverables you actually need.</li>
+                        <li>Recent review quality, not just the average rating number.</li>
+                        <li>Whether the photographer style matches the shoot brief and venue conditions.</li>
+                        <li>How quickly the vendor typically replies once the conversation starts.</li>
+                    </ul>
+                </div>
+            </aside>
         </div>
     </main>
 

@@ -30,7 +30,7 @@
                 <button class="text-gray-400 hover:text-slate-900 transition mt-1 p-2 rounded-full hover:bg-gray-100">
                     <i data-lucide="bell" class="w-5 h-5"></i>
                 </button>
-                <div class="flex items-center gap-3 pl-4 border-l border-gray-200 cursor-pointer group">
+                <div class="flex items-center gap-3 pl-4 border-l border-gray-200 group">
                     <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" class="w-9 h-9 rounded-full border border-gray-200 object-cover shadow-sm group-hover:ring-2 group-hover:ring-slate-900/20 transition-all" alt="Pro Profile">
                     <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 group-hover:text-slate-900 transition"></i>
                 </div>
@@ -40,6 +40,29 @@
 
     <!-- Main Settings Layout -->
     <main class="flex-1 max-w-7xl mx-auto px-6 md:px-12 py-8 md:py-12 w-full flex flex-col lg:flex-row gap-8 lg:gap-12">
+        <section class="w-full lg:col-span-full lg:order-first overflow-hidden rounded-[2rem] border border-slate-200 bg-[radial-gradient(circle_at_top_left,_rgba(191,219,254,0.9),_transparent_35%),linear-gradient(135deg,_#0f172a,_#1e293b)] p-6 text-white shadow-xl md:p-8">
+            <div class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-200">Settings overview</p>
+                    <h1 class="mt-3 text-3xl font-black tracking-tight md:text-4xl">Manage the profile, security, and payout details that shape your account.</h1>
+                    <p class="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300">Keep your public presentation accurate, your contact methods current, and your notification or billing setup ready before new bookings or conversations arrive.</p>
+                </div>
+                <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                    <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-100">Profile</p>
+                        <p class="mt-2 text-sm font-semibold">Update identity, studio details, and biography so the account reflects current positioning.</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-100">Security</p>
+                        <p class="mt-2 text-sm font-semibold">Review password hygiene, verified contact methods, and account access posture regularly.</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-100">Billing</p>
+                        <p class="mt-2 text-sm font-semibold">Keep payout details, tax information, and billing preferences current before transfers are due.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
         
         <!-- Sidebar / Mobile Pill Navigation -->
         <aside class="w-full lg:w-64 flex-shrink-0 lg:sticky lg:top-28 lg:h-fit">
@@ -89,7 +112,7 @@
 
                     <div class="px-6 md:px-10 pb-10 relative">
                         <!-- Avatar Editor -->
-                        <div class="relative w-28 h-28 -mt-14 mb-8 group cursor-pointer inline-block">
+                        <div class="relative w-28 h-28 -mt-14 mb-8 group inline-block">
                             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=300&auto=format&fit=crop" class="w-full h-full rounded-full border-[5px] border-white object-cover shadow-lg bg-white" alt="Profile">
                             <div class="absolute inset-0 bg-slate-900/50 rounded-full border-[5px] border-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center text-white backdrop-blur-[2px]">
                                 <i data-lucide="camera" class="w-7 h-7"></i>
@@ -143,6 +166,32 @@
                         Save Changes
                     </button>
                 </div>
+
+                <section class="mt-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                    <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-[0.18em] text-gray-500">Profile checklist</p>
+                            <h3 class="mt-2 text-xl font-black tracking-tight text-slate-900">What makes a stronger public profile</h3>
+                        </div>
+                        <a href="vendor-dashboard.html?tab=reviews" class="inline-flex items-center gap-2 text-sm font-bold text-slate-900 hover:text-blue-700 transition">
+                            See how feedback supports conversion <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                    <div class="mt-6 grid gap-4 md:grid-cols-3 text-sm text-gray-600 leading-relaxed">
+                        <div class="rounded-2xl bg-slate-50 border border-gray-200 p-4">
+                            <p class="font-bold text-slate-900 mb-1">Clear positioning</p>
+                            <p>Use a concise tagline and biography that explain style, specialty, and the type of sessions you want to attract.</p>
+                        </div>
+                        <div class="rounded-2xl bg-slate-50 border border-gray-200 p-4">
+                            <p class="font-bold text-slate-900 mb-1">Location accuracy</p>
+                            <p>Keep city or service area current so discovery, inquiries, and availability expectations stay realistic.</p>
+                        </div>
+                        <div class="rounded-2xl bg-slate-50 border border-gray-200 p-4">
+                            <p class="font-bold text-slate-900 mb-1">Consistent identity</p>
+                            <p>Match the display name, studio label, and contact details you use across directory, dashboard, and payout records.</p>
+                        </div>
+                    </div>
+                </section>
             </div>
 
             <!-- 2. Account Details Tab -->
@@ -319,6 +368,24 @@
                         </div>
                     </div>
                 </div>
+
+                <section class="mt-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                    <h3 class="text-lg font-black text-slate-900 mb-4">Notification Strategy</h3>
+                    <div class="grid gap-4 md:grid-cols-3 text-sm text-gray-600 leading-relaxed">
+                        <div class="rounded-2xl bg-slate-50 border border-gray-200 p-4">
+                            <p class="font-bold text-slate-900 mb-1">Keep urgent items on</p>
+                            <p>Booking requests and direct messages usually deserve immediate visibility so you do not miss active opportunities.</p>
+                        </div>
+                        <div class="rounded-2xl bg-slate-50 border border-gray-200 p-4">
+                            <p class="font-bold text-slate-900 mb-1">Use SMS sparingly</p>
+                            <p>Reserve text alerts for time-sensitive changes that might affect same-day sessions or immediate confirmations.</p>
+                        </div>
+                        <div class="rounded-2xl bg-slate-50 border border-gray-200 p-4">
+                            <p class="font-bold text-slate-900 mb-1">Separate signal from noise</p>
+                            <p>Marketing updates are useful, but operational notifications should stay easier to spot than general product news.</p>
+                        </div>
+                    </div>
+                </section>
             </div>
 
             <div id="tab-billing" class="tab-content hidden-fade">
@@ -376,6 +443,28 @@
                         </div>
                     </div>
                 </div>
+
+                <section class="mt-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]">
+                    <h3 class="text-lg font-black text-slate-900 mb-4">Payout Readiness Checklist</h3>
+                    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4 text-sm text-gray-600 leading-relaxed">
+                        <div class="rounded-2xl bg-slate-50 border border-gray-200 p-4">
+                            <p class="font-bold text-slate-900 mb-1">Banking details</p>
+                            <p>Confirm destination account, payout country, and legal name alignment before the next transfer window.</p>
+                        </div>
+                        <div class="rounded-2xl bg-slate-50 border border-gray-200 p-4">
+                            <p class="font-bold text-slate-900 mb-1">Tax profile</p>
+                            <p>Keep identifiers and business entity information current so transfers are not held for compliance review.</p>
+                        </div>
+                        <div class="rounded-2xl bg-slate-50 border border-gray-200 p-4">
+                            <p class="font-bold text-slate-900 mb-1">Fee awareness</p>
+                            <p>Understand platform and processing deductions before promising net payout timing to your business.</p>
+                        </div>
+                        <div class="rounded-2xl bg-slate-50 border border-gray-200 p-4">
+                            <p class="font-bold text-slate-900 mb-1">Transfer timing</p>
+                            <p>Review available balance and reserve timing so withdrawal expectations stay aligned with actual release dates.</p>
+                        </div>
+                    </div>
+                </section>
             </div>
 
         </div>

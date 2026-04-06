@@ -96,8 +96,8 @@
         const role = String(session?.role || '').toLowerCase();
         const isVendor = role === 'vendor';
 
-        navDashboardLink.href = isVendor ? 'vendor-dashboard.html' : 'client-dashboard.html';
-        navCalendarLink.href = isVendor ? 'vendor-dashboard.html' : 'client-dashboard.html';
+        navDashboardLink.href = isVendor ? 'vendor-dashboard.html?view=dashboard' : 'client-dashboard.html';
+        navCalendarLink.href = isVendor ? 'vendor-dashboard.html?view=calendar' : 'client-dashboard.html';
         navCalendarLink.textContent = isVendor ? 'Calendar' : 'My Dashboard';
 
         applyRoleScopedProfileUX(isVendor);
@@ -228,7 +228,11 @@
 
     function getInitialTarget() {
         const hash = String(window.location.hash || '').replace('#', '').trim().toLowerCase();
+        const searchTarget = String(new URLSearchParams(window.location.search || '').get('tab') || '').trim().toLowerCase();
         const allowed = new Set(['profile', 'account', 'security', 'notifications', 'billing']);
+        if (allowed.has(searchTarget)) {
+            return searchTarget;
+        }
         return allowed.has(hash) ? hash : 'profile';
     }
 

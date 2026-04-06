@@ -31,8 +31,8 @@
             <!-- Right Actions -->
             <div class="hidden md:flex items-center gap-5 text-sm font-medium">
                 <a href="login.html" class="text-gray-500 hover:text-slate-900 transition">Log In</a>
-                <button class="px-5 py-2.5 rounded-full transition bg-slate-900 text-white hover:bg-slate-800" onclick="window.location.href='login.html'">Sign Up</button>
-                <button class="relative text-slate-900 hover:opacity-70 transition" onclick="window.location.href='cart.html'">
+                <button type="button" data-nav-href="login.html" class="px-5 py-2.5 rounded-full transition bg-slate-900 text-white hover:bg-slate-800">Sign Up</button>
+                <button type="button" data-nav-href="cart.html" class="relative text-slate-900 hover:opacity-70 transition">
                     <i data-lucide="shopping-bag" class="w-6 h-6"></i>
                     <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
                 </button>
@@ -210,7 +210,7 @@
                 <!-- Profile Card 1 -->
                 <div class="group bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
                     <!-- Image Carousel Area -->
-                    <div class="relative h-60 bg-gray-100 overflow-hidden cursor-pointer">
+                    <div class="relative h-60 bg-gray-100 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Portfolio">
                         
                         <!-- Badges -->
@@ -241,7 +241,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-3">
                             <div>
-                                <h3 class="font-bold text-lg leading-tight flex items-center gap-1 cursor-pointer hover:underline">
+                                <h3 class="font-bold text-lg leading-tight flex items-center gap-1">
                                     Featured Pro <i data-lucide="check-circle" class="w-4 h-4 text-blue-500"></i>
                                 </h3>
                                 <p class="text-sm text-gray-500">Weddings & Portraits</p>
@@ -263,14 +263,14 @@
                                 <span class="text-xs text-gray-500 block">Starting at</span>
                                 <span class="font-bold text-lg">$150<span class="text-sm text-gray-400 font-normal">/hr</span></span>
                             </div>
-                            <button class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition" onclick="window.location.href='vendor-profile.html'">View Packages</button>
+                            <button type="button" data-nav-href="vendor-profile.html" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition">View Packages</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Profile Card 2 -->
                 <div class="group bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative h-60 bg-gray-100 overflow-hidden cursor-pointer">
+                    <div class="relative h-60 bg-gray-100 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Portfolio">
                         
                         <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm">
@@ -284,7 +284,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-3">
                             <div>
-                                <h3 class="font-bold text-lg leading-tight flex items-center gap-1 cursor-pointer hover:underline">
+                                <h3 class="font-bold text-lg leading-tight flex items-center gap-1">
                                     David Chen <i data-lucide="check-circle" class="w-4 h-4 text-blue-500"></i>
                                 </h3>
                                 <p class="text-sm text-gray-500">Commercial & Ads</p>
@@ -306,14 +306,14 @@
                                 <span class="text-xs text-gray-500 block">Starting at</span>
                                 <span class="font-bold text-lg">$200<span class="text-sm text-gray-400 font-normal">/hr</span></span>
                             </div>
-                            <button class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition" onclick="window.location.href='vendor-profile.html?vendor=david-chen'">View Packages</button>
+                            <button type="button" data-nav-href="vendor-profile.html?vendor=david-chen" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition">View Packages</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Profile Card 3 -->
                 <div class="group bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative h-60 bg-gray-100 overflow-hidden cursor-pointer">
+                    <div class="relative h-60 bg-gray-100 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Portfolio">
                         
                         <button class="absolute top-3 right-3 p-2 bg-white/50 backdrop-blur-md rounded-full text-white hover:text-red-500 hover:bg-white transition">
@@ -324,7 +324,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-3">
                             <div>
-                                <h3 class="font-bold text-lg leading-tight flex items-center gap-1 cursor-pointer hover:underline">
+                                <h3 class="font-bold text-lg leading-tight flex items-center gap-1">
                                     Elena Rostova <i data-lucide="check-circle" class="w-4 h-4 text-blue-500"></i>
                                 </h3>
                                 <p class="text-sm text-gray-500">Fashion & Editorials</p>
@@ -346,14 +346,14 @@
                                 <span class="text-xs text-gray-500 block">Starting at</span>
                                 <span class="font-bold text-lg">$120<span class="text-sm text-gray-400 font-normal">/hr</span></span>
                             </div>
-                            <button class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition" onclick="window.location.href='vendor-profile.html?vendor=elena-rostova'">View Packages</button>
+                            <button type="button" data-nav-href="vendor-profile.html?vendor=elena-rostova" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition">View Packages</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Profile Card 4 -->
                 <div class="group bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative h-60 bg-gray-100 overflow-hidden cursor-pointer">
+                    <div class="relative h-60 bg-gray-100 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Portfolio">
                         
                         <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm">
@@ -367,7 +367,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-3">
                             <div>
-                                <h3 class="font-bold text-lg leading-tight flex items-center gap-1 cursor-pointer hover:underline">
+                                <h3 class="font-bold text-lg leading-tight flex items-center gap-1">
                                     Studio 7 <i data-lucide="check-circle" class="w-4 h-4 text-blue-500"></i>
                                 </h3>
                                 <p class="text-sm text-gray-500">Events & Parties</p>
@@ -389,14 +389,14 @@
                                 <span class="text-xs text-gray-500 block">Starting at</span>
                                 <span class="font-bold text-lg">$90<span class="text-sm text-gray-400 font-normal">/hr</span></span>
                             </div>
-                            <button class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition" onclick="window.location.href='vendor-profile.html?vendor=studio-7'">View Packages</button>
+                            <button type="button" data-nav-href="vendor-profile.html?vendor=studio-7" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition">View Packages</button>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Profile Card 5 -->
                 <div class="group bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
-                    <div class="relative h-60 bg-gray-100 overflow-hidden cursor-pointer">
+                    <div class="relative h-60 bg-gray-100 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Portfolio">
                         
                         <button class="absolute top-3 right-3 p-2 bg-white/50 backdrop-blur-md rounded-full text-white hover:text-red-500 hover:bg-white transition">
@@ -407,7 +407,7 @@
                     <div class="p-5 flex flex-col flex-1">
                         <div class="flex justify-between items-start mb-3">
                             <div>
-                                <h3 class="font-bold text-lg leading-tight flex items-center gap-1 cursor-pointer hover:underline">
+                                <h3 class="font-bold text-lg leading-tight flex items-center gap-1">
                                     Marcus Field <i data-lucide="check-circle" class="w-4 h-4 text-blue-500"></i>
                                 </h3>
                                 <p class="text-sm text-gray-500">Nature & Aerial</p>
@@ -429,7 +429,7 @@
                                 <span class="text-xs text-gray-500 block">Starting at</span>
                                 <span class="font-bold text-lg">$100<span class="text-sm text-gray-400 font-normal">/hr</span></span>
                             </div>
-                            <button class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition" onclick="window.location.href='vendor-profile.html?vendor=marcus-field'">View Packages</button>
+                            <button type="button" data-nav-href="vendor-profile.html?vendor=marcus-field" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition">View Packages</button>
                         </div>
                     </div>
                 </div>
@@ -451,23 +451,23 @@
                     <!-- Map pins -->
                     <div class="relative z-10 w-full h-full">
                         <div class="absolute" style="top:30%;left:28%;">
-                            <div class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg cursor-pointer hover:bg-indigo-600 transition" onclick="window.location.href='vendor-profile.html'">$220/hr</div>
+                            <button type="button" data-nav-href="vendor-profile.html" class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg cursor-pointer hover:bg-indigo-600 transition">$220/hr</button>
                             <div class="w-2 h-2 bg-slate-900 rotate-45 mx-auto -mt-1"></div>
                         </div>
                         <div class="absolute" style="top:50%;left:55%;">
-                            <div class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg cursor-pointer hover:bg-indigo-600 transition" onclick="window.location.href='vendor-profile.html?vendor=david-chen'">$180/hr</div>
+                            <button type="button" data-nav-href="vendor-profile.html?vendor=david-chen" class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg cursor-pointer hover:bg-indigo-600 transition">$180/hr</button>
                             <div class="w-2 h-2 bg-slate-900 rotate-45 mx-auto -mt-1"></div>
                         </div>
                         <div class="absolute" style="top:22%;left:62%;">
-                            <div class="bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg cursor-pointer hover:bg-indigo-500 transition" onclick="window.location.href='vendor-profile.html?vendor=elena-rostova'">$350/hr</div>
+                            <button type="button" data-nav-href="vendor-profile.html?vendor=elena-rostova" class="bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg cursor-pointer hover:bg-indigo-500 transition">$350/hr</button>
                             <div class="w-2 h-2 bg-indigo-600 rotate-45 mx-auto -mt-1"></div>
                         </div>
                         <div class="absolute" style="top:65%;left:38%;">
-                            <div class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg cursor-pointer hover:bg-indigo-600 transition" onclick="window.location.href='vendor-profile.html?vendor=studio-7'">$140/hr</div>
+                            <button type="button" data-nav-href="vendor-profile.html?vendor=studio-7" class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg cursor-pointer hover:bg-indigo-600 transition">$140/hr</button>
                             <div class="w-2 h-2 bg-slate-900 rotate-45 mx-auto -mt-1"></div>
                         </div>
                         <div class="absolute" style="top:42%;left:72%;">
-                            <div class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg cursor-pointer hover:bg-indigo-600 transition" onclick="window.location.href='vendor-profile.html?vendor=marcus-field'">$275/hr</div>
+                            <button type="button" data-nav-href="vendor-profile.html?vendor=marcus-field" class="bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg cursor-pointer hover:bg-indigo-600 transition">$275/hr</button>
                             <div class="w-2 h-2 bg-slate-900 rotate-45 mx-auto -mt-1"></div>
                         </div>
                     </div>
@@ -521,7 +521,7 @@
 
             <div>
                 <h4 class="font-bold mb-5 text-md">For Professionals</h4>
-                <button class="w-full bg-white text-slate-900 py-2.5 rounded-xl font-bold text-sm hover:bg-gray-100 transition shadow-sm" onclick="window.location.href='login.html'">
+                <button type="button" data-nav-href="login.html" class="w-full bg-white text-slate-900 py-2.5 rounded-xl font-bold text-sm hover:bg-gray-100 transition shadow-sm">
                     Join as a Vendor
                 </button>
             </div>

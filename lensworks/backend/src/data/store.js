@@ -193,8 +193,54 @@ const bookings = [
     },
     status: 'CONFIRMED',
     createdAt: now
-  }
-];
+    },
+    {
+      id: 'book_demo_past_1',
+      receiptNumber: 'LW-DEMO00',
+      sessionId: 'seed-session',
+      customerUserId: 'usr_client_demo',
+      vendorUserId: 'usr_vendor_david',
+      customer: {
+        firstName: 'Alex',
+        lastName: 'Rivera',
+        email: 'client@lensworks.app'
+      },
+      booking: {
+        packageName: 'Brand Starter',
+        total: 206,
+        deposit: 41.2,
+        date: '2026-01-15',
+        time: '2:00 PM',
+        location: 'Riffa, Bahrain',
+        duration: '2 Hours'
+      },
+      status: 'COMPLETED',
+      createdAt: '2026-01-15T14:00:00.000Z'
+    },
+    {
+      id: 'book_demo_past_2',
+      receiptNumber: 'LW-PAST02',
+      sessionId: 'seed-session',
+      customerUserId: 'usr_client_demo',
+      vendorUserId: 'usr_vendor_elena',
+      customer: {
+        firstName: 'Alex',
+        lastName: 'Rivera',
+        email: 'client@lensworks.app'
+      },
+      booking: {
+        packageName: 'Fashion Session',
+        total: 328,
+        deposit: 65.6,
+        date: '2025-11-20',
+        time: '11:00 AM',
+        location: 'Muharraq, Bahrain',
+        duration: '3 Hours'
+      },
+      status: 'COMPLETED',
+      createdAt: '2025-11-20T11:00:00.000Z'
+    }
+  ];
 const payments = [
   {
     id: 'pay_demo_dep_1',
