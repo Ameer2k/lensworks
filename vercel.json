@@ -1,10 +1,12 @@
 {
   "version": 2,
   "builds": [
-    { "src": "lensworks/backend/src/app.js", "use": "@vercel/node" }
+    { "src": "lensworks/backend/src/app.js", "use": "@vercel/node" },
+    { "src": "lensworks/**/*", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/lensworks/backend/src/app.js" },
+    { "src": "/", "dest": "/lensworks/index.html" },
     { "src": "/(.*)", "dest": "/lensworks/$1" }
   ]
 }
